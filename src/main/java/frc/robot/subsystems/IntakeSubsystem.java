@@ -6,9 +6,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Intake extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new Intake. */
-  public Intake() {}
+  public IntakeSubsystem() {}
 
   public void setIntakeSpeed() {
 

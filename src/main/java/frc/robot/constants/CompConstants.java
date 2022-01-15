@@ -7,39 +7,36 @@ public class CompConstants extends Constants
 
     @Override
     public DriveConstants getDriveConstants() {
-        return null;
+        return new DriveConstants();
     }
 
     @Override
     public IntakeConstants getIntakeConstants() {
         // TODO Auto-generated method stub
-        return null;
+        return new IntakeConstants();
     }
     @Override
     public ShooterConstants getShooterConstants() {
         // TODO Auto-generated method stub
-        return null;
+        return new ShooterConstants();
     }
     @Override
     public ClimberConstants getClimberConstants() {
         // TODO Auto-generated method stub
-        return null;
+        return new ClimberConstants();
     }
 
     public class DriveConstants extends Constants.DriveConstants {
-
-        public double getWheelSize() {return 4.0;}
-
         @Override
         public double getWheelDiameter() {
             // TODO Auto-generated method stub
-            return 0;
+            return 4.0;
         }
 
         @Override
         public double getWheelTrackWidth() {
             // TODO Auto-generated method stub
-            return 0;
+            return 0.0;
         }
 
         @Override
@@ -176,6 +173,12 @@ public class CompConstants extends Constants
 
         @Override
         public ModuleConfiguration BLModuleGearRatio() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public ModuleConfiguration BRModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }

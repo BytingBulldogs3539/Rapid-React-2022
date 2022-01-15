@@ -25,7 +25,6 @@ public abstract class Constants {
     public abstract ClimberConstants getClimberConstants();
 
     public abstract class DriveConstants {
-        public abstract double getWheelSize();
         
         // Wheel measurement constants
         public abstract double getWheelDiameter();
@@ -66,6 +65,7 @@ public abstract class Constants {
         public abstract ModuleConfiguration FLModuleGearRatio();
         public abstract ModuleConfiguration FRModuleGearRatio();
         public abstract ModuleConfiguration BLModuleGearRatio();
+        public abstract ModuleConfiguration BRModuleGearRatio();
     }
     public abstract class IntakeConstants {
         // Intake Motor ID

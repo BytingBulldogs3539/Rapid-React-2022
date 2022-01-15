@@ -10,13 +10,10 @@ public class PracConstants extends Constants
         return null;
     }
     public class DriveConstants extends Constants.DriveConstants {
-
-        public double getWheelSize() {return 4.0;}
-
+    
         @Override
         public double getWheelDiameter() {
-            // TODO Auto-generated method stub
-            return 0;
+            return 4.0;
         }
 
         @Override
@@ -159,6 +156,12 @@ public class PracConstants extends Constants
 
         @Override
         public ModuleConfiguration BLModuleGearRatio() {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public ModuleConfiguration BRModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }

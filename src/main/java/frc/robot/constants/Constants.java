@@ -45,10 +45,10 @@ public abstract class Constants {
         public abstract int getBRSteeringID();
 
         // All of the cancoder IDs
-        public abstract int FLCanEncoderID();
-        public abstract int FRCanEncoderID();
-        public abstract int BLCanEncoderID();
-        public abstract int BRCanEncoderID();
+        public abstract int getFLCanEncoderID();
+        public abstract int getFRCanEncoderID();
+        public abstract int getBLCanEncoderID();
+        public abstract int getBRCanEncoderID();
 
         // Pigeon ID constant
         public abstract int getPigeonID();
@@ -62,24 +62,24 @@ public abstract class Constants {
         // Gear ratio & drive reduction constants
         public abstract double getDriveGearReduction();
         public abstract double getSteerGearReduction();
-        public abstract ModuleConfiguration FLModuleGearRatio();
-        public abstract ModuleConfiguration FRModuleGearRatio();
-        public abstract ModuleConfiguration BLModuleGearRatio();
-        public abstract ModuleConfiguration BRModuleGearRatio();
+        public abstract ModuleConfiguration getFLModuleGearRatio();
+        public abstract ModuleConfiguration getFRModuleGearRatio();
+        public abstract ModuleConfiguration getBLModuleGearRatio();
+        public abstract ModuleConfiguration getBRModuleGearRatio();
     }
     public abstract class IntakeConstants {
         // Intake Motor ID
-        public abstract int intakeMotorID();
+        public abstract int getIntakeMotorID();
     }
     public abstract class ShooterConstants {
         // Shooter Motor ID
-        public abstract int shooterMotor1ID();
-        public abstract int shooterMotor2ID();
+        public abstract int getShooterMotor1ID();
+        public abstract int getShooterMotor2ID();
     }
     public abstract class ClimberConstants {
         // Climber Motor ID
-        public abstract int climberMotor1ID();
-        public abstract int climberMotor2ID();
-        public abstract int climberMotor3ID();
+        public abstract int getClimberMotor1ID();
+        public abstract int getClimberMotor2ID();
+        public abstract int getClimberMotor3ID();
     }
 }

@@ -94,25 +94,25 @@ public class CompConstants extends Constants
         }
 
         @Override
-        public int FLCanEncoderID() {
+        public int getFLCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int FRCanEncoderID() {
+        public int getFRCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int BLCanEncoderID() {
+        public int getBLCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int BRCanEncoderID() {
+        public int getBRCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
@@ -160,25 +160,25 @@ public class CompConstants extends Constants
         }
 
         @Override
-        public ModuleConfiguration FLModuleGearRatio() {
+        public ModuleConfiguration getFLModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }
 
         @Override
-        public ModuleConfiguration FRModuleGearRatio() {
+        public ModuleConfiguration getFRModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }
 
         @Override
-        public ModuleConfiguration BLModuleGearRatio() {
+        public ModuleConfiguration getBLModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }
 
         @Override
-        public ModuleConfiguration BRModuleGearRatio() {
+        public ModuleConfiguration getBRModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }
@@ -186,7 +186,7 @@ public class CompConstants extends Constants
     public class IntakeConstants extends Constants.IntakeConstants {
 
         @Override
-        public int intakeMotorID() {
+        public int getIntakeMotorID() {
             // TODO Auto-generated method stub
             return 0;
         }
@@ -195,13 +195,13 @@ public class CompConstants extends Constants
     public class ShooterConstants extends Constants.ShooterConstants {
 
         @Override
-        public int shooterMotor1ID() {
+        public int getShooterMotor1ID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int shooterMotor2ID() {
+        public int getShooterMotor2ID() {
             // TODO Auto-generated method stub
             return 0;
         }
@@ -210,19 +210,19 @@ public class CompConstants extends Constants
     public class ClimberConstants extends Constants.ClimberConstants {
 
         @Override
-        public int climberMotor1ID() {
+        public int getClimberMotor1ID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int climberMotor2ID() {
+        public int getClimberMotor2ID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int climberMotor3ID() {
+        public int getClimberMotor3ID() {
             // TODO Auto-generated method stub
             return 0;
         }

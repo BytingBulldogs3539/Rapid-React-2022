@@ -77,25 +77,25 @@ public class PracConstants extends Constants
         }
 
         @Override
-        public int FLCanEncoderID() {
+        public int getFLCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int FRCanEncoderID() {
+        public int getFRCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int BLCanEncoderID() {
+        public int getBLCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
 
         @Override
-        public int BRCanEncoderID() {
+        public int getBRCanEncoderID() {
             // TODO Auto-generated method stub
             return 0;
         }
@@ -143,25 +143,25 @@ public class PracConstants extends Constants
         }
 
         @Override
-        public ModuleConfiguration FLModuleGearRatio() {
+        public ModuleConfiguration getFLModuleGearRatio() {
+            // TODO Auto-generated method stub
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false);
+        }
+
+        @Override
+        public ModuleConfiguration getFRModuleGearRatio() {
+            // TODO Auto-generated method stub
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false);
+        }
+
+        @Override
+        public ModuleConfiguration getBLModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }
 
         @Override
-        public ModuleConfiguration FRModuleGearRatio() {
-            // TODO Auto-generated method stub
-            return null;
-        }
-
-        @Override
-        public ModuleConfiguration BLModuleGearRatio() {
-            // TODO Auto-generated method stub
-            return null;
-        }
-
-        @Override
-        public ModuleConfiguration BRModuleGearRatio() {
+        public ModuleConfiguration getBRModuleGearRatio() {
             // TODO Auto-generated method stub
             return null;
         }

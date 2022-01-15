@@ -24,7 +24,7 @@ public class RobotContainer {
   private static final String PRACTICE_BOT_MAC_ADDRESS = "";
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  Constants constants;
+  public static Constants constants;
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();

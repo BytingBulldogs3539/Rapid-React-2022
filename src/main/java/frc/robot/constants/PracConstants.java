@@ -7,19 +7,36 @@ public class PracConstants extends Constants
 
     @Override
     public DriveConstants getDriveConstants() {
-        return null;
+        return new DriveConstants();
     }
+
+    @Override
+    public IntakeConstants getIntakeConstants() {
+        // TODO Auto-generated method stub
+        return new IntakeConstants();
+    }
+    @Override
+    public ShooterConstants getShooterConstants() {
+        // TODO Auto-generated method stub
+        return new ShooterConstants();
+    }
+    @Override
+    public ClimberConstants getClimberConstants() {
+        // TODO Auto-generated method stub
+        return new ClimberConstants();
+    }
+
     public class DriveConstants extends Constants.DriveConstants {
-    
         @Override
         public double getWheelDiameter() {
+            // TODO Auto-generated method stub
             return 4.0;
         }
 
         @Override
         public double getWheelTrackWidth() {
             // TODO Auto-generated method stub
-            return 0;
+            return 0.0;
         }
 
         @Override
@@ -107,79 +124,108 @@ public class PracConstants extends Constants
         }
 
         @Override
-        public int getFLSteerOffset() {
+        public double getFLSteerOffset() {
             // TODO Auto-generated method stub
-            return 0;
+            return 0.1808 + 0.5 * Math.PI;
         }
 
         @Override
-        public int getFRSteerOffset() {
+        public double getFRSteerOffset() {
             // TODO Auto-generated method stub
-            return 0;
+            return 5.6420 + 0.5 * Math.PI;
         }
 
         @Override
-        public int getBLSteerOffset() {
+        public double getBLSteerOffset() {
             // TODO Auto-generated method stub
-            return 0;
+            return 2.8973 + 0.5 * Math.PI;
         }
 
         @Override
-        public int getBRSteerOffset() {
+        public double getBRSteerOffset() {
             // TODO Auto-generated method stub
-            return 0;
+            return 0.6336 + 0.5 * Math.PI;
         }
 
         @Override
         public double getDriveGearReduction() {
             // TODO Auto-generated method stub
-            return 0;
+            return (11.0 / 40.0) * (32.0 / 16.0) * (1.0 / 3.0);
         }
 
         @Override
         public double getSteerGearReduction() {
             // TODO Auto-generated method stub
-            return 0;
+            return (9.0 / 24.0) * (18.0 / 72.0);
         }
 
         @Override
         public ModuleConfiguration getFLModuleGearRatio() {
             // TODO Auto-generated method stub
-            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false);
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getFRModuleGearRatio() {
             // TODO Auto-generated method stub
-            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false);
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getBLModuleGearRatio() {
             // TODO Auto-generated method stub
-            return null;
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getBRModuleGearRatio() {
             // TODO Auto-generated method stub
-            return null;
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
     }
-    @Override
-    public IntakeConstants getIntakeConstants() {
-        // TODO Auto-generated method stub
-        return null;
+    public class IntakeConstants extends Constants.IntakeConstants {
+
+        @Override
+        public int getIntakeMotorID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
     }
-    @Override
-    public ShooterConstants getShooterConstants() {
-        // TODO Auto-generated method stub
-        return null;
+    public class ShooterConstants extends Constants.ShooterConstants {
+
+        @Override
+        public int getShooterMotor1ID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getShooterMotor2ID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
     }
-    @Override
-    public ClimberConstants getClimberConstants() {
-        // TODO Auto-generated method stub
-        return null;
+    public class ClimberConstants extends Constants.ClimberConstants {
+
+        @Override
+        public int getClimberMotor1ID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getClimberMotor2ID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getClimberMotor3ID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
     }
-    
 }

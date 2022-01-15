@@ -54,10 +54,10 @@ public abstract class Constants {
         public abstract int getPigeonID();
 
         // Encoder distance on axis (in radians) / Steer offset constants
-        public abstract int getFLSteerOffset();
-        public abstract int getFRSteerOffset();
-        public abstract int getBLSteerOffset();
-        public abstract int getBRSteerOffset();
+        public abstract double getFLSteerOffset();
+        public abstract double getFRSteerOffset();
+        public abstract double getBLSteerOffset();
+        public abstract double getBRSteerOffset();
 
         // Gear ratio & drive reduction constants
         public abstract double getDriveGearReduction();

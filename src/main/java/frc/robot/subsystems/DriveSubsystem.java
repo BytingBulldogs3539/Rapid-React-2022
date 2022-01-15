@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.swervedrivespecialties.swervelib.Mk3SwerveModuleHelper;
@@ -21,7 +19,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
-import frc.robot.constants.Constants;
 
 public class DriveSubsystem extends SubsystemBase 
 {
@@ -78,29 +75,29 @@ public class DriveSubsystem extends SubsystemBase
                 m_frontRightModule = Mk3SwerveModuleHelper.createFalcon500(
                                 tab.getLayout("Front Right Module", BuiltInLayouts.kList).withSize(2, 4).withPosition(2,
                                                 0),
-                                RobotContainer.constants.getDriveConstants().FRModuleGearRatio, RobotContainer.constants.getDriveConstants().FRDriveID, RobotContainer.constants.getDriveConstants().FRSteeringID,
-                                RobotContainer.constants.getDriveConstants().FRCanEncoderID, RobotContainer.constants.getDriveConstants().FRSteerOffset);
+                                RobotContainer.constants.getDriveConstants().getFRModuleGearRatio(), RobotContainer.constants.getDriveConstants().getFRDriveID(), RobotContainer.constants.getDriveConstants().getFRSteeringID()                        ,
+                                RobotContainer.constants.getDriveConstants().getFRCanEncoderID(), RobotContainer.constants.getDriveConstants().getFRSteerOffset());
                 
 
                 m_backLeftModule = Mk3SwerveModuleHelper.createFalcon500(
                                 tab.getLayout("Back Left Module", BuiltInLayouts.kList).withSize(2, 4).withPosition(4,
                                                 0),
-                                RobotContainer.constants.getDriveConstants().BLModuleGearRatio, RobotContainer.constants.getDriveConstants().BLDriveID, RobotContainer.constants.getDriveConstants().BLSteeringID,
-                                RobotContainer.constants.getDriveConstants().BLCanEncoderID, RobotContainer.constants.getDriveConstants().BLSteerOffset);
+                                RobotContainer.constants.getDriveConstants().getBLModuleGearRatio(), RobotContainer.constants.getDriveConstants().getBLDriveID(), RobotContainer.constants.getDriveConstants().getBLSteeringID(),
+                                RobotContainer.constants.getDriveConstants().getBLCanEncoderID(), RobotContainer.constants.getDriveConstants().getBLSteerOffset());
 
                 m_backRightModule = Mk3SwerveModuleHelper.createFalcon500(
                                 tab.getLayout("Back Right Module", BuiltInLayouts.kList).withSize(2, 4).withPosition(4,
                                                 0),
-                                RobotContainer.constants.getDriveConstants().BRModuleGearRatio, RobotContainer.constants.getDriveConstants().BRDriveID, RobotContainer.constants.getDriveConstants().BRSteeringID,
-                                RobotContainer.constants.getDriveConstants().BRCanEncoderID, RobotContainer.constants.getDriveConstants().BRSteerOffset);
+                                RobotContainer.constants.getDriveConstants().getBRModuleGearRatio(), RobotContainer.constants.getDriveConstants().getBRDriveID(), RobotContainer.constants.getDriveConstants().getBRSteeringID(),
+                                RobotContainer.constants.getDriveConstants().getBRCanEncoderID(), RobotContainer.constants.getDriveConstants().getBRSteerOffset());
 
-                CANCoder fl = new CANCoder(RobotContainer.constants.getDriveConstants().FLCanEncoderID);
+                CANCoder fl = new CANCoder(RobotContainer.constants.getDriveConstants().getFLCanEncoderID());
                 fl.configSensorDirection(false);
-                CANCoder fr = new CANCoder(RobotContainer.constants.getDriveConstants().FRCanEncoderID);
+                CANCoder fr = new CANCoder(RobotContainer.constants.getDriveConstants().getFRCanEncoderID());
                 fr.configSensorDirection(false);
-                CANCoder bl = new CANCoder(RobotContainer.constants.getDriveConstants().BLCanEncoderID);
+                CANCoder bl = new CANCoder(RobotContainer.constants.getDriveConstants().getBLCanEncoderID());
                 bl.configSensorDirection(false);
-                CANCoder br = new CANCoder(RobotContainer.constants.getDriveConstants().BRCanEncoderID);
+                CANCoder br = new CANCoder(RobotContainer.constants.getDriveConstants().getBRCanEncoderID());
                 br.configSensorDirection(false);
                 zeroGyroscope();
 

@@ -156,7 +156,7 @@ public class PracConstants extends Constants
         @Override
         public double getSteerGearReduction() {
             // TODO Auto-generated method stub
-            return (9.0 / 24.0) * (18.0 / 72.0);
+            return -(9.0 / 24.0) * (18.0 / 72.0);
         }
 
         @Override

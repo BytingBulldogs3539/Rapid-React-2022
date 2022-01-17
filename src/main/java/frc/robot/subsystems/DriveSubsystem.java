@@ -4,15 +4,16 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.swervedrivespecialties.swervelib.Mk3SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SwerveModule;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -41,7 +42,11 @@ public class DriveSubsystem extends SubsystemBase
                         // Back right
                         new Translation2d(-RobotContainer.constants.getDriveConstants().getWheelTrackWidth() / 2.0, -RobotContainer.constants.getDriveConstants().getWheelBase() / 2.0));
 
+        SwerveDriveOdometry m_odometry;
+
         private final PigeonIMU m_pigeon = new PigeonIMU(RobotContainer.constants.getDriveConstants().getPigeonID());
+
+        Pose2d m_pose;
 
         private final SwerveModule m_frontLeftModule;
         private final SwerveModule m_frontRightModule;
@@ -86,34 +91,50 @@ public class DriveSubsystem extends SubsystemBase
                                 RobotContainer.constants.getDriveConstants().getBLCanEncoderID(), RobotContainer.constants.getDriveConstants().getBLSteerOffset());
 
                 m_backRightModule = Mk3SwerveModuleHelper.createFalcon500(
-                                tab.getLayout("Back Right Module", BuiltInLayouts.kList).withSize(2, 4).withPosition(4,
+                                tab.getLayout("Back Right Module", BuiltInLayouts.kList).withSize(2, 4).withPosition(6,
                                                 0),
                                 RobotContainer.constants.getDriveConstants().getBRModuleGearRatio(), RobotContainer.constants.getDriveConstants().getBRDriveID(), RobotContainer.constants.getDriveConstants().getBRSteeringID(),
                                 RobotContainer.constants.getDriveConstants().getBRCanEncoderID(), RobotContainer.constants.getDriveConstants().getBRSteerOffset());
 
-                CANCoder fl = new CANCoder(RobotContainer.constants.getDriveConstants().getFLCanEncoderID());
-                fl.configSensorDirection(false);
-                CANCoder fr = new CANCoder(RobotContainer.constants.getDriveConstants().getFRCanEncoderID());
-                fr.configSensorDirection(false);
-                CANCoder bl = new CANCoder(RobotContainer.constants.getDriveConstants().getBLCanEncoderID());
-                bl.configSensorDirection(false);
-                CANCoder br = new CANCoder(RobotContainer.constants.getDriveConstants().getBRCanEncoderID());
-                br.configSensorDirection(false);
                 zeroGyroscope();
+
+                m_odometry = new SwerveDriveOdometry(m_kinematics, getGyroscopeRotation(), new Pose2d(0, 0, new Rotation2d()));
 
         }
 
+        /**
+         * Used to zero the pigeon / gyroscope.
+         */
         public void zeroGyroscope() {
                 m_pigeon.setFusedHeading(0.0);
                 m_pigeon.setYaw(0);
         }
 
+        /**
+         * Used to get the angle of rotation of the robot from the last time the gyro was zeroed.
+         * @returns gyro angle.
+         */
         public Rotation2d getGyroscopeRotation() {
                 return Rotation2d.fromDegrees(m_pigeon.getFusedHeading());
         }
 
         public void drive(ChassisSpeeds chassisSpeeds) {
                 m_chassisSpeeds = chassisSpeeds;
+        }
+
+        public SwerveModuleState getState (SwerveModule swerveModule)
+        {
+                return new SwerveModuleState(swerveModule.getDriveVelocity(), Rotation2d.fromDegrees(Math.toDegrees(swerveModule.getSteerAngle())));
+        }
+
+        public Pose2d getPose()
+        {
+                return m_pose;
+        }
+
+        public void resetPose(Pose2d pose)
+        {
+                m_odometry.resetPosition(pose, getGyroscopeRotation());
         }
 
         @Override
@@ -129,5 +150,8 @@ public class DriveSubsystem extends SubsystemBase
                                 states[2].angle.getRadians());
                 m_backRightModule.set(states[3].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE,
                                 states[3].angle.getRadians());
+
+                m_pose = m_odometry.update(getGyroscopeRotation(), getState(m_frontLeftModule), getState(m_frontRightModule),
+                getState(m_backLeftModule), getState(m_backRightModule));
         }
 }

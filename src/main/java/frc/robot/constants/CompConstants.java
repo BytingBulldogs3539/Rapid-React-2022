@@ -5,31 +5,15 @@ import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 public class CompConstants extends Constants
 {
 
-    @Override
-    public DriveConstants getDriveConstants() {
-        return new DriveConstants();
-    }
+    public DriveConstants getDriveConstants() {return new DriveConstants();}
+    public IntakeConstants getIntakeConstants() {return new IntakeConstants();}
 
-    @Override
-    public IntakeConstants getIntakeConstants() {
-        // TODO Auto-generated method stub
-        return new IntakeConstants();
-    }
-    @Override
-    public ShooterConstants getShooterConstants() {
-        // TODO Auto-generated method stub
-        return new ShooterConstants();
-    }
-    @Override
-    public ClimberConstants getClimberConstants() {
-        // TODO Auto-generated method stub
-        return new ClimberConstants();
-    }
+    public ShooterConstants getShooterConstants() {return new ShooterConstants();}
+    public ClimberConstants getClimberConstants() {return new ClimberConstants();}
 
     public class DriveConstants extends Constants.DriveConstants {
         @Override
         public double getWheelDiameter() {
-            // TODO Auto-generated method stub
             return 4.0;
         }
 
@@ -156,7 +140,7 @@ public class CompConstants extends Constants
         @Override
         public double getSteerGearReduction() {
             // TODO Auto-generated method stub
-            return (9.0 / 24.0) * (18.0 / 72.0);
+            return -(9.0 / 24.0) * (18.0 / 72.0);
         }
 
         @Override

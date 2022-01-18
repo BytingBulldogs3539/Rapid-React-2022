@@ -5,10 +5,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
+import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.utilities.PIDConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
   // Declares shooter motor objects, but does not define them yet.
@@ -20,14 +22,34 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor2 = new TalonFX(RobotContainer.constants.getShooterConstants().getShooterMotor2ID());
 
     shooterMotor2.set(TalonFXControlMode.Follower, RobotContainer.constants.getShooterConstants().getShooterMotor1ID());
+    
+    shooterMotor1.setInverted(RobotContainer.constants.getShooterConstants().getGearRatio().getInverted());
+    shooterMotor1.setSensorPhase(RobotContainer.constants.getShooterConstants().getGearRatio().getInverted());
+    shooterMotor2.setInverted(TalonFXInvertType.FollowMaster);
   }
   /**
-   * A value between -1 and 1.
+   * A value between -1 and 1
    * 
    * @param speed
    */
   public void setShooterPercentOutput(double speed) {
-    shooterMotor2.set(TalonFXControlMode.PercentOutput, speed);
+    shooterMotor1.set(TalonFXControlMode.PercentOutput, speed);
+  }
+
+  public void setShooterSpeed(double speed) {
+    shooterMotor1.set(TalonFXControlMode.Velocity, speed * (2048.0 / 600.0) * RobotContainer.constants.getShooterConstants().getGearRatio().getGearRatio());
+
+  }
+
+  /***
+   * Configures PID constants for shooterMotor1
+   * @param PIDConstants (PID constants for shooter motor 1)
+   */
+  public void setPIDConstants(PIDConstants PIDConstants) {
+    shooterMotor1.config_kP(0, PIDConstants.getP());
+    shooterMotor1.config_kI(0, PIDConstants.getI());
+    shooterMotor1.config_kD(0, PIDConstants.getD());
+    shooterMotor1.config_kF(0, PIDConstants.getF());
   }
 
   @Override

@@ -2,6 +2,7 @@ package frc.robot.constants;
 
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 
+import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
 public class CompConstants extends Constants
@@ -196,6 +197,12 @@ public class CompConstants extends Constants
         public PIDConstants getPIDConstants() {
             // TODO Auto-generated method stub
             return new PIDConstants(0, 0, 0, 0);
+        }
+
+        @Override
+        public GearRatio getGearRatio() {
+            // TODO Auto-generated method stub
+            return new GearRatio(1, false);
         }
 
     }

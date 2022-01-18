@@ -6,6 +6,7 @@ package frc.robot.constants;
 
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 
+import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
 /**
@@ -117,12 +118,14 @@ public abstract class Constants {
      */
     public abstract class ShooterConstants {
         // Shooter Motor ID
-        /*** @return the id of the first shooter motor*/
+        /*** @return The id of the first shooter motor*/
         public abstract int getShooterMotor1ID();
-        /*** @return the id of the second shooter motor*/
+        /*** @return The id of the second shooter motor*/
         public abstract int getShooterMotor2ID();
-        /*** @return the values of the p, i, d, & f PID constants*/
+        /*** @return The values of the p, i, d, & f PID constants*/
         public abstract PIDConstants getPIDConstants();
+        /*** @return The values of the gear ratio and inverted constants*/
+        public abstract GearRatio getGearRatio();
     }
     /**
      * Class containing climber constants

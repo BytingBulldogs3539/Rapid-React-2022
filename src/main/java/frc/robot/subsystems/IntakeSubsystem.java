@@ -4,19 +4,27 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
-  TalonFX intakeMotor;
-  /** Creates a new Intake. */
+
+  TalonFX intakeMotor1;
+  
   public IntakeSubsystem() {
     
+    intakeMotor1 = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
   }
+  /**
+   * 
+   * @param speed a value between -1 & 1
+   */
+  public void setIntakeSpeed(double speed) {
 
-  public void setIntakeSpeed() {
-
+    intakeMotor1.set(TalonFXControlMode.PercentOutput, speed);
   }
   @Override
   public void periodic() {

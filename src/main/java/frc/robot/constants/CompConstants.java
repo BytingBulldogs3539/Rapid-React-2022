@@ -2,6 +2,8 @@ package frc.robot.constants;
 
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 
+import frc.robot.utilities.PIDConstants;
+
 public class CompConstants extends Constants
 {
 
@@ -188,6 +190,12 @@ public class CompConstants extends Constants
         public int getShooterMotor2ID() {
             // TODO Auto-generated method stub
             return 0;
+        }
+
+        @Override
+        public PIDConstants getPIDConstants() {
+            // TODO Auto-generated method stub
+            return new PIDConstants(0, 0, 0, 0);
         }
 
     }

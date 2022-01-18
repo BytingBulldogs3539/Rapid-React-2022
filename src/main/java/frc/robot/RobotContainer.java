@@ -7,9 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
 import frc.robot.constants.PracConstants;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.utilities.LogitechF310;
 import frc.robot.utilities.MacAddress;
 
 public class RobotContainer {
@@ -21,6 +25,13 @@ public class RobotContainer {
   public static Constants constants;
   public static MacAddress macAddress = new MacAddress(PRACTICE_BOT_MAC_ADDRESS);
 
+  public static LogitechF310 driverController = new LogitechF310(1); 
+  public static LogitechF310 operatorController = new LogitechF310(1);
+
+  public static IntakeSubsystem intakeSubsystem;
+
+  public static ShooterSubsystem shooterSubsystem;
+
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -31,6 +42,8 @@ public class RobotContainer {
       constants = new CompConstants();
     }
 
+    intakeSubsystem = new IntakeSubsystem();
+    shooterSubsystem = new ShooterSubsystem();
   }
 
   /**
@@ -43,7 +56,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-  }
+    operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem));
+    }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

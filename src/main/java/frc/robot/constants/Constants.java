@@ -6,6 +6,8 @@ package frc.robot.constants;
 
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 
+import frc.robot.utilities.PIDConstants;
+
 /**
  * An outline for two classes containing constants for both the practice bot and the comp bot.
  */
@@ -119,6 +121,8 @@ public abstract class Constants {
         public abstract int getShooterMotor1ID();
         /*** @return the id of the second shooter motor*/
         public abstract int getShooterMotor2ID();
+        /*** @return the values of the p, i, d, & f PID constants*/
+        public abstract PIDConstants getPIDConstants();
     }
     /**
      * Class containing climber constants

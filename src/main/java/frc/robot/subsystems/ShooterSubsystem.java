@@ -16,7 +16,12 @@ public class ShooterSubsystem extends SubsystemBase {
   // Declares shooter motor objects, but does not define them yet.
   TalonFX shooterMotor1;
   TalonFX shooterMotor2;
+  final boolean shouldRun;
   public ShooterSubsystem() {
+    if(RobotContainer.constants.getShooterConstants().getShooterMotor1ID()!=-1 ||
+     RobotContainer.constants.getShooterConstants().getShooterMotor2ID()!=-1 ){
+      
+
     // Creates 2 objects, one object per each shooter motor.
     shooterMotor1 = new TalonFX(RobotContainer.constants.getShooterConstants().getShooterMotor1ID());
     shooterMotor2 = new TalonFX(RobotContainer.constants.getShooterConstants().getShooterMotor2ID());
@@ -26,6 +31,11 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterMotor1.setInverted(RobotContainer.constants.getShooterConstants().getGearRatio().getInverted());
     shooterMotor1.setSensorPhase(RobotContainer.constants.getShooterConstants().getGearRatio().getInverted());
     shooterMotor2.setInverted(TalonFXInvertType.FollowMaster);
+    shouldRun = true;
+    } 
+    else 
+      shouldRun = false;
+
   }
   /**
    * A value between -1 and 1
@@ -33,11 +43,13 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param speed
    */
   public void setShooterPercentOutput(double speed) {
-    shooterMotor1.set(TalonFXControlMode.PercentOutput, speed);
+    if(shouldRun)
+      shooterMotor1.set(TalonFXControlMode.PercentOutput, speed);
   }
 
   public void setShooterSpeed(double speed) {
-    shooterMotor1.set(TalonFXControlMode.Velocity, speed * (2048.0 / 600.0) * RobotContainer.constants.getShooterConstants().getGearRatio().getGearRatio());
+    if(shouldRun)
+      shooterMotor1.set(TalonFXControlMode.Velocity, speed * (2048.0 / 600.0) * RobotContainer.constants.getShooterConstants().getGearRatio().getGearRatio());
 
   }
 
@@ -46,10 +58,13 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param PIDConstants (PID constants for shooter motor 1)
    */
   public void setPIDConstants(PIDConstants PIDConstants) {
-    shooterMotor1.config_kP(0, PIDConstants.getP());
-    shooterMotor1.config_kI(0, PIDConstants.getI());
-    shooterMotor1.config_kD(0, PIDConstants.getD());
-    shooterMotor1.config_kF(0, PIDConstants.getF());
+    if(shouldRun)
+    {
+      shooterMotor1.config_kP(0, PIDConstants.getP());
+      shooterMotor1.config_kI(0, PIDConstants.getI());
+      shooterMotor1.config_kD(0, PIDConstants.getD());
+      shooterMotor1.config_kF(0, PIDConstants.getF());
+    }
   }
 
   @Override

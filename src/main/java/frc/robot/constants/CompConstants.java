@@ -8,130 +8,155 @@ import frc.robot.utilities.PIDConstants;
 public class CompConstants extends Constants
 {
 
-    public DriveConstants getDriveConstants() {return new DriveConstants();}
-    public IntakeConstants getIntakeConstants() {return new IntakeConstants();}
+    @Override
+    public DriveConstants getDriveConstants() {
+        return new DriveConstants();
+    }
 
-    public ShooterConstants getShooterConstants() {return new ShooterConstants();}
-    public ClimberConstants getClimberConstants() {return new ClimberConstants();}
+    @Override
+    public IntakeConstants getIntakeConstants() {
+        // TODO Auto-generated method stub
+        return new IntakeConstants();
+    }
+    @Override
+    public ShooterConstants getShooterConstants() {
+        // TODO Auto-generated method stub
+        return new ShooterConstants();
+    }
+    @Override
+    public ClimberConstants getClimberConstants() {
+        // TODO Auto-generated method stub
+        return new ClimberConstants();
+    }   
 
     public class DriveConstants extends Constants.DriveConstants {
         @Override
+        public double getCameraHeightMeters() {
+            return 0.0;//???
+        }
+        @Override
+        public double getCameraPitchRadians() {
+            return 0.0;//???
+        }
+
+        @Override
         public double getWheelDiameter() {
-            return 4.0;
+            // TODO Auto-generated method stub
+            return 0.1016;
         }
 
         @Override
         public double getWheelTrackWidth() {
             // TODO Auto-generated method stub
-            return 0.0;
+            return 0.3302;
         }
 
         @Override
         public double getWheelBase() {
             // TODO Auto-generated method stub
-            return 0;
+            return 0.3302;
         }
 
         @Override
         public int getFLDriveID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 3;
         }
 
         @Override
         public int getFLSteeringID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 4;
         }
 
         @Override
         public int getFRDriveID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 1;
         }
 
         @Override
         public int getFRSteeringID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 2;
         }
 
         @Override
         public int getBLDriveID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 8;
         }
 
         @Override
         public int getBLSteeringID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 7;
         }
 
         @Override
         public int getBRDriveID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 6;
         }
 
         @Override
         public int getBRSteeringID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 5;
         }
 
         @Override
         public int getFLCanEncoderID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 32;
         }
 
         @Override
         public int getFRCanEncoderID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 33;
         }
 
         @Override
         public int getBLCanEncoderID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 30;
         }
 
         @Override
         public int getBRCanEncoderID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 31;
         }
 
         @Override
         public int getPigeonID() {
             // TODO Auto-generated method stub
-            return 0;
+            return 25;
         }
 
         @Override
         public double getFLSteerOffset() {
             // TODO Auto-generated method stub
-            return 0.1808 + 0.5 * Math.PI;
+            return -0.1808 + 0.5 * Math.PI;
         }
 
         @Override
         public double getFRSteerOffset() {
             // TODO Auto-generated method stub
-            return 5.6420 + 0.5 * Math.PI;
+            return -5.6420 + 0.5 * Math.PI;
         }
 
         @Override
         public double getBLSteerOffset() {
             // TODO Auto-generated method stub
-            return 2.8973 + 0.5 * Math.PI;
+            return -2.8973 + 0.5 * Math.PI;
         }
 
         @Override
         public double getBRSteerOffset() {
             // TODO Auto-generated method stub
-            return 0.6336 + 0.5 * Math.PI;
+            return -0.6336- 0.1426 + 0.5 * Math.PI;
         }
 
         @Override
@@ -143,7 +168,7 @@ public class CompConstants extends Constants
         @Override
         public double getSteerGearReduction() {
             // TODO Auto-generated method stub
-            return -(9.0 / 24.0) * (18.0 / 72.0);
+            return -(8.0 / 24.0) * (18.0 / 72.0);
         }
 
         @Override
@@ -175,7 +200,7 @@ public class CompConstants extends Constants
         @Override
         public int getIntakeMotorID() {
             // TODO Auto-generated method stub
-            return 0;
+            return -1;
         }
 
     }
@@ -184,13 +209,13 @@ public class CompConstants extends Constants
         @Override
         public int getShooterMotor1ID() {
             // TODO Auto-generated method stub
-            return 0;
+            return -1;
         }
 
         @Override
         public int getShooterMotor2ID() {
             // TODO Auto-generated method stub
-            return 0;
+            return -1;
         }
 
         @Override
@@ -211,19 +236,19 @@ public class CompConstants extends Constants
         @Override
         public int getClimberMotor1ID() {
             // TODO Auto-generated method stub
-            return 0;
+            return -1;
         }
 
         @Override
         public int getClimberMotor2ID() {
             // TODO Auto-generated method stub
-            return 0;
+            return -1;
         }
 
         @Override
         public int getClimberMotor3ID() {
             // TODO Auto-generated method stub
-            return 0;
+            return -1;
         }
 
     }

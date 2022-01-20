@@ -59,22 +59,17 @@ public class MacAddress {
 
       macAddresses.add(address);
     }
+    listAddresses(macAddresses);
 
     return macAddresses;
   }
 
-  public void listAddresses()
+  public void listAddresses(List<byte[]> macAddresses)
   {
-      
-
-    try {
         String[] macAddressStrings;
-        macAddressStrings = getMacAddresses().stream().map(this::macToString).toArray(String[]::new);
+        macAddressStrings = macAddresses.stream().map(this::macToString).toArray(String[]::new);
         SmartDashboard.putStringArray("MAC Addresses", macAddressStrings);
         SmartDashboard.putString("Practice Bot MAC Address",practice);
-    } catch (IOException e) {
-        DriverStation.reportError("Error Retrieving Mac Addresses.", e.getStackTrace());
-    }
 
   }
 

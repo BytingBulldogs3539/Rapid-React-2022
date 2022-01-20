@@ -1,32 +1,50 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveSubsystem;
+
+import java.util.function.DoubleSupplier;
 
 public class DriveCommand extends CommandBase {
-  /** Creates a new DriveCommand. */
-  public DriveCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+    private final DriveSubsystem drivetrain;
+    private final DoubleSupplier translationXSupplier;
+    private final DoubleSupplier translationYSupplier;
+    private final DoubleSupplier rotationSupplier;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
+    public DriveCommand(
+            DriveSubsystem drivetrain,
+            DoubleSupplier translationXSupplier,
+            DoubleSupplier translationYSupplier,
+            DoubleSupplier rotationSupplier
+    ) {
+        this.drivetrain = drivetrain;
+        this.translationXSupplier = translationXSupplier;
+        this.translationYSupplier = translationYSupplier;
+        this.rotationSupplier = rotationSupplier;
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
+        addRequirements(drivetrain);
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+    @Override
+    public void execute() {
+        double translationXPercent = translationXSupplier.getAsDouble();
+        double translationYPercent = translationYSupplier.getAsDouble();
+        double rotationPercent = rotationSupplier.getAsDouble();
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+        drivetrain.drive(
+                ChassisSpeeds.fromFieldRelativeSpeeds(
+                        .3*translationXPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+                        .3*translationYPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+                        .3*rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+                        drivetrain.getGyroscopeRotation()
+                )
+        );
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        // Stop the drivetrain
+        drivetrain.drive(new ChassisSpeeds(0.0, 0.0, 0.0));
+    }
 }

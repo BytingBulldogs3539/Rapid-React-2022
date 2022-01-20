@@ -8,6 +8,9 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import com.swervedrivespecialties.swervelib.Mk3SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SwerveModule;
 
+import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -15,11 +18,13 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.constants.Constants;
 
 public class DriveSubsystem extends SubsystemBase 
 {
@@ -54,7 +59,7 @@ public class DriveSubsystem extends SubsystemBase
         private final SwerveModule m_backRightModule;
 
         private ChassisSpeeds m_chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
-
+        private PhotonCamera camera;
         public DriveSubsystem() {
                 ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
 
@@ -100,6 +105,7 @@ public class DriveSubsystem extends SubsystemBase
 
                 m_odometry = new SwerveDriveOdometry(m_kinematics, getGyroscopeRotation(), new Pose2d(0, 0, new Rotation2d()));
 
+                camera = new PhotonCamera("mmal_service_16.1");
         }
 
         /**
@@ -136,7 +142,35 @@ public class DriveSubsystem extends SubsystemBase
         {
                 m_odometry.resetPosition(pose, getGyroscopeRotation());
         }
-
+        public boolean getVisionSeeing(){
+                return camera.getLatestResult().hasTargets();
+        }
+        public double getVisionAngle(){
+                if(getVisionSeeing()){
+                        return camera.getLatestResult().getBestTarget().getYaw();
+                }
+                return 0;
+        }
+        public double getVisionPitch(){
+                if(getVisionSeeing()){
+                        return camera.getLatestResult().getBestTarget().getPitch();
+                }
+                return 0;
+        }
+        public double getTargetHeight(){
+                return 0.0D;
+        }
+        public double getTargetDistance(){
+                if (getVisionSeeing()){
+                        return PhotonUtils.calculateDistanceToTargetMeters(
+                                RobotContainer.constants.getDriveConstants().getCameraHeightMeters(),
+                                getTargetHeight(), 
+                                RobotContainer.constants.getDriveConstants().getCameraPitchRadians(), 
+                                Units.degreesToRadians(getVisionPitch()));
+                }
+                return 99;
+                //This is the return vaule
+        }
         @Override
         public void periodic() {
                 SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_chassisSpeeds);

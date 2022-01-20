@@ -38,7 +38,13 @@ public abstract class Constants {
      * Class containing drive constants
      */
     public abstract class DriveConstants {
-        
+        // Camera Constants
+        /*** @return the Camera Height in meters*/
+        public abstract double getCameraHeightMeters();
+        /*** @return the Camera Pitch in Radians*/
+        public abstract double getCameraPitchRadians();
+
+
         // Wheel measurement constants
         /*** @return the diameter of the drive wheel in meters*/
         public abstract double getWheelDiameter();

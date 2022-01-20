@@ -13,17 +13,26 @@ import frc.robot.RobotContainer;
 public class IntakeSubsystem extends SubsystemBase {
 
   TalonFX intakeMotor1;
-  
+  final boolean shouldRun;
   public IntakeSubsystem() {
-    
-    intakeMotor1 = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
+    if(RobotContainer.constants.getIntakeConstants().getIntakeMotorID()!=-1){
+      shouldRun = true;
+      intakeMotor1 = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
+    }
+    else
+    {
+      shouldRun = false;
+    }
+
   }
   /**
    * 
    * @param speed a value between -1 & 1
    */
   public void setIntakeSpeed(double speed) {
-
+    if(!shouldRun){
+      return;
+    }
     intakeMotor1.set(TalonFXControlMode.PercentOutput, speed);
   }
   @Override

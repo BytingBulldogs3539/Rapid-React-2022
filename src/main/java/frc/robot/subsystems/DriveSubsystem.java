@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
-import frc.robot.constants.Constants;
+import frc.robot.commands.DriveCommand;
 
 public class DriveSubsystem extends SubsystemBase 
 {
@@ -106,6 +106,8 @@ public class DriveSubsystem extends SubsystemBase
                 m_odometry = new SwerveDriveOdometry(m_kinematics, getGyroscopeRotation(), new Pose2d(0, 0, new Rotation2d()));
 
                 camera = new PhotonCamera("mmal_service_16.1");
+
+                setDefaultCommand(new DriveCommand(this));
         }
 
         /**

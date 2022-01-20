@@ -51,41 +51,13 @@ public class RobotContainer {
     driveSubsystem = new DriveSubsystem();
 
     configureButtonBindings();
-    driveSubsystem.register();
 
-    driveSubsystem.setDefaultCommand(new DriveCommand(
-      driveSubsystem,
-            () -> modifyAxis(driverController.getLeftStickY()), // Axes are flipped here on purpose
-            () -> -modifyAxis(driverController.getLeftStickX()),
-            () -> -modifyAxis(driverController.getRightStickX())
-    ));
 }
 
 public DriveSubsystem getDrivetrain() {
     return driveSubsystem;
 }
 
-private static double deadband(double value, double deadband) {
-    if (Math.abs(value) > deadband) {
-        if (value > 0.0) {
-            return (value - deadband) / (1.0 - deadband);
-        } else {
-            return (value + deadband) / (1.0 - deadband);
-        }
-    } else {
-        return 0.0;
-    }  
-}
-
-private static double modifyAxis(double value) {
-    // Deadband
-    value = deadband(value, 0.05);
-
-    // Square the axis
-    value = Math.copySign(value * value, value);
-
-    return value;
-}
   /**
    * Use this method to define your button->command mappings. Buttons can be
    * created by

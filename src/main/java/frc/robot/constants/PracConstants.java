@@ -194,6 +194,16 @@ public class PracConstants extends Constants
             // TODO Auto-generated method stub
             return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
+        @Override
+        public String frontCameraName() {
+            // TODO Auto-generated method stub
+            return "HD_USB_Camera";
+        }
+        @Override
+        public String shooterCameraName() {
+            // TODO Auto-generated method stub
+            return "mmal_service_16.1";
+        }
     }
     public class IntakeConstants extends Constants.IntakeConstants {
 

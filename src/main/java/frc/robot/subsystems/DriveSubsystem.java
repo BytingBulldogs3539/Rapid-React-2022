@@ -164,33 +164,45 @@ public class DriveSubsystem extends SubsystemBase
         {
                 m_odometry.resetPosition(pose, getGyroscopeRotation());
         }
-        public boolean getVisionSeeing(){
-                return camera.getLatestResult().hasTargets();
+        public boolean getFrontVisionSeeing(){
+                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                {
+                        return frontCamera.getLatestResult().hasTargets();
+                }
+                return false;
         }
-        public double getVisionAngle(){
-                if(getVisionSeeing()){
-                        return camera.getLatestResult().getBestTarget().getYaw();
+        public double getFrontVisionYaw(){
+                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                {
+                        if(getFrontVisionSeeing()){
+                                return frontCamera.getLatestResult().getBestTarget().getYaw();
+                        }
                 }
                 return 0;
         }
-        public double getVisionPitch(){
-                if(getVisionSeeing()){
-                        return camera.getLatestResult().getBestTarget().getPitch();
+        public double getFrontVisionPitch()
+        {
+                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                {
+                        if(getFrontVisionSeeing()){
+                                return frontCamera.getLatestResult().getBestTarget().getPitch();
+                        }
                 }
+                
                 return 0;
         }
         public double getTargetHeight(){
                 return 0.0D;
         }
         public double getTargetDistance(){
-                if (getVisionSeeing()){
+                if (getFrontVisionSeeing()){
                         return PhotonUtils.calculateDistanceToTargetMeters(
                                 RobotContainer.constants.getDriveConstants().getCameraHeightMeters(),
                                 getTargetHeight(), 
                                 RobotContainer.constants.getDriveConstants().getCameraPitchRadians(), 
-                                Units.degreesToRadians(getVisionPitch()));
+                                Units.degreesToRadians(getFrontVisionPitch()));
                 }
-                return 99;
+                return 0;
                 //This is the return vaule
         }
         @Override

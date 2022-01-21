@@ -59,7 +59,13 @@ public class DriveSubsystem extends SubsystemBase
         private final SwerveModule m_backRightModule;
 
         private ChassisSpeeds m_chassisSpeeds = new ChassisSpeeds(0.0, 0.0, 0.0);
-        private PhotonCamera camera;
+        
+        private PhotonCamera frontCamera;
+        private PhotonCamera shooterCamera;
+
+        final boolean shouldRunFront;
+        final boolean shouldRunShooter;
+
         public DriveSubsystem() {
                 ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
 
@@ -104,8 +110,22 @@ public class DriveSubsystem extends SubsystemBase
                 zeroGyroscope();
 
                 m_odometry = new SwerveDriveOdometry(m_kinematics, getGyroscopeRotation(), new Pose2d(0, 0, new Rotation2d()));
+                
+                // Creates two photon camera objects to represent both of the cameras on the robot that are used for vision tracking if their names are not left blank. If they are left blank, they will not be created, which will effectively disable that part of the robot.
+                if(RobotContainer.constants.getDriveConstants().getFrontCameraName().equals("")) {
+                        shouldRunFront = false;
+                } else {
+                        shouldRunFront = true;
+                        frontCamera = new PhotonCamera(RobotContainer.constants.getDriveConstants().getFrontCameraName());
+                }
+                
+                if(RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
+                        shouldRunShooter = false;
+                } else {
+                        shouldRunShooter = true;
+                        shooterCamera = new PhotonCamera(RobotContainer.constants.getDriveConstants().getShooterCameraName());
 
-                camera = new PhotonCamera("mmal_service_16.1");
+                }
 
                 setDefaultCommand(new DriveCommand(this));
         }

@@ -195,12 +195,12 @@ public class PracConstants extends Constants
             return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
         @Override
-        public String frontCameraName() {
+        public String getFrontCameraName() {
             // TODO Auto-generated method stub
             return "HD_USB_Camera";
         }
         @Override
-        public String shooterCameraName() {
+        public String getShooterCameraName() {
             // TODO Auto-generated method stub
             return "mmal_service_16.1";
         }

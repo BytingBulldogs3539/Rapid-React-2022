@@ -44,9 +44,9 @@ public abstract class Constants {
         /*** @return the Camera Pitch in Radians*/
         public abstract double getCameraPitchRadians();
         /*** @return The name of the front camera as a string */
-        public abstract String frontCameraName();
+        public abstract String getFrontCameraName();
         /*** @return The name of the rear/shooter camera as a string */
-        public abstract String shooterCameraName();
+        public abstract String getShooterCameraName();
 
 
         // Wheel measurement constants

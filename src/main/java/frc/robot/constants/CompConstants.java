@@ -223,7 +223,7 @@ public class CompConstants extends Constants
         @Override
         public PIDConstants getFrontCameraPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0.01, 0, 0);
+            return new PIDConstants(0.08, 0, 0.008);
         }
 
         @Override

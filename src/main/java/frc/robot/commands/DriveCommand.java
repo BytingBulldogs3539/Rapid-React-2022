@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -27,7 +28,10 @@ public class DriveCommand extends CommandBase {
     
     // Sets several values of the front PID Controller
     frontPIDController.setIntegratorRange(0.0, 1.0);
+    frontPIDController.setTolerance(4.0);
     frontPIDController.setSetpoint(0);
+
+    System.out.println("Started drive command");
   }
 
   private static double deadband(double value, double deadband) {
@@ -54,11 +58,15 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
+    Rotation2d gyroAngle = drivetrain.getGyroscopeRotation();
     double translationXPercent = modifyAxis(RobotContainer.driverController.getLeftStickY());
     double translationYPercent = -modifyAxis(RobotContainer.driverController.getLeftStickX());
     double rotationPercent = -modifyAxis(RobotContainer.driverController.getRightStickX());
     if(RobotContainer.driverController.buttonBR.get()) {
-      translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+      if(!frontPIDController.atSetpoint()) {
+        translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+      }
+      gyroAngle = Rotation2d.fromDegrees(0);
     }
 
     drivetrain.drive(
@@ -66,9 +74,7 @@ public class DriveCommand extends CommandBase {
             .3 * translationXPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             .3 * translationYPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             .3 * rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
-            drivetrain.getGyroscopeRotation())
-
-    );
+            gyroAngle));
   }
 
   @Override

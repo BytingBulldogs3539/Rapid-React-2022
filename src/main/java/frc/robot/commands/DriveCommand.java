@@ -24,6 +24,10 @@ public class DriveCommand extends CommandBase {
     // Creates a new PID controller for each of the cameras with their corresponding PID constants.
     frontPIDController = new PIDController(frontPIDConstants.getP(), frontPIDConstants.getI(), frontPIDConstants.getD());
     shooterPIDController = new PIDController(shooterPIDConstants.getP(), shooterPIDConstants.getI(), shooterPIDConstants.getD());
+    
+    // Sets several values of the front PID Controller
+    frontPIDController.setIntegratorRange(0.0, 1.0);
+    frontPIDController.setSetpoint(0);
   }
 
   private static double deadband(double value, double deadband) {
@@ -53,6 +57,9 @@ public class DriveCommand extends CommandBase {
     double translationXPercent = modifyAxis(RobotContainer.driverController.getLeftStickY());
     double translationYPercent = -modifyAxis(RobotContainer.driverController.getLeftStickX());
     double rotationPercent = -modifyAxis(RobotContainer.driverController.getRightStickX());
+    if(RobotContainer.driverController.buttonBR.get()) {
+      translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+    }
 
     drivetrain.drive(
         ChassisSpeeds.fromFieldRelativeSpeeds(

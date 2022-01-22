@@ -31,15 +31,6 @@ public class CompConstants extends Constants
 
     public class DriveConstants extends Constants.DriveConstants {
         @Override
-        public double getCameraHeightMeters() {
-            return 0.0;//???
-        }
-        @Override
-        public double getCameraPitchRadians() {
-            return 0.0;//???
-        }
-
-        @Override
         public double getWheelDiameter() {
             // TODO Auto-generated method stub
             return 0.1016;
@@ -203,6 +194,30 @@ public class CompConstants extends Constants
         public String getShooterCameraName() {
             // TODO Auto-generated method stub
             return "mmal_service_16.1";
+        }
+
+        @Override
+        public double getFrontCameraHeightMeters() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public double getFrontCameraPitchRadians() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public double getShooterCameraHeightMeters() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public double getShooterCameraPitchRadians() {
+            // TODO Auto-generated method stub
+            return 0;
         }
     }
     public class IntakeConstants extends Constants.IntakeConstants {

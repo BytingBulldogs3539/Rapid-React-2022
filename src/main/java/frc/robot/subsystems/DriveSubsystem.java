@@ -232,9 +232,9 @@ public class DriveSubsystem extends SubsystemBase
         public double getFrontTargetDistance() {
                 if (getFrontVisionSeeing()) {
                         return PhotonUtils.calculateDistanceToTargetMeters(
-                                RobotContainer.constants.getDriveConstants().getCameraHeightMeters(),
+                                RobotContainer.constants.getDriveConstants().getFrontCameraHeightMeters(),
                                 getFrontTargetHeight(), 
-                                RobotContainer.constants.getDriveConstants().getCameraPitchRadians(), 
+                                RobotContainer.constants.getDriveConstants().getFrontCameraPitchRadians(), 
                                 Units.degreesToRadians(getFrontVisionPitch()));
                 }
                 return 0; // This is the return value
@@ -248,9 +248,9 @@ public class DriveSubsystem extends SubsystemBase
         public double getShooterTargetDistance() {
                 if (getFrontVisionSeeing()) {
                         return PhotonUtils.calculateDistanceToTargetMeters(
-                                RobotContainer.constants.getDriveConstants().getCameraHeightMeters(),
+                                RobotContainer.constants.getDriveConstants().getShooterCameraHeightMeters(),
                                 getShooterTargetHeight(), 
-                                RobotContainer.constants.getDriveConstants().getCameraPitchRadians(), 
+                                RobotContainer.constants.getDriveConstants().getShooterCameraPitchRadians(), 
                                 Units.degreesToRadians(getFrontVisionPitch()));
                 }
                 return 0; // This is the return value

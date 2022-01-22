@@ -39,13 +39,17 @@ public abstract class Constants {
      */
     public abstract class DriveConstants {
         // Camera Constants
-        /*** @return the Camera Height in meters*/
-        public abstract double getCameraHeightMeters();
-        /*** @return the Camera Pitch in Radians*/
-        public abstract double getCameraPitchRadians();
+        /*** @return The front camera's height in meters */
+        public abstract double getFrontCameraHeightMeters();
+        /*** @return the front camera's pitch in radians */
+        public abstract double getFrontCameraPitchRadians();
         /*** @return The name of the front camera as a string */
         public abstract String getFrontCameraName();
-        /*** @return The name of the rear/shooter camera as a string */
+        /*** @return The shooter camera height in meters*/
+        public abstract double getShooterCameraHeightMeters();
+        /*** @return The shooter camera pitch in radians as a double */
+        public abstract double getShooterCameraPitchRadians();
+        /*** @return The name of the shooter camera as a string */
         public abstract String getShooterCameraName();
 
 

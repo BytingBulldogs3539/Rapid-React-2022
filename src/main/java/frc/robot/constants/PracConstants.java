@@ -31,15 +31,6 @@ public class PracConstants extends Constants
 
     public class DriveConstants extends Constants.DriveConstants {
         @Override
-        public double getCameraHeightMeters() {
-            return 0.0;//???
-        }
-        @Override
-        public double getCameraPitchRadians() {
-            return 0.0;//???
-        }
-
-        @Override
         public double getWheelDiameter() {
             // TODO Auto-generated method stub
             return 0.1016;
@@ -156,7 +147,7 @@ public class PracConstants extends Constants
         @Override
         public double getBRSteerOffset() {
             // TODO Auto-generated method stub
-            return -0.6336 + 0.5 * Math.PI;
+            return -0.6336- 0.1426 + 0.5 * Math.PI;
         }
 
         @Override
@@ -203,6 +194,30 @@ public class PracConstants extends Constants
         public String getShooterCameraName() {
             // TODO Auto-generated method stub
             return "mmal_service_16.1";
+        }
+
+        @Override
+        public double getFrontCameraHeightMeters() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public double getFrontCameraPitchRadians() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public double getShooterCameraHeightMeters() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public double getShooterCameraPitchRadians() {
+            // TODO Auto-generated method stub
+            return 0;
         }
     }
     public class IntakeConstants extends Constants.IntakeConstants {

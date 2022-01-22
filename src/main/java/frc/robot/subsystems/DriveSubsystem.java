@@ -196,7 +196,7 @@ public class DriveSubsystem extends SubsystemBase
 
         // Getter methods for the shooter camera
         public boolean getShooterVisionSeeing() {
-                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                if(!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals(""))
                 {
                         return shooterCamera.getLatestResult().hasTargets();
                 }
@@ -204,20 +204,20 @@ public class DriveSubsystem extends SubsystemBase
         }
 
         public double getShooterVisionYaw() {
-                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                if(!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals(""))
                 {
                         if(getFrontVisionSeeing()){
-                                return frontCamera.getLatestResult().getBestTarget().getYaw();
+                                return shooterCamera.getLatestResult().getBestTarget().getYaw();
                         }
                 }
                 return 0;
         }
 
         public double getShooterVisionPitch() {
-                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                if(!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals(""))
                 {
-                        if(getFrontVisionSeeing()){
-                                return frontCamera.getLatestResult().getBestTarget().getPitch();
+                        if(getShooterVisionSeeing()){
+                                return shooterCamera.getLatestResult().getBestTarget().getPitch();
                         }
                 }
                 
@@ -246,7 +246,7 @@ public class DriveSubsystem extends SubsystemBase
         }
 
         public double getShooterTargetDistance() {
-                if (getFrontVisionSeeing()) {
+                if (getShooterVisionSeeing()) {
                         return PhotonUtils.calculateDistanceToTargetMeters(
                                 RobotContainer.constants.getDriveConstants().getShooterCameraHeightMeters(),
                                 getShooterTargetHeight(), 

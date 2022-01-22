@@ -164,6 +164,8 @@ public class DriveSubsystem extends SubsystemBase
         {
                 m_odometry.resetPosition(pose, getGyroscopeRotation());
         }
+
+        // Getter methods for front camera
         public boolean getFrontVisionSeeing(){
                 if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
                 {
@@ -191,6 +193,38 @@ public class DriveSubsystem extends SubsystemBase
                 
                 return 0;
         }
+
+        // Getter methods for the shooter camera
+        public boolean getShooterVisionSeeing() {
+                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                {
+                        return shooterCamera.getLatestResult().hasTargets();
+                }
+                return false;
+        }
+
+        public double getShooterVisionYaw() {
+                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                {
+                        if(getFrontVisionSeeing()){
+                                return frontCamera.getLatestResult().getBestTarget().getYaw();
+                        }
+                }
+                return 0;
+        }
+
+        public double getShooterVisionPitch() {
+                if(!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals(""))
+                {
+                        if(getFrontVisionSeeing()){
+                                return frontCamera.getLatestResult().getBestTarget().getPitch();
+                        }
+                }
+                
+                return 0;
+        }
+
+        // Vision tracking target getter methods
         public double getTargetHeight(){
                 return 0.0D;
         }
@@ -203,7 +237,7 @@ public class DriveSubsystem extends SubsystemBase
                                 Units.degreesToRadians(getFrontVisionPitch()));
                 }
                 return 0;
-                //This is the return vaule
+                //This is the return value
         }
         @Override
         public void periodic() {

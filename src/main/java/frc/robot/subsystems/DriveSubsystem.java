@@ -224,21 +224,38 @@ public class DriveSubsystem extends SubsystemBase
                 return 0;
         }
 
-        // Vision tracking target getter methods
-        public double getTargetHeight(){
-                return 0.0D;
+        // Vision tracking target getter methods for the front camera
+        public double getFrontTargetHeight() {
+                return 0.0;
         }
-        public double getTargetDistance(){
-                if (getFrontVisionSeeing()){
+
+        public double getFrontTargetDistance() {
+                if (getFrontVisionSeeing()) {
                         return PhotonUtils.calculateDistanceToTargetMeters(
                                 RobotContainer.constants.getDriveConstants().getCameraHeightMeters(),
-                                getTargetHeight(), 
+                                getFrontTargetHeight(), 
                                 RobotContainer.constants.getDriveConstants().getCameraPitchRadians(), 
                                 Units.degreesToRadians(getFrontVisionPitch()));
                 }
-                return 0;
-                //This is the return value
+                return 0; //This is the return value
         }
+
+        // Vision tracking target getter methods for the shooter camera
+        public double getShooterTargetHeight() {
+                return 0.0;
+        }
+
+        public double getShooterTargetDistance() {
+                if (getFrontVisionSeeing()) {
+                        return PhotonUtils.calculateDistanceToTargetMeters(
+                                RobotContainer.constants.getDriveConstants().getCameraHeightMeters(),
+                                getShooterTargetHeight(), 
+                                RobotContainer.constants.getDriveConstants().getCameraPitchRadians(), 
+                                Units.degreesToRadians(getFrontVisionPitch()));
+                }
+                return 0; //This is the return value
+        }
+
         @Override
         public void periodic() {
                 SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_chassisSpeeds);

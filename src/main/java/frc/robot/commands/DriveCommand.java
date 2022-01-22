@@ -1,17 +1,29 @@
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.utilities.PIDConstants;
 
 public class DriveCommand extends CommandBase {
   private final DriveSubsystem drivetrain;
+  private PIDController frontPIDController;
+  private PIDController shooterPIDController;
 
   public DriveCommand(DriveSubsystem drivetrain) {
     this.drivetrain = drivetrain;
 
     addRequirements(drivetrain);
+
+    // Declares and initializes variables holding the values of the PID constants for both cameras. This helps to make the code easier to read.
+    PIDConstants frontPIDConstants = RobotContainer.constants.getDriveConstants().getFrontCameraPIDConstants();
+    PIDConstants shooterPIDConstants = RobotContainer.constants.getDriveConstants().getShooterCameraPIDConstants();
+
+    // Creates a new PID controller for each of the cameras with their corresponding PID constants.
+    frontPIDController = new PIDController(frontPIDConstants.getP(), frontPIDConstants.getI(), frontPIDConstants.getD());
+    shooterPIDController = new PIDController(shooterPIDConstants.getP(), shooterPIDConstants.getI(), shooterPIDConstants.getD());
   }
 
   private static double deadband(double value, double deadband) {

@@ -219,6 +219,18 @@ public class CompConstants extends Constants
             // TODO Auto-generated method stub
             return 0;
         }
+
+        @Override
+        public PIDConstants getFrontCameraPIDConstants() {
+            // TODO Auto-generated method stub
+            return new PIDConstants(0.01, 0, 0);
+        }
+
+        @Override
+        public PIDConstants getShooterCameraPIDConstants() {
+            // TODO Auto-generated method stub
+            return new PIDConstants(0.01, 0, 0);
+        }
     }
     public class IntakeConstants extends Constants.IntakeConstants {
 

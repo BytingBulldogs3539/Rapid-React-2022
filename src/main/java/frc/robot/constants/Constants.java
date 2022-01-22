@@ -38,6 +38,12 @@ public abstract class Constants {
      * Class containing drive constants
      */
     public abstract class DriveConstants {
+        // Camera PID Constants
+        /*** @return The PID constants for the front camera */
+        public abstract PIDConstants getFrontCameraPIDConstants();
+        /*** @return The PID constants for the shooter camera */
+        public abstract PIDConstants getShooterCameraPIDConstants();
+
         // Camera Constants
         /*** @return The front camera's height in meters */
         public abstract double getFrontCameraHeightMeters();

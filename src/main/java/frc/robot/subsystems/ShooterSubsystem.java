@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
@@ -16,6 +18,8 @@ public class ShooterSubsystem extends SubsystemBase {
   // Declares shooter motor objects, but does not define them yet.
   TalonFX shooterMotor1;
   TalonFX shooterMotor2;
+  TalonSRX shooterMotor3;
+  VictorSPX kickerMotor;
   final boolean shouldRun;
   public ShooterSubsystem() {
     if(RobotContainer.constants.getShooterConstants().getShooterMotor1ID()!=-1 ||

@@ -223,7 +223,7 @@ public class CompConstants extends Constants
         @Override
         public PIDConstants getFrontCameraPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0.08, 0, 0.008);
+            return new PIDConstants(0.01, 0, 0);
         }
 
         @Override
@@ -265,6 +265,18 @@ public class CompConstants extends Constants
         public GearRatio getGearRatio() {
             // TODO Auto-generated method stub
             return new GearRatio(1, false);
+        }
+
+        @Override
+        public int getShooterMotor3ID() {
+            // TODO Auto-generated method stub
+            return -1;
+        }
+
+        @Override
+        public int getKickerMotorID() {
+            // TODO Auto-generated method stub
+            return -1;
         }
 
     }

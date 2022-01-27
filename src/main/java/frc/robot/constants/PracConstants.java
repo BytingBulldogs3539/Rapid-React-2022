@@ -1,5 +1,8 @@
 package frc.robot.constants;
 
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 
 import frc.robot.utilities.GearRatio;
@@ -265,6 +268,18 @@ public class PracConstants extends Constants
         public GearRatio getGearRatio() {
             // TODO Auto-generated method stub
             return new GearRatio(1, false);
+        }
+
+        @Override
+        public int getShooterMotor3ID() {
+            // TODO Auto-generated method stub
+            return -1;
+        }
+
+        @Override
+        public int getKickerMotorID() {
+            // TODO Auto-generated method stub
+            return -1;
         }
 
     }

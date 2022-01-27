@@ -138,10 +138,14 @@ public abstract class Constants {
      */
     public abstract class ShooterConstants {
         // Shooter Motor ID
-        /*** @return The id of the first shooter motor*/
+        /*** @return The ID of the first shooter motor*/
         public abstract int getShooterMotor1ID();
-        /*** @return The id of the second shooter motor*/
+        /*** @return The ID of the second shooter motor*/
         public abstract int getShooterMotor2ID();
+        /*** @return  The ID of the third shooter motor*/
+        public abstract int getShooterMotor3ID();
+        /*** @return  The ID of the kicker motor*/
+        public abstract int getKickerMotorID();
         /*** @return The values of the p, i, d, & f PID constants*/
         public abstract PIDConstants getPIDConstants();
         /*** @return The values of the gear ratio and inverted constants*/

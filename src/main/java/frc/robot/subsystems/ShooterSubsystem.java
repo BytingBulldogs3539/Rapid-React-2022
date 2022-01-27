@@ -18,8 +18,8 @@ public class ShooterSubsystem extends SubsystemBase {
   // Declares shooter motor objects, but does not define them yet.
   TalonFX shooterMotor1;
   TalonFX shooterMotor2;
-  TalonSRX shooterMotor3;
-  VictorSPX kickerMotor;
+  TalonFX shooterMotor3;
+  TalonFX kickerMotor;
   final boolean shouldRun;
   public ShooterSubsystem() {
     if(RobotContainer.constants.getShooterConstants().getShooterMotor1ID()!=-1 ||

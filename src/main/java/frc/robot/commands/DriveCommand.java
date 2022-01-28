@@ -31,7 +31,9 @@ public class DriveCommand extends CommandBase {
     frontPIDController.setTolerance(4.0);
     frontPIDController.setSetpoint(0);
 
-    System.out.println("Started drive command");
+    shooterPIDController.setIntegratorRange(0.0, 1.0);
+    shooterPIDController.setTolerance(4.0);
+    shooterPIDController.setSetpoint(0);
   }
 
   private static double deadband(double value, double deadband) {
@@ -62,11 +64,18 @@ public class DriveCommand extends CommandBase {
     double translationXPercent = modifyAxis(RobotContainer.driverController.getLeftStickY());
     double translationYPercent = -modifyAxis(RobotContainer.driverController.getLeftStickX());
     double rotationPercent = -modifyAxis(RobotContainer.driverController.getRightStickX());
+    
     if(RobotContainer.driverController.buttonBR.get()) {
       if(!frontPIDController.atSetpoint()) {
         translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
       }
       gyroAngle = Rotation2d.fromDegrees(0);
+    }
+
+    if(RobotContainer.driverController.buttonBL.get()) {
+      if(!shooterPIDController.atSetpoint()) {
+        rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+      }
     }
 
     drivetrain.drive(

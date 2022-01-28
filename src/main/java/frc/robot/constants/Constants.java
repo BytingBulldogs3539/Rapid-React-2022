@@ -43,6 +43,12 @@ public abstract class Constants {
         public abstract PIDConstants getFrontCameraPIDConstants();
         /*** @return The PID constants for the shooter camera */
         public abstract PIDConstants getShooterCameraPIDConstants();
+        /*** @return The PID constants for translation X */
+        public abstract PIDConstants getTranslationXPIDConstants();
+        /*** @return The PID constants for translation Y */
+        public abstract PIDConstants getTranslationYPIDConstants();
+        /*** @return The PID rotation constants*/
+        public abstract PIDConstants getRotationConstants();
 
         // Camera Constants
         /*** @return The front camera's height in meters */

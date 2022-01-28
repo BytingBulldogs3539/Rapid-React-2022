@@ -231,6 +231,24 @@ public class PracConstants extends Constants
             // TODO Auto-generated method stub
             return new PIDConstants(0.01, 0, 0);
         }
+
+        @Override
+        public PIDConstants getTranslationXPIDConstants() {
+            // TODO Auto-generated method stub
+            return new PIDConstants(0, 0, 0, 0);
+        }
+
+        @Override
+        public PIDConstants getTranslationYPIDConstants() {
+            // TODO Auto-generated method stub
+            return new PIDConstants(0, 0, 0, 0);
+        }
+
+        @Override
+        public PIDConstants getRotationConstants() {
+            // TODO Auto-generated method stub
+            return new PIDConstants(0, 0, 0, 0);
+        }
     }
     public class IntakeConstants extends Constants.IntakeConstants {
 

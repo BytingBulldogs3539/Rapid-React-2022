@@ -1,7 +1,8 @@
 package frc.robot.utilities;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.ErrorMessages;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -11,14 +12,12 @@ import java.util.function.Supplier;
 import com.swervedrivespecialties.swervelib.control.Path;
 import com.swervedrivespecialties.swervelib.control.PidController;
 import com.swervedrivespecialties.swervelib.control.Trajectory;
-import com.swervedrivespecialties.swervelib.math.RigidTransform2;
-import com.swervedrivespecialties.swervelib.math.Vector2;
 
 public class SwerveController extends CommandBase {
     private final Timer m_timer = new Timer();
 
     private final Trajectory m_trajectory;
-    private final Supplier<RigidTransform2> m_pose;
+    private final Supplier<Pose2d> m_pose;
     private final PidController m_xController;
     private final PidController m_yController;
     private final PidController m_thetaController;
@@ -28,13 +27,13 @@ public class SwerveController extends CommandBase {
     private final DriveSubsystem m_driveSub;
     private double lastTime = 0.0D;
 
-    public SwerveController(Trajectory trajectory, Supplier<RigidTransform2> pose, PidController xController,
+    public SwerveController(Trajectory trajectory, Supplier<Pose2d> pose, PidController xController,
             PidController yController, PidController thetaController, Supplier<Boolean> targetIsAvail,
             Supplier<Double> targetSupplier, Boolean shouldVisionTrack, DriveSubsystem driveSub,
             Subsystem... requirements) {
         this.m_trajectory = (Trajectory) ErrorMessages.requireNonNullParam(trajectory, "trajectory",
                 "SwerveControllerCommand");
-        this.m_pose = (Supplier<RigidTransform2>) ErrorMessages.requireNonNullParam(pose, "pose",
+        this.m_pose = (Supplier<Pose2d>) ErrorMessages.requireNonNullParam(pose, "pose",
                 "SwerveControllerCommand");
 
         this.m_xController = (PidController) ErrorMessages.requireNonNullParam(xController, "xController",
@@ -87,16 +86,16 @@ public class SwerveController extends CommandBase {
 
         double xvel = Math.cos(angle) * desiredVelocity;
 
-        double targetXVel = this.m_xController.calculate(((RigidTransform2) this.m_pose.get()).translation.x, dt)
-                + xvel * RobotContainer.constants.getAutoConstants().getKFController();
+        double targetXVel = this.m_xController.calculate(((Pose2d) this.m_pose.get()).getTranslation().getX(), dt)
+                + xvel * RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getF();
 
         this.m_yController.setSetpoint((desiredPose.getPosition()).y);
         double yvel = Math.sin(angle) * desiredVelocity;
 
-        double targetYVel = this.m_yController.calculate(((RigidTransform2) this.m_pose.get()).translation.y, dt)
-                + yvel * RobotContainer.constants.getAutoConstants().getKFController();
+        double targetYVel = this.m_yController.calculate(((Pose2d) this.m_pose.get()).getTranslation().getY(), dt)
+                + yvel * RobotContainer.constants.getDriveConstants().getTranslationYPIDConstants().getF();
 
-        this.m_thetaController.setInputRange(0.0D, 6.283185307179586D);
+        this.m_thetaController.setInputRange(0.0D, 2*Math.PI);
         this.m_thetaController.setOutputRange(-1.0D, 1.0D);
         this.m_thetaController.setContinuous(true);
 
@@ -111,16 +110,16 @@ public class SwerveController extends CommandBase {
 
                 this.m_thetaController.setSetpoint(desiredPose.getRotation().toRadians());
                 targetAngularVel = this.m_thetaController
-                        .calculate(((RigidTransform2) this.m_pose.get()).rotation.toRadians(), dt);
+                        .calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
             }
         } else {
             this.m_thetaController.setSetpoint(desiredPose.getRotation().inverse().toRadians());
 
             targetAngularVel = this.m_thetaController
-                    .calculate(((RigidTransform2) this.m_pose.get()).rotation.toRadians(), dt);
+                    .calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
         }
 
-        this.m_driveSub.drive(new Vector2(targetXVel, targetYVel), targetAngularVel, true);
+        this.m_driveSub.drive(new ChassisSpeeds(targetXVel, targetYVel, targetAngularVel));
 
         this.lastTime = this.m_timer.get();
     }
@@ -130,12 +129,7 @@ public class SwerveController extends CommandBase {
     }
 
     public boolean isFinished() {
-        return this.m_timer.hasPeriodPassed(this.m_trajectory.getDuration());
+            
+        return this.m_timer.advanceIfElapsed(this.m_trajectory.getDuration());
     }
 }
-
-/*
- * Location: C:\Users\Ivan\Infinite-Recharge-2021.jar!\frc\robo\\utilities\
- * SwerveController.class Java compiler version: 11 (55.0) JD-Core Version:
- * 1.1.3
- */

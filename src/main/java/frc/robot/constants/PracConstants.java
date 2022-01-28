@@ -244,13 +244,13 @@ public class PracConstants extends Constants
     public class ShooterConstants extends Constants.ShooterConstants {
 
         @Override
-        public int getShooterMotor1ID() {
+        public int getSM1ID() {
             // TODO Auto-generated method stub
             return -1;
         }
 
         @Override
-        public int getShooterMotor2ID() {
+        public int getSM2ID() {
             // TODO Auto-generated method stub
             return -1;
         }
@@ -262,7 +262,37 @@ public class PracConstants extends Constants
         }
 
         @Override
-        public GearRatio getGearRatio() {
+        public GearRatio getSM1GearRatio() {
+            // TODO Auto-generated method stub
+            return new GearRatio(1, false);
+        }
+
+        @Override
+        public int getSM3ID() {
+            // TODO Auto-generated method stub
+            return -1;
+        }
+
+        @Override
+        public int getKMID() {
+            // TODO Auto-generated method stub
+            return -1;
+        }
+
+        @Override
+        public GearRatio getSM2GearRatio() {
+            // TODO Auto-generated method stub
+            return new GearRatio(1, false);
+        }
+
+        @Override
+        public GearRatio getSM3GearRatio() {
+            // TODO Auto-generated method stub
+            return new GearRatio(1, false);
+        }
+
+        @Override
+        public GearRatio getKMGearRatio() {
             // TODO Auto-generated method stub
             return new GearRatio(1, false);
         }

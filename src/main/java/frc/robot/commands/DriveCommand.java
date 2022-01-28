@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -24,6 +25,15 @@ public class DriveCommand extends CommandBase {
     // Creates a new PID controller for each of the cameras with their corresponding PID constants.
     frontPIDController = new PIDController(frontPIDConstants.getP(), frontPIDConstants.getI(), frontPIDConstants.getD());
     shooterPIDController = new PIDController(shooterPIDConstants.getP(), shooterPIDConstants.getI(), shooterPIDConstants.getD());
+    
+    // Sets several values of the front PID Controller
+    frontPIDController.setIntegratorRange(0.0, 1.0);
+    frontPIDController.setTolerance(4.0);
+    frontPIDController.setSetpoint(0);
+
+    shooterPIDController.setIntegratorRange(0.0, 1.0);
+    shooterPIDController.setTolerance(4.0);
+    shooterPIDController.setSetpoint(0);
   }
 
   private static double deadband(double value, double deadband) {
@@ -50,18 +60,30 @@ public class DriveCommand extends CommandBase {
 
   @Override
   public void execute() {
+    Rotation2d gyroAngle = drivetrain.getGyroscopeRotation();
     double translationXPercent = modifyAxis(RobotContainer.driverController.getLeftStickY());
     double translationYPercent = -modifyAxis(RobotContainer.driverController.getLeftStickX());
     double rotationPercent = -modifyAxis(RobotContainer.driverController.getRightStickX());
+    
+    if(RobotContainer.driverController.buttonBR.get()) {
+      if(!frontPIDController.atSetpoint()) {
+        translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+      }
+      gyroAngle = Rotation2d.fromDegrees(0);
+    }
+
+    if(RobotContainer.driverController.buttonBL.get()) {
+      if(!shooterPIDController.atSetpoint()) {
+        rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+      }
+    }
 
     drivetrain.drive(
         ChassisSpeeds.fromFieldRelativeSpeeds(
             .3 * translationXPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             .3 * translationYPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
             .3 * rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
-            drivetrain.getGyroscopeRotation())
-
-    );
+            gyroAngle));
   }
 
   @Override

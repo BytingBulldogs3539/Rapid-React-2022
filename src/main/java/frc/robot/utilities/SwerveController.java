@@ -3,6 +3,7 @@ package frc.robot.utilities;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.ErrorMessages;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -72,25 +73,38 @@ public class SwerveController extends CommandBase {
         Path.State desiredPose = desiredState.getPathState();
         double desiredVelocity = desiredState.getVelocity();
 
-        //SmartDashboard.putNumber("Expected X", (desiredPose.getPosition()).x);
-        //SmartDashboard.putNumber("Expected Y", (desiredPose.getPosition()).y);
-        //SmartDashboard.putNumber("Expected Angle", desiredPose.getRotation().toDegrees());
+        SmartDashboard.putNumber("Expected X", (desiredPose.getPosition()).x);
+        SmartDashboard.putNumber("Expected Y", (desiredPose.getPosition()).y);
+        SmartDashboard.putNumber("Expected Angle", desiredPose.getRotation().toDegrees());
 
-        //SmartDashboard.putNumber("Real X", ((RigidTransform2) this.m_pose.get()).translation.x);
-        //SmartDashboard.putNumber("Real Y", ((RigidTransform2) this.m_pose.get()).translation.y);
-        //SmartDashboard.putNumber("Real Angle", ((RigidTransform2) this.m_pose.get()).rotation.toDegrees());
+
+        SmartDashboard.putNumber("Real X", this.m_pose.get().getTranslation().getX());
+        SmartDashboard.putNumber("Real Y", this.m_pose.get().getTranslation().getY());
+        SmartDashboard.putNumber("Real Angle", this.m_pose.get().getRotation().getDegrees());
+
 
         this.m_xController.setSetpoint((desiredPose.getPosition()).x);
         double angle = Math.atan(((desiredPose.getPosition()).y - (lastDesiredPose.getPosition()).y)
                 / ((desiredPose.getPosition()).x - (lastDesiredPose.getPosition()).x));
 
+        // Accounts for when the angle should be 180 degrees but is actually 0
+        if(((desiredPose.getPosition()).x - (lastDesiredPose.getPosition()).x) < 0.0 && desiredPose.getPosition().y - (lastDesiredPose.getPosition()).y == 0) {
+                angle = Math.PI;
+        }
+
         double xvel = Math.cos(angle) * desiredVelocity;
+
+        SmartDashboard.putNumber("Speed/Vel x", xvel);
+
 
         double targetXVel = this.m_xController.calculate(((Pose2d) this.m_pose.get()).getTranslation().getX(), dt)
                 + xvel * RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getF();
 
         this.m_yController.setSetpoint((desiredPose.getPosition()).y);
         double yvel = Math.sin(angle) * desiredVelocity;
+
+        SmartDashboard.putNumber("Speed/Vel y", yvel);
+
 
         double targetYVel = this.m_yController.calculate(((Pose2d) this.m_pose.get()).getTranslation().getY(), dt)
                 + yvel * RobotContainer.constants.getDriveConstants().getTranslationYPIDConstants().getF();
@@ -118,8 +132,12 @@ public class SwerveController extends CommandBase {
             targetAngularVel = this.m_thetaController
                     .calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
         }
-
-        this.m_driveSub.drive(new ChassisSpeeds(targetXVel, targetYVel, targetAngularVel));
+        m_driveSub.drive(
+        ChassisSpeeds.fromFieldRelativeSpeeds(
+            targetXVel,
+            targetYVel,
+            targetAngularVel,
+            m_driveSub.getGyroscopeRotation()));
 
         this.lastTime = this.m_timer.get();
     }
@@ -129,7 +147,6 @@ public class SwerveController extends CommandBase {
     }
 
     public boolean isFinished() {
-            
         return this.m_timer.advanceIfElapsed(this.m_trajectory.getDuration());
     }
 }

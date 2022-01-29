@@ -6,7 +6,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.auton.DistanceTest;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
@@ -26,7 +29,7 @@ public class RobotContainer {
   public static Constants constants;
   public static MacAddress macAddress = new MacAddress(PRACTICE_BOT_MAC_ADDRESS);
 
-  public static LogitechF310 driverController = new LogitechF310(1); 
+  public static LogitechF310 driverController = new LogitechF310(1);
   public static LogitechF310 operatorController = new LogitechF310(0);
 
   public static IntakeSubsystem intakeSubsystem;
@@ -34,6 +37,8 @@ public class RobotContainer {
   public static ShooterSubsystem shooterSubsystem;
 
   public static DriveSubsystem driveSubsystem;
+
+  public SendableChooser<Command> chooser;
 
   public RobotContainer() {
     // Configure the button bindings
@@ -49,12 +54,13 @@ public class RobotContainer {
     driveSubsystem = new DriveSubsystem();
 
     configureButtonBindings();
+    putAuton();
 
-}
+  }
 
-public DriveSubsystem getDrivetrain() {
+  public DriveSubsystem getDrivetrain() {
     return driveSubsystem;
-}
+  }
 
   /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -67,7 +73,13 @@ public DriveSubsystem getDrivetrain() {
   private void configureButtonBindings() {
 
     operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem));
-    }
+  }
+
+  public void putAuton() {
+    chooser = new SendableChooser<Command>();
+    chooser.setDefaultOption("DistanceTest", new DistanceTest(driveSubsystem));
+    SmartDashboard.putData("Auto Chooser", chooser);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -75,7 +87,6 @@ public DriveSubsystem getDrivetrain() {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return null;
-  }
+    return this.chooser.getSelected();
+}
 }

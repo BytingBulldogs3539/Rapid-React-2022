@@ -1,6 +1,9 @@
 package frc.robot.constants;
 
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
+import com.swervedrivespecialties.swervelib.control.MaxAccelerationConstraint;
+import com.swervedrivespecialties.swervelib.control.MaxVelocityConstraint;
+import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
@@ -15,17 +18,14 @@ public class CompConstants extends Constants
 
     @Override
     public IntakeConstants getIntakeConstants() {
-        // TODO Auto-generated method stub
         return new IntakeConstants();
     }
     @Override
     public ShooterConstants getShooterConstants() {
-        // TODO Auto-generated method stub
         return new ShooterConstants();
     }
     @Override
     public ClimberConstants getClimberConstants() {
-        // TODO Auto-generated method stub
         return new ClimberConstants();
     }   
 
@@ -235,20 +235,26 @@ public class CompConstants extends Constants
         @Override
         public PIDConstants getTranslationXPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0, 0, 0, 0);
+            return new PIDConstants(10, 3, 0, 2);
         }
 
         @Override
         public PIDConstants getTranslationYPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0, 0, 0, 0);
+            return new PIDConstants(10, 3, 0, 2);
         }
 
         @Override
         public PIDConstants getRotationConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0, 0, 0, 0);
+            return new PIDConstants(20, 0, 0, 0);
         }
+
+        @Override
+        public TrajectoryConstraint[] getConstraints() {
+            TrajectoryConstraint[] constraints = { (TrajectoryConstraint)new MaxAccelerationConstraint(1), (TrajectoryConstraint)new MaxVelocityConstraint(1) };
+            return constraints;
+          }
     }
     public class IntakeConstants extends Constants.IntakeConstants {
 

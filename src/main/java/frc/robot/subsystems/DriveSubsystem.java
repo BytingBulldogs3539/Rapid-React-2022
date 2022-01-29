@@ -22,6 +22,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.commands.DriveCommand;
@@ -272,5 +273,9 @@ public class DriveSubsystem extends SubsystemBase
 
                 m_pose = m_odometry.update(getGyroscopeRotation(), getState(m_frontLeftModule), getState(m_frontRightModule),
                 getState(m_backLeftModule), getState(m_backRightModule));
+
+                SmartDashboard.putNumber("X Pose", m_pose.getX());
+                SmartDashboard.putNumber("Y Pose", m_pose.getY());
+                SmartDashboard.putNumber("Theta Pose", m_pose.getRotation().getDegrees());
         }
 }

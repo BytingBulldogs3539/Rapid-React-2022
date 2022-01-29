@@ -5,6 +5,7 @@
 package frc.robot.constants;
 
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
+import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
@@ -38,6 +39,9 @@ public abstract class Constants {
      * Class containing drive constants
      */
     public abstract class DriveConstants {
+        // Trajectory constraints for auton paths.
+        /*** @return Trajectory constraints for the robot. */
+        public abstract TrajectoryConstraint[] getConstraints();
         // Camera PID Constants
         /*** @return The PID constants for the front camera */
         public abstract PIDConstants getFrontCameraPIDConstants();

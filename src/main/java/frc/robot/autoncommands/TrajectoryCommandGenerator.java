@@ -10,20 +10,21 @@ import com.swervedrivespecialties.swervelib.control.Path;
 import com.swervedrivespecialties.swervelib.control.PidConstants;
 import com.swervedrivespecialties.swervelib.control.PidController;
 import com.swervedrivespecialties.swervelib.control.Trajectory;
-import com.swervedrivespecialties.swervelib.math.Vector2;
 
 public class TrajectoryCommandGenerator {
     public static Command getMotionCommand(Path path, boolean reverse, DriveSubsystem driveSub) {
-        Trajectory trajectory = new Trajectory(path, RobotContainer.constants.getDriveConstants().getConstraints(),1.0D);
+        Trajectory trajectory = new Trajectory(path, RobotContainer.constants.getDriveConstants().getConstraints(),0.01);
         SwerveController swerveControllerCommand = new SwerveController(trajectory, driveSub::getPose,
-                new PidController(new PidConstants(RobotContainer.constants.getAutoConstants().getKPXController(),
-                        RobotContainer.constants.getAutoConstants().getKIXController(),
-                        RobotContainer.constants.getAutoConstants().getKDXController())),
-                new PidController(new PidConstants(RobotContainer.constants.getAutoConstants().getKPYController(),
-                        RobotContainer.constants.getAutoConstants().getKIYController(),
-                        RobotContainer.constants.getAutoConstants().getKDYController())),
+                new PidController(new PidConstants(RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getP(),
+                        RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getI(),
+                        RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getD())),
+                new PidController(new PidConstants(RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getP(),
+                        RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getI(),
+                        RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getD())),
                 new PidController(new PidConstants(
-                        RobotContainer.constants.getAutoConstants().getKPThetaController(), 0.0D, 0.0D)),
+                        RobotContainer.constants.getDriveConstants().getRotationConstants().getP(),
+                        RobotContainer.constants.getDriveConstants().getRotationConstants().getI(),
+                        RobotContainer.constants.getDriveConstants().getRotationConstants().getD())),
                 driveSub::getShooterVisionSeeing, driveSub::getShooterVisionYaw, false, driveSub,
                 new Subsystem[] { (Subsystem) driveSub });
 

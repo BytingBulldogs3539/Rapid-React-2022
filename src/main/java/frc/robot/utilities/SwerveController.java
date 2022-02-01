@@ -75,7 +75,7 @@ public class SwerveController extends CommandBase {
 
         SmartDashboard.putNumber("Expected X", (desiredPose.getPosition()).x);
         SmartDashboard.putNumber("Expected Y", (desiredPose.getPosition()).y);
-        SmartDashboard.putNumber("Expected Angle", desiredPose.getRotation().toDegrees());
+        SmartDashboard.putNumber("Expected Angle", desiredPose.getRotation().inverse().toDegrees());
 
 
         SmartDashboard.putNumber("Real X", this.m_pose.get().getTranslation().getX());
@@ -122,7 +122,7 @@ public class SwerveController extends CommandBase {
                         .calculate(((Double) this.m_targetSupplier.get()).doubleValue(), dt);
             } else {
 
-                this.m_thetaController.setSetpoint(desiredPose.getRotation().toRadians());
+                this.m_thetaController.setSetpoint(desiredPose.getRotation().inverse().toRadians());
                 targetAngularVel = this.m_thetaController
                         .calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
             }
@@ -136,7 +136,7 @@ public class SwerveController extends CommandBase {
         ChassisSpeeds.fromFieldRelativeSpeeds(
             targetXVel,
             targetYVel,
-            targetAngularVel,
+            targetAngularVel * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
             m_driveSub.getGyroscopeRotation()));
 
         this.lastTime = this.m_timer.get();

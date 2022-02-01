@@ -13,7 +13,7 @@ import com.swervedrivespecialties.swervelib.control.Trajectory;
 
 public class TrajectoryCommandGenerator {
     public static Command getMotionCommand(Path path, boolean reverse, DriveSubsystem driveSub) {
-        Trajectory trajectory = new Trajectory(path, RobotContainer.constants.getDriveConstants().getConstraints(),0.01);
+        Trajectory trajectory = new Trajectory(path, RobotContainer.constants.getDriveConstants().getConstraints(),0.2);
         SwerveController swerveControllerCommand = new SwerveController(trajectory, driveSub::getPose,
                 new PidController(new PidConstants(RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getP(),
                         RobotContainer.constants.getDriveConstants().getTranslationXPIDConstants().getI(),

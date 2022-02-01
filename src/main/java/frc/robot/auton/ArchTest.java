@@ -8,14 +8,13 @@ import com.swervedrivespecialties.swervelib.control.*;
 import com.swervedrivespecialties.swervelib.math.Rotation2;
 import com.swervedrivespecialties.swervelib.math.Vector2;
 
-public class DistanceTest extends SequentialCommandGroup {
-    public DistanceTest(DriveSubsystem driveSub) {
+public class ArchTest extends SequentialCommandGroup {
+    public ArchTest(DriveSubsystem driveSub) {
         super(new Command[] { TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
-                        .lineTo(new Vector2(2, 0.0), Rotation2.ZERO)
-                        .lineTo(new Vector2(2, -2), Rotation2.fromDegrees(180))
-                        .lineTo(new Vector2(1, -2), Rotation2.ZERO)
-                        .lineTo(new Vector2(1, -3), Rotation2.ZERO)
+                        .arcTo(new Vector2(2, -2), new Vector2(0, -2))
+                        .arcTo(new Vector2(1, -3), new Vector2(1, -2), Rotation2.fromDegrees(180))
+                        .arcTo(new Vector2(0, -4), new Vector2(1, -4), Rotation2.ZERO)
                         .build(), false, driveSub) });
     }
 }

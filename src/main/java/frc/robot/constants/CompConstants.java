@@ -235,19 +235,19 @@ public class CompConstants extends Constants
         @Override
         public PIDConstants getTranslationXPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(10, 3, 0, 2);
+            return new PIDConstants(20, 3, 0, 1.7);
         }
 
         @Override
         public PIDConstants getTranslationYPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(10, 3, 0, 2);
+            return new PIDConstants(20, 3, 0, 1.7);
         }
 
         @Override
         public PIDConstants getRotationConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(20, 0, 0, 0);
+            return new PIDConstants(0.2, 0, 0, 0);
         }
 
         @Override

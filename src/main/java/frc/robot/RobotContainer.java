@@ -14,6 +14,7 @@ import frc.robot.auton.Back2Start;
 import frc.robot.auton.DistanceTest;
 import frc.robot.auton.Lapse;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
 import frc.robot.constants.PracConstants;
@@ -76,6 +77,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem));
+    operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem));
   }
 
   public void putAuton() {

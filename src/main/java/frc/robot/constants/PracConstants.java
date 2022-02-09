@@ -20,14 +20,21 @@ public class PracConstants extends Constants
     public IntakeConstants getIntakeConstants() {
         return new IntakeConstants();
     }
+
     @Override
     public ShooterConstants getShooterConstants() {
         return new ShooterConstants();
     }
+
     @Override
     public ClimberConstants getClimberConstants() {
         return new ClimberConstants();
-    }   
+    }
+
+    @Override
+    public PneumaticsConstants getPneumaticsConstants() {
+        return new Pneumatics();
+    }
 
     public class DriveConstants extends Constants.DriveConstants {
         @Override
@@ -342,5 +349,32 @@ public class PracConstants extends Constants
             return -1;
         }
 
+    }
+    public class Pneumatics extends Constants.PneumaticsConstants {
+
+        @Override
+        public int getCompressorID() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getIntakeSolenoid() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getStaticClimberSolenoid() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getClimberSolenoid() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+        
     }
 }

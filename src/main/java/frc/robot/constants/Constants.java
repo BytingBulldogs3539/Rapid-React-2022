@@ -10,9 +10,7 @@ import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
-/**
- * An outline for two classes containing constants for both the practice bot and the comp bot.
- */
+/*** An outline for two classes containing constants for both the practice bot and the comp bot. */
 public abstract class Constants {
     /**
      * @return the Drivetrain Constants
@@ -36,8 +34,12 @@ public abstract class Constants {
     public abstract ClimberConstants getClimberConstants();
 
     /**
-     * Class containing drive constants
+     * @return the Pneumatics Constants
+     * @see PneumaticsConstants
      */
+    public abstract PneumaticsConstants getPneumaticsConstants();
+
+    /*** Class containing drive constants */
     public abstract class DriveConstants {
         // Trajectory constraints for auton paths.
         /*** @return Trajectory constraints for the robot. */
@@ -136,16 +138,12 @@ public abstract class Constants {
         /*** @return the module configuration for the back right module*/
         public abstract ModuleConfiguration getBRModuleGearRatio();
     }
-    /**
-     * Class containing intake constants
-     */
+    /*** Class containing intake constants */
     public abstract class IntakeConstants {
         /*** @return the id of the intake motor*/
         public abstract int getIntakeMotorID();
     }
-    /**
-     * Class containing shooter constants
-     */
+    /*** Class containing shooter constants */
     public abstract class ShooterConstants {
         // Shooter Motor ID
         /*** @return The ID of the first shooter motor*/
@@ -169,9 +167,7 @@ public abstract class Constants {
 
 
     }
-    /**
-     * Class containing climber constants
-     */
+    /*** Class containing climber constants */
     public abstract class ClimberConstants {
         // Climber Motor ID
         /*** @return the id of the first climber motor*/
@@ -180,5 +176,14 @@ public abstract class Constants {
         public abstract int getClimberMotor2ID();
         /*** @return the id of the thirt climber motor*/
         public abstract int getClimberMotor3ID();
+    }
+
+    /*** Class containing the Pneumatics Constants (for the compressor & the solenoids) */
+    public abstract class PneumaticsConstants {
+        public abstract int getCompressorID();
+        public abstract int getIntakeSolenoid();
+        public abstract int getStaticClimberSolenoid();
+        public abstract int getClimberSolenoid();
+        // Add another here later???
     }
 }

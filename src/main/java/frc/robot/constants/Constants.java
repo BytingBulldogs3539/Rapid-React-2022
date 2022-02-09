@@ -182,6 +182,8 @@ public abstract class Constants {
     public abstract class PneumaticsConstants {
         public abstract int getCompressorID();
         public abstract int getIntakeSolenoid();
+        public abstract int getIntakeSolenoidForward();
+        public abstract int getIntakeSolenoidReverse();
         public abstract int getStaticClimberSolenoid();
         public abstract int getClimberSolenoid();
         // Add another here later???

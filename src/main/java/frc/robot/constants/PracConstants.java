@@ -375,6 +375,18 @@ public class PracConstants extends Constants
             // TODO Auto-generated method stub
             return 0;
         }
+
+        @Override
+        public int getIntakeSolenoidForward() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getIntakeSolenoidReverse() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
         
     }
 }

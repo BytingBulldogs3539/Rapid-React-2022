@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
-public class Pneumatics extends SubsystemBase {
+public class PneumaticsSubsystem extends SubsystemBase {
   final double minPressure = 80;
   final double maxPressure = 120;
 
@@ -22,7 +22,7 @@ public class Pneumatics extends SubsystemBase {
   DoubleSolenoid climberSolenoid;
 
   /** Creates a new Pneumatics. */
-  public Pneumatics() {
+  public PneumaticsSubsystem() {
     // Creates a compressor object
     compressor = new Compressor(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH);
     compressor.enableAnalog(minPressure, maxPressure);

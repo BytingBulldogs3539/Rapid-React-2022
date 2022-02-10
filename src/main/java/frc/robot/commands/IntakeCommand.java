@@ -6,17 +6,17 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.PneumaticsSubsystem;
 
 public class IntakeCommand extends CommandBase {
   
   IntakeSubsystem intakeSubsystem;
-  Pneumatics pneumatics;
+  PneumaticsSubsystem pneumatics;
   
   double speed = 0;
   
   /** Creates a new IntakeCommand. */
-  public IntakeCommand(double speed, IntakeSubsystem intakeSubsystem, Pneumatics pneumatics) {
+  public IntakeCommand(double speed, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(intakeSubsystem);
 

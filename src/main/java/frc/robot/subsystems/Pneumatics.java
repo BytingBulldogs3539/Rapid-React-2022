@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
@@ -17,6 +18,8 @@ public class Pneumatics extends SubsystemBase {
   // Initializes compressor & solenoid objects
   Compressor compressor;
   DoubleSolenoid intakeSolenoid;
+  DoubleSolenoid staticClimberSolenoid;
+  DoubleSolenoid climberSolenoid;
 
   /** Creates a new Pneumatics. */
   public Pneumatics() {
@@ -25,9 +28,37 @@ public class Pneumatics extends SubsystemBase {
     compressor.enableAnalog(minPressure, maxPressure);
     compressor.disable();
 
-    // Creates 4 solenoid objects
-    intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoid(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidReverse());
+    // Creates 3 solenoid objects
+    intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidReverse());
+    staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidReverse());
+    climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidReverse());
+
   }
+  public void setIntakeOut()
+  {
+    intakeSolenoid.set(Value.kForward);
+  }
+  public void setIntakeIn()
+  {
+    intakeSolenoid.set(Value.kReverse);
+  }
+  public void grabClimbBar()
+  {
+    staticClimberSolenoid.set(Value.kForward);
+  }
+  public void releaseClimbBar()
+  {
+    staticClimberSolenoid.set(Value.kReverse);
+  }
+  public void moveClimberForward()
+  {
+    climberSolenoid.set(Value.kForward);
+  }
+  public void moveClimberBackwards()
+  {
+    climberSolenoid.set(Value.kReverse);
+  }
+
 
   public void enableCompressor() {
     compressor.enableAnalog(minPressure, maxPressure);

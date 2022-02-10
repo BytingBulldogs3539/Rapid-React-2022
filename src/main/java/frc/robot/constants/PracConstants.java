@@ -29,13 +29,12 @@ public class PracConstants extends Constants
     @Override
     public ClimberConstants getClimberConstants() {
         return new ClimberConstants();
-    }
+    }   
 
     @Override
     public PneumaticsConstants getPneumaticsConstants() {
         return new Pneumatics();
     }
-
     public class DriveConstants extends Constants.DriveConstants {
         @Override
         public double getWheelDiameter() {
@@ -242,19 +241,19 @@ public class PracConstants extends Constants
         @Override
         public PIDConstants getTranslationXPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(.03, 0, 0, 0);
+            return new PIDConstants(20, 3, 0, 1.7);
         }
 
         @Override
         public PIDConstants getTranslationYPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(.03, 0, 0, 0);
+            return new PIDConstants(20, 3, 0, 1.7);
         }
 
         @Override
         public PIDConstants getRotationConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0.015, 0, 0, 0);
+            return new PIDConstants(0.2, 0, 0, 0);
         }
 
         @Override
@@ -359,24 +358,6 @@ public class PracConstants extends Constants
         }
 
         @Override
-        public int getIntakeSolenoid() {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public int getStaticClimberSolenoid() {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public int getClimberSolenoid() {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
         public int getIntakeSolenoidForward() {
             // TODO Auto-generated method stub
             return 0;
@@ -384,6 +365,30 @@ public class PracConstants extends Constants
 
         @Override
         public int getIntakeSolenoidReverse() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getStaticClimberSolenoidForward() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getStaticClimberSolenoidReverse() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getClimberSolenoidForward() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public int getCLimberSolenoidReverse() {
             // TODO Auto-generated method stub
             return 0;
         }

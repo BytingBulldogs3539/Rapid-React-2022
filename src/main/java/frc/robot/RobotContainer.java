@@ -20,6 +20,7 @@ import frc.robot.constants.Constants;
 import frc.robot.constants.PracConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.utilities.LogitechF310;
 import frc.robot.utilities.MacAddress;
@@ -42,6 +43,8 @@ public class RobotContainer {
 
   public static DriveSubsystem driveSubsystem;
 
+  public static Pneumatics pneumaticsSubsystem;
+
   public SendableChooser<Command> chooser;
 
   public RobotContainer() {
@@ -56,6 +59,7 @@ public class RobotContainer {
     intakeSubsystem = new IntakeSubsystem();
     shooterSubsystem = new ShooterSubsystem();
     driveSubsystem = new DriveSubsystem();
+    pneumaticsSubsystem = new Pneumatics();
 
     configureButtonBindings();
     putAuton();
@@ -76,7 +80,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem));
+    operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem, pneumaticsSubsystem));
     operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem));
   }
 

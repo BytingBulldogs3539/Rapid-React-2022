@@ -50,7 +50,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    RobotContainer.pneumaticsSubsystem.disableCompressor();
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -60,6 +62,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     // Resets robot code and position before getting auton command.
     RobotContainer.driveSubsystem.zeroGyroscope();
+    RobotContainer.pneumaticsSubsystem.enableCompressor();
     RobotContainer.driveSubsystem.resetPose(new Pose2d(0.0, 0.0, Rotation2d.fromDegrees(0)));
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
@@ -82,6 +85,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    RobotContainer.pneumaticsSubsystem.enableCompressor();
   }
 
   /** This function is called periodically during operator control. */

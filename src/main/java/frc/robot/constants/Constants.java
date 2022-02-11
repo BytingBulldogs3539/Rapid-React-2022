@@ -164,7 +164,8 @@ public abstract class Constants {
         public abstract GearRatio getSM3GearRatio();
         /*** @return The values of the gear ratio and inverted constants for shooter motor 4*/
         public abstract GearRatio getKMGearRatio();
-
+        /*** @return The digital input of the sensor (default is 0) */
+        public abstract int getDigitalInput();
 
     }
     /*** Class containing climber constants */
@@ -174,8 +175,6 @@ public abstract class Constants {
         public abstract int getClimberMotor1ID();
         /*** @return the id of the second climber motor*/
         public abstract int getClimberMotor2ID();
-        /*** @return the id of the thirt climber motor*/
-        public abstract int getClimberMotor3ID();
     }
 
     /*** Class containing the Pneumatics Constants (for the compressor & the solenoids) */

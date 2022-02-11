@@ -13,11 +13,14 @@ import frc.robot.auton.ArchTest;
 import frc.robot.auton.Back2Start;
 import frc.robot.auton.DistanceTest;
 import frc.robot.auton.Lapse;
+import frc.robot.commands.ClimberBackwardCommand;
+import frc.robot.commands.ClimberForwardCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
 import frc.robot.constants.PracConstants;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
@@ -42,6 +45,8 @@ public class RobotContainer {
   public static ShooterSubsystem shooterSubsystem;
 
   public static DriveSubsystem driveSubsystem;
+
+  public static ClimberSubsystem climberSubsystem;
 
   public static PneumaticsSubsystem pneumaticsSubsystem;
 
@@ -82,6 +87,8 @@ public class RobotContainer {
 
     operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem, pneumaticsSubsystem));
     operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem));
+    operatorController.buttonSELECT.whenPressed(new ClimberBackwardCommand(climberSubsystem, pneumaticsSubsystem));
+    operatorController.buttonSTART.whenPressed(new ClimberForwardCommand(climberSubsystem, pneumaticsSubsystem));
   }
 
   public void putAuton() {

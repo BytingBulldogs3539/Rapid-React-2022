@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.utilities.GearRatio;
@@ -27,6 +28,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   final Double VELCONV = (2048.0 / 600.0);
 
+  // Creates a new object for the sensor
+  DigitalInput sensor;
+  
   public ShooterSubsystem() {
     int SM1ID = RobotContainer.constants.getShooterConstants().getSM1ID();
     GearRatio SM1GearRatio = RobotContainer.constants.getShooterConstants().getSM1GearRatio();

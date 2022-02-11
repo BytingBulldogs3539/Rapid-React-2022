@@ -159,13 +159,13 @@ public class PracConstants extends Constants
         @Override
         public double getDriveGearReduction() {
             // TODO Auto-generated method stub
-            return (11.0 / 40.0) * (32.0 / 16.0) * (1.0 / 3.0);
+            return 1.0 / 6.75; // From MK4 Swerve Drive Specialties (specifically for L2s)
         }
 
         @Override
         public double getSteerGearReduction() {
             // TODO Auto-generated method stub
-            return -(8.0 / 24.0) * (18.0 / 72.0);
+            return 1.0 / 12.8; // From MK4 Swerve Drive Specialties
         }
 
         @Override
@@ -327,6 +327,12 @@ public class PracConstants extends Constants
             return new GearRatio(1, false);
         }
 
+        @Override
+        public int getDigitalInput() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
     }
     public class ClimberConstants extends Constants.ClimberConstants {
 
@@ -341,13 +347,6 @@ public class PracConstants extends Constants
             // TODO Auto-generated method stub
             return -1;
         }
-
-        @Override
-        public int getClimberMotor3ID() {
-            // TODO Auto-generated method stub
-            return -1;
-        }
-
     }
     public class Pneumatics extends Constants.PneumaticsConstants {
 

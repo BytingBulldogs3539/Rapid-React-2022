@@ -327,6 +327,12 @@ public class CompConstants extends Constants
             return new GearRatio(1, false);
         }
 
+        @Override
+        public int getDigitalInput() {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
     }
     public class ClimberConstants extends Constants.ClimberConstants {
 
@@ -341,13 +347,6 @@ public class CompConstants extends Constants
             // TODO Auto-generated method stub
             return -1;
         }
-
-        @Override
-        public int getClimberMotor3ID() {
-            // TODO Auto-generated method stub
-            return -1;
-        }
-
     }
     public class Pneumatics extends Constants.PneumaticsConstants {
 

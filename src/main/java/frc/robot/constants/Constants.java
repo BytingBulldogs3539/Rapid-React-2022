@@ -142,6 +142,9 @@ public abstract class Constants {
     public abstract class IntakeConstants {
         /*** @return the id of the intake motor*/
         public abstract int getIntakeMotorID();
+
+        /*** @return the id of the knock down motor */
+        public abstract int getKnockDownMotorID();
     }
     /*** Class containing shooter constants */
     public abstract class ShooterConstants {

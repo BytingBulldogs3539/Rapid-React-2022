@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.PigeonIMU;
+import com.ctre.phoenix.sensors.Pigeon2;
 import com.swervedrivespecialties.swervelib.Mk3SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SwerveModule;
 
@@ -50,7 +50,7 @@ public class DriveSubsystem extends SubsystemBase
 
         SwerveDriveOdometry m_odometry;
 
-        private final PigeonIMU m_pigeon = new PigeonIMU(RobotContainer.constants.getDriveConstants().getPigeonID());
+        private final Pigeon2 m_pigeon = new Pigeon2(RobotContainer.constants.getDriveConstants().getPigeonID());
 
         Pose2d m_pose;
 
@@ -135,7 +135,6 @@ public class DriveSubsystem extends SubsystemBase
          * Used to zero the pigeon / gyroscope.
          */
         public void zeroGyroscope() {
-                m_pigeon.setFusedHeading(0.0);
                 m_pigeon.setYaw(0);
         }
 
@@ -144,7 +143,7 @@ public class DriveSubsystem extends SubsystemBase
          * @returns gyro angle.
          */
         public Rotation2d getGyroscopeRotation() {
-                return Rotation2d.fromDegrees(m_pigeon.getFusedHeading());
+                return Rotation2d.fromDegrees(m_pigeon.getYaw());
         }
 
         public void drive(ChassisSpeeds chassisSpeeds) {

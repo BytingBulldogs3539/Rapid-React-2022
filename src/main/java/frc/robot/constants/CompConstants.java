@@ -57,49 +57,49 @@ public class CompConstants extends Constants
         @Override
         public int getFLDriveID() {
             // TODO Auto-generated method stub
-            return 3;
+            return 2;
         }
 
         @Override
         public int getFLSteeringID() {
             // TODO Auto-generated method stub
-            return 4;
+            return 1;
         }
 
         @Override
         public int getFRDriveID() {
             // TODO Auto-generated method stub
-            return 1;
+            return 18;
         }
 
         @Override
         public int getFRSteeringID() {
             // TODO Auto-generated method stub
-            return 2;
+            return 17;
         }
 
         @Override
         public int getBLDriveID() {
             // TODO Auto-generated method stub
-            return 8;
+            return 4;
         }
 
         @Override
         public int getBLSteeringID() {
             // TODO Auto-generated method stub
-            return 7;
+            return 3;
         }
 
         @Override
         public int getBRDriveID() {
             // TODO Auto-generated method stub
-            return 6;
+            return 14;
         }
 
         @Override
         public int getBRSteeringID() {
             // TODO Auto-generated method stub
-            return 5;
+            return 13;
         }
 
         @Override
@@ -159,13 +159,13 @@ public class CompConstants extends Constants
         @Override
         public double getDriveGearReduction() {
             // TODO Auto-generated method stub
-            return (11.0 / 40.0) * (32.0 / 16.0) * (1.0 / 3.0);
+            return 1.0 / 6.75; // From MK4 Swerve Drive Specialties (specifically for L2s)
         }
 
         @Override
         public double getSteerGearReduction() {
             // TODO Auto-generated method stub
-            return -(8.0 / 24.0) * (18.0 / 72.0);
+            return 1.0 / 12.8; // From MK4 Swerve Drive Specialties
         }
 
         @Override
@@ -266,6 +266,12 @@ public class CompConstants extends Constants
 
         @Override
         public int getIntakeMotorID() {
+            // TODO Auto-generated method stub
+            return -1;
+        }
+
+        @Override
+        public int getKnockDownMotorID() {
             // TODO Auto-generated method stub
             return -1;
         }

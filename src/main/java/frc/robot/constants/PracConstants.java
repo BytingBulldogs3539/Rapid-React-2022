@@ -57,49 +57,49 @@ public class PracConstants extends Constants
         @Override
         public int getFLDriveID() {
             // TODO Auto-generated method stub
-            return 3;
+            return 2;
         }
 
         @Override
         public int getFLSteeringID() {
             // TODO Auto-generated method stub
-            return 4;
+            return 1;
         }
 
         @Override
         public int getFRDriveID() {
             // TODO Auto-generated method stub
-            return 1;
+            return 18;
         }
 
         @Override
         public int getFRSteeringID() {
             // TODO Auto-generated method stub
-            return 2;
+            return 17;
         }
 
         @Override
         public int getBLDriveID() {
             // TODO Auto-generated method stub
-            return 8;
+            return 4;
         }
 
         @Override
         public int getBLSteeringID() {
             // TODO Auto-generated method stub
-            return 7;
+            return 3;
         }
 
         @Override
         public int getBRDriveID() {
             // TODO Auto-generated method stub
-            return 6;
+            return 14;
         }
 
         @Override
         public int getBRSteeringID() {
             // TODO Auto-generated method stub
-            return 5;
+            return 13;
         }
 
         @Override

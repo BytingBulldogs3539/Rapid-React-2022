@@ -37,12 +37,14 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
     //Add the compressor to the dashboard to see when its running.
     SmartDashboard.putData(compressor);
+    setIntakeIn();
+    releaseClimbBar();
   }
-  public void setIntakeOut()
+  public void setIntakeIn()
   {
     intakeSolenoid.set(Value.kForward);
   }
-  public void setIntakeIn()
+  public void setIntakeOut()
   {
     intakeSolenoid.set(Value.kReverse);
   }
@@ -54,11 +56,11 @@ public class PneumaticsSubsystem extends SubsystemBase {
   {
     staticClimberSolenoid.set(Value.kReverse);
   }
-  public void moveClimberForward()
+  public void moveClimberIn()
   {
     climberSolenoid.set(Value.kForward);
   }
-  public void moveClimberBackwards()
+  public void moveClimberOut()
   {
     climberSolenoid.set(Value.kReverse);
   }

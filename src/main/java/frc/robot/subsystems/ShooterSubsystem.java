@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -35,41 +36,44 @@ public class ShooterSubsystem extends SubsystemBase {
 
   
   public ShooterSubsystem() {
+    PIDConstants pidConstants = RobotContainer.constants.getShooterConstants().getPIDConstants();
     int SM1ID = RobotContainer.constants.getShooterConstants().getSM1ID();
     GearRatio SM1GearRatio = RobotContainer.constants.getShooterConstants().getSM1GearRatio();
     if (RobotContainer.constants.getShooterConstants().getSM1ID() != -1) {
-      hasSM1 = false;
-    } else {
       hasSM1 = true;
-      SM1 = configureMotor(SM1ID, SM1GearRatio);
+      SM1 = configureMotor(SM1ID, SM1GearRatio, pidConstants);
+    } else {
+      hasSM1 = false;
     }
 
     int SM2ID = RobotContainer.constants.getShooterConstants().getSM2ID();
     GearRatio SM2GearRatio = RobotContainer.constants.getShooterConstants().getSM2GearRatio();
     if (RobotContainer.constants.getShooterConstants().getSM2ID() != -1) {
-      hasSM2 = false;
-    } else {
       hasSM2 = true;
-      SM2 = configureMotor(SM2ID, SM2GearRatio);
+      SM2 = configureMotor(SM2ID, SM2GearRatio, pidConstants);
+    } else {
+      hasSM2 = false;
     }
 
     int SM3ID = RobotContainer.constants.getShooterConstants().getSM3ID();
     GearRatio SM3GearRatio = RobotContainer.constants.getShooterConstants().getSM3GearRatio();
     if (RobotContainer.constants.getShooterConstants().getSM3ID() != -1) {
-      hasSM3 = false;
-    } else {
       hasSM3 = true;
-      SM2 = configureMotor(SM3ID, SM3GearRatio);
+      SM3 = configureMotor(SM3ID, SM3GearRatio, pidConstants);
+    } else {
+      hasSM3 = false;
+
 
     }
 
     int KMID = RobotContainer.constants.getShooterConstants().getKMID();
     GearRatio KMGearRatio = RobotContainer.constants.getShooterConstants().getKMGearRatio();
     if (RobotContainer.constants.getShooterConstants().getKMID() != -1) {
-      hasKM = false;
-    } else {
       hasKM = true;
-      SM2 = configureMotor(KMID, KMGearRatio);
+      KM = configureMotor(KMID, KMGearRatio, pidConstants);
+      KM.setNeutralMode(NeutralMode.Brake);
+    } else {
+      hasKM = false;
     }
 
     if(RobotContainer.constants.getShooterConstants().getDigitalInput()!=-1)
@@ -83,11 +87,16 @@ public class ShooterSubsystem extends SubsystemBase {
     }
   }
 
-  public TalonFX configureMotor(int motorID, GearRatio gearRatio) {
+  public TalonFX configureMotor(int motorID, GearRatio gearRatio, PIDConstants pidConstants) {
     TalonFX motor = new TalonFX(motorID);
     motor.setInverted(gearRatio.getInverted());
     motor.setSensorPhase(RobotContainer.constants.getShooterConstants().getSM1GearRatio().getInverted());
     motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
+    motor.config_kP(0, pidConstants.getP());
+    motor.config_kI(0, pidConstants.getI());
+    motor.config_kD(0, pidConstants.getD());
+    motor.config_kF(0, pidConstants.getF());
+    
     return motor;
   }
 
@@ -96,8 +105,10 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public boolean getSensor()
   {
-    if(hasSensor)
-    {
+    if(hasSensor) {
+      if(RobotContainer.constants.getShooterConstants().invertSensor()) {
+      return !sensor.get();
+      }
       return sensor.get();
     }
     return true;
@@ -243,6 +254,22 @@ public class ShooterSubsystem extends SubsystemBase {
       motor.config_kD(0, PIDConstants.getD());
       motor.config_kF(0, PIDConstants.getF());
     }
+  }
+
+  public boolean SM1AtTarget(double tolerance) {
+    return SM1.getClosedLoopError() < tolerance;
+  }
+
+  public boolean SM2AtTarget(double tolerance) {
+    return SM2.getClosedLoopError() < tolerance;
+  }
+
+  public boolean SM3AtTarget(double tolerance) {
+    return SM3.getClosedLoopError() < tolerance;
+  }
+
+  public boolean KM1AtTarget(double tolerance) {
+    return KM.getClosedLoopError() < tolerance;
   }
 
   @Override

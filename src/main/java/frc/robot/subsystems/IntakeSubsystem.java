@@ -40,7 +40,7 @@ public class IntakeSubsystem extends SubsystemBase {
     if (RobotContainer.constants.getIntakeConstants().getKnockDownMotorID() != -1) {
       hasKnockDownMotor = true;
       knockDownMotor = new TalonSRX(RobotContainer.constants.getIntakeConstants().getKnockDownMotorID());
-      GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getIntakeGearRatio();
+      GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getKnockDownGearRatio();
       knockDownMotor.setInverted(gearRatio.getInverted());
       knockDownMotor.setSensorPhase(gearRatio.getInverted());
       knockDownMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));

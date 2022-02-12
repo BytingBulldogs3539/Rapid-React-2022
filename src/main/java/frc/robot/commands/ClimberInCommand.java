@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 
-public class ClimberForwardCommand extends CommandBase {
+public class ClimberInCommand extends CommandBase {
   ClimberSubsystem climberSubsystem;
   PneumaticsSubsystem pneumaticsSubsystem;
   
   /** Creates a new GrabBarCommand. */
-  public ClimberForwardCommand(ClimberSubsystem climberSubsystem, PneumaticsSubsystem pneumatics) {
+  public ClimberInCommand(ClimberSubsystem climberSubsystem, PneumaticsSubsystem pneumatics) {
     this.climberSubsystem = climberSubsystem;
     this.pneumaticsSubsystem = pneumatics;
   }
@@ -21,7 +21,7 @@ public class ClimberForwardCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    pneumaticsSubsystem.moveClimberForward();
+    pneumaticsSubsystem.moveClimberIn();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

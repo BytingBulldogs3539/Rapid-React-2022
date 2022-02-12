@@ -175,6 +175,8 @@ public abstract class Constants {
         public abstract GearRatio getKMGearRatio();
         /*** @return The digital input of the sensor (default is 0) */
         public abstract int getDigitalInput();
+        /*** @return True if inverted, false if not */
+        public abstract boolean invertSensor();
 
     }
     /*** Class containing climber constants */

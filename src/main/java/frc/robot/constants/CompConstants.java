@@ -117,31 +117,31 @@ public class CompConstants extends Constants
         @Override
         public int getPigeonID() {
             // TODO Auto-generated method stub
-            return 40;
+            return 50;
         }
 
         @Override
         public double getFLSteerOffset() {
             // TODO Auto-generated method stub
-            return -0.1808 + 0.5 * Math.PI;
+            return -2.922;
         }
 
         @Override
         public double getFRSteerOffset() {
             // TODO Auto-generated method stub
-            return -5.6420 + 0.5 * Math.PI;
+            return -0.248;
         }
 
         @Override
         public double getBLSteerOffset() {
             // TODO Auto-generated method stub
-            return -2.8973 + 0.5 * Math.PI;
+            return -5.419;
         }
 
         @Override
         public double getBRSteerOffset() {
             // TODO Auto-generated method stub
-            return -0.6336- 0.1426 + 0.5 * Math.PI;
+            return -1.265;
         }
 
         @Override
@@ -258,7 +258,7 @@ public class CompConstants extends Constants
 
         @Override
         public GearRatio getIntakeGearRatio() {
-            return new GearRatio(1, false, 40); //Gear ratio does not matter but direction does.
+            return new GearRatio(1, true, 40); //Gear ratio does not matter but direction does.
         }
 
         @Override
@@ -272,60 +272,64 @@ public class CompConstants extends Constants
         @Override
         public int getSM1ID() {
             // TODO Auto-generated method stub
-            return -1;
+            return 11;
         }
 
         @Override
         public int getSM2ID() {
             // TODO Auto-generated method stub
-            return -1;
+            return 6;
         }
 
         @Override
         public PIDConstants getPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0, 0, 0, 0);
+            return new PIDConstants(0.05, 0.0005, 0, 0.04);
         }
 
         @Override
         public GearRatio getSM1GearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public int getSM3ID() {
             // TODO Auto-generated method stub
-            return -1;
+            return 5;
         }
 
         @Override
         public int getKMID() {
             // TODO Auto-generated method stub
-            return -1;
+            return 12;
         }
 
         @Override
         public GearRatio getSM2GearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public GearRatio getSM3GearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public GearRatio getKMGearRatio() {
-            // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public int getDigitalInput() {
             return 0;
+        }
+
+        @Override
+        public boolean invertSensor() {
+            return true;
         }
 
     }

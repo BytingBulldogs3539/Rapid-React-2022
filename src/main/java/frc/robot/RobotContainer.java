@@ -13,8 +13,8 @@ import frc.robot.auton.ArchTest;
 import frc.robot.auton.Back2Start;
 import frc.robot.auton.DistanceTest;
 import frc.robot.auton.Lapse;
-import frc.robot.commands.ClimberBackwardCommand;
-import frc.robot.commands.ClimberForwardCommand;
+import frc.robot.commands.ClimberOutCommand;
+import frc.robot.commands.ClimberInCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.constants.CompConstants;
@@ -29,7 +29,7 @@ import frc.robot.utilities.LogitechF310;
 import frc.robot.utilities.MacAddress;
 
 public class RobotContainer {
-  private static final String PRACTICE_BOT_MAC_ADDRESS = "";
+  private static final String PRACTICE_BOT_MAC_ADDRESS = "00:80:2F:33:C3:8F:00:80:2F:33:C3:90";
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -85,10 +85,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    operatorController.buttonPadDown.whenHeld(new IntakeCommand(1, intakeSubsystem, pneumaticsSubsystem));
+    operatorController.buttonPadDown.whenHeld(new IntakeCommand(.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
     operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem));
-    operatorController.buttonSELECT.whenPressed(new ClimberBackwardCommand(climberSubsystem, pneumaticsSubsystem));
-    operatorController.buttonSTART.whenPressed(new ClimberForwardCommand(climberSubsystem, pneumaticsSubsystem));
+    operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
+    operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
   }
 
   public void putAuton() {

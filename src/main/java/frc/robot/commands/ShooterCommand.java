@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -11,6 +12,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterCommand extends CommandBase {
   /** Creates a new ShooterCommand. */
   ShooterSubsystem shooterSubsystem;
+  /*** Create a new timer */
+  Timer timer = new Timer();
   public ShooterCommand(ShooterSubsystem shooterSubsystem) {
     this.shooterSubsystem = shooterSubsystem;
     SmartDashboard.putNumber("KM Speed", 0);
@@ -21,7 +24,10 @@ public class ShooterCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer.reset();
+    timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -31,7 +37,14 @@ public class ShooterCommand extends CommandBase {
       shooterSubsystem.setKMPercentOutput(0);
     }
     else
-      shooterSubsystem.setKMSpeed(SmartDashboard.getNumber("KM Speed", 0));
+    { 
+      double tolerance = 200;
+      if(timer.hasElapsed(2)) {
+      // if(shooterSubsystem.SM1AtTarget(tolerance) && shooterSubsystem.SM2AtTarget(tolerance) && shooterSubsystem.SM3AtTarget(tolerance))
+        shooterSubsystem.setKMSpeed(SmartDashboard.getNumber("KM Speed", 0));
+      }
+
+    }
     if(SmartDashboard.getNumber("SM1 Speed", 0) == 0)
     {
       shooterSubsystem.setSM1PercentOutput(0);

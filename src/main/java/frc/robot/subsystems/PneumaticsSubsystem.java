@@ -13,10 +13,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class PneumaticsSubsystem extends SubsystemBase {
+  //Final variables for pressure on and off
   final double minPressure = 80;
   final double maxPressure = 120;
 
-  // Initializes compressor & solenoid objects
+  // Creates compressor & solenoid objects
   Compressor compressor;
   DoubleSolenoid intakeSolenoid;
   DoubleSolenoid staticClimberSolenoid;
@@ -31,9 +32,10 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
     // Creates 3 solenoid objects
     intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidOut());
-    staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidOut());
+    staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidOpen(), RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidClose());
     climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidOut());
 
+    //Add the compressor to the dashboard to see when its running.
     SmartDashboard.putData(compressor);
   }
   public void setIntakeOut()

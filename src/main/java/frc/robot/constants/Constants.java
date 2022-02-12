@@ -190,8 +190,8 @@ public abstract class Constants {
         public abstract int getIntakeSolenoidIn();
         public abstract int getIntakeSolenoidOut();
 
-        public abstract int getStaticClimberSolenoidIn();
-        public abstract int getStaticClimberSolenoidOut();
+        public abstract int getStaticClimberSolenoidOpen();
+        public abstract int getStaticClimberSolenoidClose();
 
         public abstract int getClimberSolenoidIn();
         public abstract int getCLimberSolenoidOut();

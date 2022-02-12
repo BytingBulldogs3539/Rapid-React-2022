@@ -8,10 +8,12 @@ package frc.robot.utilities;
 public class GearRatio {
     private final double gearRatio;
     private final boolean inverted;
+    private final double currentLimit;
 
-    public GearRatio(double gearRatio, boolean inverted) {
+    public GearRatio(double gearRatio, boolean inverted, double currentLimit) {
         this.gearRatio = gearRatio;
         this.inverted = inverted;
+        this.currentLimit = currentLimit;
     }
 
     // Getter methods
@@ -21,6 +23,14 @@ public class GearRatio {
      */
     public double getGearRatio() {
         return gearRatio;
+    }
+
+    /**
+     * Gets value of current limit constant
+     * @return Value of current limit constant
+     */
+    public double getCurrentLimit() {
+        return currentLimit;
     }
 
     /***

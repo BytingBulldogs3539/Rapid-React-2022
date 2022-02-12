@@ -255,6 +255,16 @@ public class PracConstants extends Constants
         public int getKnockDownMotorID() {
             return 19;
         }
+
+        @Override
+        public GearRatio getIntakeGearRatio() {
+            return new GearRatio(1, false, 40); //Gear ratio does not matter but direction does.
+        }
+
+        @Override
+        public GearRatio getKnockDownGearRatio() {
+            return new GearRatio(1, false, 40); //Gear ratio does not matter but direction does.
+        }
         
     }
     public class ShooterConstants extends Constants.ShooterConstants {
@@ -280,7 +290,7 @@ public class PracConstants extends Constants
         @Override
         public GearRatio getSM1GearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false);
+            return new GearRatio(1, false, 40);
         }
 
         @Override
@@ -298,19 +308,19 @@ public class PracConstants extends Constants
         @Override
         public GearRatio getSM2GearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false);
+            return new GearRatio(1, false, 40);
         }
 
         @Override
         public GearRatio getSM3GearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false);
+            return new GearRatio(1, false, 40);
         }
 
         @Override
         public GearRatio getKMGearRatio() {
             // TODO Auto-generated method stub
-            return new GearRatio(1, false);
+            return new GearRatio(1, false, 40);
         }
 
         @Override
@@ -332,13 +342,13 @@ public class PracConstants extends Constants
         }
 
         @Override
-        public boolean getLClimberInvert() {
-            return false;
+        public GearRatio getLClimberGearRatio() {
+            return new GearRatio(1, false, 40); //Gear ratio does not matter but inversion does
         }
 
         @Override
-        public boolean getRClimberInvert() {
-            return false;
+        public GearRatio getRClimberGearRatio() {
+            return new GearRatio(1, false, 40); //Gear ratio does not matter but inversion does
         }
     }
     public class Pneumatics extends Constants.PneumaticsConstants {
@@ -377,6 +387,5 @@ public class PracConstants extends Constants
         public int getCLimberSolenoidOut() {
             return 5;
         }
-        
     }
 }

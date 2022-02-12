@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
@@ -82,10 +83,11 @@ public class ShooterSubsystem extends SubsystemBase {
     }
   }
 
-  public TalonFX configureMotor(int motorID, GearRatio motorGearRatio) {
+  public TalonFX configureMotor(int motorID, GearRatio gearRatio) {
     TalonFX motor = new TalonFX(motorID);
-    motor.setInverted(motorGearRatio.getInverted());
+    motor.setInverted(gearRatio.getInverted());
     motor.setSensorPhase(RobotContainer.constants.getShooterConstants().getSM1GearRatio().getInverted());
+    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
     return motor;
   }
 

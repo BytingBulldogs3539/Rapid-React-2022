@@ -145,6 +145,12 @@ public abstract class Constants {
 
         /*** @return the id of the knock down motor*/
         public abstract int getKnockDownMotorID();
+
+        /*** @return the gear ratio of the intake*/
+        public abstract GearRatio getIntakeGearRatio();
+
+        /*** @return the gear ratio of the knock down*/
+        public abstract GearRatio getKnockDownGearRatio();
     }
     /*** Class containing shooter constants */
     public abstract class ShooterConstants {
@@ -176,12 +182,13 @@ public abstract class Constants {
         // Climber Motor ID
         /*** @return the id of the first climber motor*/
         public abstract int getLClimberMotorID();
-        /*** @return if the left climber motor should be inverted */
-        public abstract boolean getLClimberInvert();
         /*** @return the id of the second climber motor*/
         public abstract int getRClimberMotorID();
-        /*** @return if the right climber motor should be inverted */
-        public abstract boolean getRClimberInvert();
+
+        /*** @return the gear ratio of the left climber */
+        public abstract GearRatio getLClimberGearRatio();
+        /*** @return the gear ratio of the right climber*/
+        public abstract GearRatio getRClimberGearRatio();
     }
 
     /*** Class containing the Pneumatics Constants (for the compressor & the solenoids) */

@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -12,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.utilities.GearRatio;
 
 public class IntakeSubsystem extends SubsystemBase {
 
@@ -27,6 +29,10 @@ public class IntakeSubsystem extends SubsystemBase {
     if (RobotContainer.constants.getIntakeConstants().getIntakeMotorID() != -1) {
       hasIntakeMotor = true;
       intakeMotor = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
+      GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getIntakeGearRatio();
+      intakeMotor.setInverted(gearRatio.getInverted());
+      intakeMotor.setSensorPhase(gearRatio.getInverted());
+      intakeMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
     } else {
       hasIntakeMotor = false;
     }
@@ -34,11 +40,16 @@ public class IntakeSubsystem extends SubsystemBase {
     if (RobotContainer.constants.getIntakeConstants().getKnockDownMotorID() != -1) {
       hasKnockDownMotor = true;
       knockDownMotor = new TalonSRX(RobotContainer.constants.getIntakeConstants().getKnockDownMotorID());
+      GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getIntakeGearRatio();
+      knockDownMotor.setInverted(gearRatio.getInverted());
+      knockDownMotor.setSensorPhase(gearRatio.getInverted());
+      knockDownMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
     } else {
       hasKnockDownMotor = false;
     }
 
   }
+
 
   /**
    * @param speed a value between -1 & 1

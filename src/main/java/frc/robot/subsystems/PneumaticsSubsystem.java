@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
@@ -29,10 +30,11 @@ public class PneumaticsSubsystem extends SubsystemBase {
     compressor.disable();
 
     // Creates 3 solenoid objects
-    intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidReverse());
-    staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidReverse());
-    climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidForward(), RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidReverse());
+    intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidOut());
+    staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidOut());
+    climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidOut());
 
+    SmartDashboard.putData(compressor);
   }
   public void setIntakeOut()
   {
@@ -70,6 +72,5 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

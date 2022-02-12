@@ -30,6 +30,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   // Creates a new object for the sensor
   DigitalInput sensor;
+  final boolean hasSensor;
+
   
   public ShooterSubsystem() {
     int SM1ID = RobotContainer.constants.getShooterConstants().getSM1ID();
@@ -68,6 +70,16 @@ public class ShooterSubsystem extends SubsystemBase {
       hasKM = true;
       SM2 = configureMotor(KMID, KMGearRatio);
     }
+
+    if(RobotContainer.constants.getShooterConstants().getDigitalInput()!=-1)
+    {
+      sensor = new DigitalInput(RobotContainer.constants.getShooterConstants().getDigitalInput());
+      hasSensor = true;
+    }
+    else
+    {
+      hasSensor = false;
+    }
   }
 
   public TalonFX configureMotor(int motorID, GearRatio motorGearRatio) {
@@ -75,6 +87,18 @@ public class ShooterSubsystem extends SubsystemBase {
     motor.setInverted(motorGearRatio.getInverted());
     motor.setSensorPhase(RobotContainer.constants.getShooterConstants().getSM1GearRatio().getInverted());
     return motor;
+  }
+
+  /**
+   * @return returns true when the sensor in the shooter is blocked. Also returns true if the robot does not have a sensor.
+   */
+  public boolean getSensor()
+  {
+    if(hasSensor)
+    {
+      return sensor.get();
+    }
+    return true;
   }
 
   /***

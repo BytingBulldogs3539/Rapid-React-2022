@@ -14,17 +14,36 @@ import frc.robot.commands.MoveClimberCommand;
 public class ClimberSubsystem extends SubsystemBase {
   private TalonFX lClimber;
   private TalonFX rClimber;
+
+  final boolean hasLClimber;
+  final boolean hasRClimber;
+
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
-    lClimber = new TalonFX(RobotContainer.constants.getClimberConstants().getClimberMotor1ID());
-    rClimber = new TalonFX(RobotContainer.constants.getClimberConstants().getClimberMotor2ID());
+    if (RobotContainer.constants.getClimberConstants().getLClimberMotorID() != -1) {
+      lClimber = new TalonFX(RobotContainer.constants.getClimberConstants().getLClimberMotorID());
+      hasLClimber = true;
+    } else {
+      hasLClimber = false;
+    }
+
+    if (RobotContainer.constants.getClimberConstants().getRClimberMotorID() != -1) {
+      rClimber = new TalonFX(RobotContainer.constants.getClimberConstants().getRClimberMotorID());
+      hasRClimber = true;
+    } else {
+      hasRClimber = false;
+    }
+
     this.setDefaultCommand(new MoveClimberCommand(this));
   }
 
   /*** Sets the speed of both the left and right climbers. */
   public void setMotorSpeed(double lClimberSpeed, double rClimberSpeed) {
-    lClimber.set(ControlMode.PercentOutput, lClimberSpeed);
-    rClimber.set(ControlMode.PercentOutput, rClimberSpeed);
+    if (hasLClimber)
+      lClimber.set(ControlMode.PercentOutput, lClimberSpeed);
+
+    if (hasRClimber)
+      rClimber.set(ControlMode.PercentOutput, rClimberSpeed);
   }
 
   @Override

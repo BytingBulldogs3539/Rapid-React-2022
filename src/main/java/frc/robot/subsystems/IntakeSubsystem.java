@@ -9,57 +9,58 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  TalonFX intakeMotor1;
+  TalonFX intakeMotor;
   TalonSRX knockDownMotor;
+
+  DigitalInput sensor;
+
   final boolean hasIntakeMotor;
   final boolean hasKnockDownMotor;
-  
+
   public IntakeSubsystem() {
-    if(RobotContainer.constants.getIntakeConstants().getIntakeMotorID()!=-1){
+    if (RobotContainer.constants.getIntakeConstants().getIntakeMotorID() != -1) {
       hasIntakeMotor = true;
-      intakeMotor1 = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
-    }
-    else
-    {
+      intakeMotor = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
+    } else {
       hasIntakeMotor = false;
     }
 
-    if(RobotContainer.constants.getIntakeConstants().getKnockDownMotorID()!=-1){
+    if (RobotContainer.constants.getIntakeConstants().getKnockDownMotorID() != -1) {
       hasKnockDownMotor = true;
-      intakeMotor1 = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
-    }
-    else
-    {
+      knockDownMotor = new TalonSRX(RobotContainer.constants.getIntakeConstants().getKnockDownMotorID());
+    } else {
       hasKnockDownMotor = false;
     }
 
   }
+
+  /**
+   * @param speed a value between -1 & 1
+   */
+  public void setIntakeSpeed(double speed) {
+    if (!hasIntakeMotor) {
+      return;
+    }
+    intakeMotor.set(TalonFXControlMode.PercentOutput, speed);
+  }
+
   /**
    * 
    * @param speed a value between -1 & 1
    */
-  public void setIntakeSpeed(double speed) {
-    if(!hasIntakeMotor){
-      return;
-    }
-    intakeMotor1.set(TalonFXControlMode.PercentOutput, speed);
-  }
-
-    /**
-   * 
-   * @param speed a value between -1 & 1
-   */
   public void setKnockDownSpeed(double speed) {
-    if(!hasKnockDownMotor){
+    if (!hasKnockDownMotor) {
       return;
     }
     knockDownMotor.set(ControlMode.PercentOutput, speed);
   }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

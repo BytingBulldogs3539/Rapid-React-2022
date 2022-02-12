@@ -143,7 +143,7 @@ public abstract class Constants {
         /*** @return the id of the intake motor*/
         public abstract int getIntakeMotorID();
 
-        /*** @return the id of the knock down motor */
+        /*** @return the id of the knock down motor*/
         public abstract int getKnockDownMotorID();
     }
     /*** Class containing shooter constants */
@@ -175,21 +175,25 @@ public abstract class Constants {
     public abstract class ClimberConstants {
         // Climber Motor ID
         /*** @return the id of the first climber motor*/
-        public abstract int getClimberMotor1ID();
+        public abstract int getLClimberMotorID();
+        /*** @return if the left climber motor should be inverted */
+        public abstract boolean getLClimberInvert();
         /*** @return the id of the second climber motor*/
-        public abstract int getClimberMotor2ID();
+        public abstract int getRClimberMotorID();
+        /*** @return if the right climber motor should be inverted */
+        public abstract boolean getRClimberInvert();
     }
 
     /*** Class containing the Pneumatics Constants (for the compressor & the solenoids) */
     public abstract class PneumaticsConstants {
         public abstract int getCompressorID();
-        public abstract int getIntakeSolenoidForward();
-        public abstract int getIntakeSolenoidReverse();
+        public abstract int getIntakeSolenoidIn();
+        public abstract int getIntakeSolenoidOut();
 
-        public abstract int getStaticClimberSolenoidForward();
-        public abstract int getStaticClimberSolenoidReverse();
+        public abstract int getStaticClimberSolenoidIn();
+        public abstract int getStaticClimberSolenoidOut();
 
-        public abstract int getClimberSolenoidForward();
-        public abstract int getCLimberSolenoidReverse();
+        public abstract int getClimberSolenoidIn();
+        public abstract int getCLimberSolenoidOut();
     }
 }

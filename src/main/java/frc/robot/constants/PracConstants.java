@@ -56,80 +56,68 @@ public class PracConstants extends Constants
 
         @Override
         public int getFLDriveID() {
-            // TODO Auto-generated method stub
             return 2;
         }
 
         @Override
         public int getFLSteeringID() {
-            // TODO Auto-generated method stub
             return 1;
         }
 
         @Override
         public int getFRDriveID() {
-            // TODO Auto-generated method stub
             return 18;
         }
 
         @Override
         public int getFRSteeringID() {
-            // TODO Auto-generated method stub
             return 17;
         }
 
         @Override
         public int getBLDriveID() {
-            // TODO Auto-generated method stub
             return 4;
         }
 
         @Override
         public int getBLSteeringID() {
-            // TODO Auto-generated method stub
             return 3;
         }
 
         @Override
         public int getBRDriveID() {
-            // TODO Auto-generated method stub
             return 14;
         }
 
         @Override
         public int getBRSteeringID() {
-            // TODO Auto-generated method stub
             return 13;
         }
 
         @Override
         public int getFLCanEncoderID() {
-            // TODO Auto-generated method stub
-            return 32;
+            return 30;
         }
 
         @Override
         public int getFRCanEncoderID() {
-            // TODO Auto-generated method stub
             return 33;
         }
 
         @Override
         public int getBLCanEncoderID() {
-            // TODO Auto-generated method stub
-            return 30;
+            return 31;
         }
 
         @Override
         public int getBRCanEncoderID() {
-            // TODO Auto-generated method stub
-            return 31;
+            return 32;
         }
 
         @Override
         public int getPigeonID() {
             // TODO Auto-generated method stub
-            return 25;
+            return 40;
         }
 
         @Override
@@ -158,37 +146,31 @@ public class PracConstants extends Constants
 
         @Override
         public double getDriveGearReduction() {
-            // TODO Auto-generated method stub
             return 1.0 / 6.75; // From MK4 Swerve Drive Specialties (specifically for L2s)
         }
 
         @Override
         public double getSteerGearReduction() {
-            // TODO Auto-generated method stub
             return 1.0 / 12.8; // From MK4 Swerve Drive Specialties
         }
 
         @Override
         public ModuleConfiguration getFLModuleGearRatio() {
-            // TODO Auto-generated method stub
             return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getFRModuleGearRatio() {
-            // TODO Auto-generated method stub
             return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getBLModuleGearRatio() {
-            // TODO Auto-generated method stub
             return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getBRModuleGearRatio() {
-            // TODO Auto-generated method stub
             return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
         }
         @Override
@@ -266,16 +248,14 @@ public class PracConstants extends Constants
 
         @Override
         public int getIntakeMotorID() {
-            // TODO Auto-generated method stub
-            return -1;
+            return 0;
         }
 
         @Override
         public int getKnockDownMotorID() {
-            // TODO Auto-generated method stub
-            return -1;
+            return 19;
         }
-
+        
     }
     public class ShooterConstants extends Constants.ShooterConstants {
 
@@ -335,7 +315,6 @@ public class PracConstants extends Constants
 
         @Override
         public int getDigitalInput() {
-            // TODO Auto-generated method stub
             return 0;
         }
 
@@ -343,59 +322,60 @@ public class PracConstants extends Constants
     public class ClimberConstants extends Constants.ClimberConstants {
 
         @Override
-        public int getClimberMotor1ID() {
-            // TODO Auto-generated method stub
-            return -1;
+        public int getLClimberMotorID() {
+            return 15;
         }
 
         @Override
-        public int getClimberMotor2ID() {
-            // TODO Auto-generated method stub
-            return -1;
+        public int getRClimberMotorID() {
+            return 16;
+        }
+
+        @Override
+        public boolean getLClimberInvert() {
+            return false;
+        }
+
+        @Override
+        public boolean getRClimberInvert() {
+            return false;
         }
     }
     public class Pneumatics extends Constants.PneumaticsConstants {
 
         @Override
         public int getCompressorID() {
-            // TODO Auto-generated method stub
+            return 25;
+        }
+
+        @Override
+        public int getIntakeSolenoidIn() {
+            return 2;
+        }
+
+        @Override
+        public int getIntakeSolenoidOut() {
+            return 3;
+        }
+
+        @Override
+        public int getStaticClimberSolenoidOpen() {
             return 0;
         }
 
         @Override
-        public int getIntakeSolenoidForward() {
-            // TODO Auto-generated method stub
-            return 0;
+        public int getStaticClimberSolenoidClose() {
+            return 1;
         }
 
         @Override
-        public int getIntakeSolenoidReverse() {
-            // TODO Auto-generated method stub
-            return 0;
+        public int getClimberSolenoidIn() {
+            return 4;
         }
 
         @Override
-        public int getStaticClimberSolenoidForward() {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public int getStaticClimberSolenoidReverse() {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public int getClimberSolenoidForward() {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public int getCLimberSolenoidReverse() {
-            // TODO Auto-generated method stub
-            return 0;
+        public int getCLimberSolenoidOut() {
+            return 5;
         }
         
     }

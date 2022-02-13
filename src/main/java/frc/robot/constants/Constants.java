@@ -114,6 +114,10 @@ public abstract class Constants {
         /*** @return the id of the pigeon gyro*/
         public abstract int getPigeonID();
 
+        // PDH ID constant
+        /*** @return returns the id of the power distribution hub*/
+        public abstract int getPDHID();
+
         // Encoder distance on axis (in radians) / Steer offset constants
         /*** @return the offset from zero in radians for the front left steering*/
         public abstract double getFLSteerOffset();

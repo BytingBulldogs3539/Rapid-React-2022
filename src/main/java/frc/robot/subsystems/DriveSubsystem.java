@@ -19,6 +19,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -67,7 +69,21 @@ public class DriveSubsystem extends SubsystemBase
         final boolean shouldRunFront;
         final boolean shouldRunShooter;
 
+        PowerDistribution PDH;
+
+        final boolean hasPDH;
+
         public DriveSubsystem() {
+                int PDHID = RobotContainer.constants.getDriveConstants().getPDHID();
+                if(PDHID!=-1)
+                {
+                        PDH = new PowerDistribution(PDHID, ModuleType.kRev);
+                        SmartDashboard.putData(PDH);    
+                        hasPDH = true;    
+                }
+                else
+                        hasPDH = false;
+                
                 ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
 
                 m_frontLeftModule = Mk3SwerveModuleHelper.createFalcon500(

@@ -243,6 +243,12 @@ public class PracConstants extends Constants
             TrajectoryConstraint[] constraints = { (TrajectoryConstraint)new MaxAccelerationConstraint(1), (TrajectoryConstraint)new MaxVelocityConstraint(1) };
             return constraints;
           }
+
+        @Override
+        public int getPDHID() {
+            // TODO Auto-generated method stub
+            return 20;
+        }
     }
     public class IntakeConstants extends Constants.IntakeConstants {
 
@@ -271,55 +277,47 @@ public class PracConstants extends Constants
 
         @Override
         public int getSM1ID() {
-            // TODO Auto-generated method stub
-            return -1;
+            return 11;
         }
 
         @Override
         public int getSM2ID() {
-            // TODO Auto-generated method stub
-            return -1;
+            return 6;
         }
 
         @Override
         public PIDConstants getPIDConstants() {
             // TODO Auto-generated method stub
-            return new PIDConstants(0, 0, 0, 0);
+            return new PIDConstants(0.05, 0.0005, 0, 0.04);
         }
 
         @Override
         public GearRatio getSM1GearRatio() {
-            // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public int getSM3ID() {
-            // TODO Auto-generated method stub
-            return -1;
+            return 5;
         }
 
         @Override
         public int getKMID() {
-            // TODO Auto-generated method stub
-            return -1;
+            return 12;
         }
 
         @Override
         public GearRatio getSM2GearRatio() {
-            // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public GearRatio getSM3GearRatio() {
-            // TODO Auto-generated method stub
-            return new GearRatio(1, false, 40);
+            return new GearRatio(1, true, 40);
         }
 
         @Override
         public GearRatio getKMGearRatio() {
-            // TODO Auto-generated method stub
             return new GearRatio(1, true, 40);
         }
 

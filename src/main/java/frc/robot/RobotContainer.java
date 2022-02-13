@@ -70,11 +70,7 @@ public class RobotContainer {
     putAuton();
 
   }
-
-  public DriveSubsystem getDrivetrain() {
-    return driveSubsystem;
-  }
-
+  
   /**
    * Use this method to define your button->command mappings. Buttons can be
    * created by

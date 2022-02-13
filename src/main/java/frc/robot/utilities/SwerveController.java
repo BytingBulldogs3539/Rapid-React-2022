@@ -67,7 +67,7 @@ public class SwerveController extends CommandBase {
 
         Trajectory.State lastDesiredState = this.m_trajectory.calculate(this.lastTime);
         Path.State lastDesiredPose = lastDesiredState.getPathState();
-        double LastDesiredVelocity = lastDesiredState.getVelocity();
+        //double LastDesiredVelocity = lastDesiredState.getVelocity();
 
         Trajectory.State desiredState = this.m_trajectory.calculate(curTime);
         Path.State desiredPose = desiredState.getPathState();

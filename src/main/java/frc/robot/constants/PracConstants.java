@@ -8,8 +8,7 @@ import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
-public class PracConstants extends Constants
-{
+public class PracConstants extends Constants {
 
     @Override
     public DriveConstants getDriveConstants() {
@@ -29,12 +28,13 @@ public class PracConstants extends Constants
     @Override
     public ClimberConstants getClimberConstants() {
         return new ClimberConstants();
-    }   
+    }
 
     @Override
     public PneumaticsConstants getPneumaticsConstants() {
         return new Pneumatics();
     }
+
     public class DriveConstants extends Constants.DriveConstants {
         @Override
         public double getWheelDiameter() {
@@ -156,28 +156,34 @@ public class PracConstants extends Constants
 
         @Override
         public ModuleConfiguration getFLModuleGearRatio() {
-            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(),
+                    false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getFRModuleGearRatio() {
-            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(),
+                    false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getBLModuleGearRatio() {
-            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(),
+                    false); // Add appropriate parameter values when you have them.
         }
 
         @Override
         public ModuleConfiguration getBRModuleGearRatio() {
-            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(), false); // Add appropriate parameter values when you have them.
+            return new ModuleConfiguration(getWheelDiameter(), getDriveGearReduction(), false, getSteerGearReduction(),
+                    false); // Add appropriate parameter values when you have them.
         }
+
         @Override
         public String getFrontCameraName() {
             // TODO Auto-generated method stub
             return "HD_USB_Camera";
         }
+
         @Override
         public String getShooterCameraName() {
             // TODO Auto-generated method stub
@@ -240,9 +246,10 @@ public class PracConstants extends Constants
 
         @Override
         public TrajectoryConstraint[] getConstraints() {
-            TrajectoryConstraint[] constraints = { (TrajectoryConstraint)new MaxAccelerationConstraint(1), (TrajectoryConstraint)new MaxVelocityConstraint(1) };
+            TrajectoryConstraint[] constraints = { (TrajectoryConstraint) new MaxAccelerationConstraint(1),
+                    (TrajectoryConstraint) new MaxVelocityConstraint(1) };
             return constraints;
-          }
+        }
 
         @Override
         public int getPDHID() {
@@ -250,6 +257,7 @@ public class PracConstants extends Constants
             return 20;
         }
     }
+
     public class IntakeConstants extends Constants.IntakeConstants {
 
         @Override
@@ -264,15 +272,16 @@ public class PracConstants extends Constants
 
         @Override
         public GearRatio getIntakeGearRatio() {
-            return new GearRatio(1, true, 40); //Gear ratio does not matter but direction does.
+            return new GearRatio(1, true, 40); // Gear ratio does not matter but direction does.
         }
 
         @Override
         public GearRatio getKnockDownGearRatio() {
-            return new GearRatio(1, false, 40); //Gear ratio does not matter but direction does.
+            return new GearRatio(1, false, 40); // Gear ratio does not matter but direction does.
         }
-        
+
     }
+
     public class ShooterConstants extends Constants.ShooterConstants {
 
         @Override
@@ -332,6 +341,7 @@ public class PracConstants extends Constants
         }
 
     }
+
     public class ClimberConstants extends Constants.ClimberConstants {
 
         @Override
@@ -346,14 +356,15 @@ public class PracConstants extends Constants
 
         @Override
         public GearRatio getLClimberGearRatio() {
-            return new GearRatio(1, false, 40); //Gear ratio does not matter but inversion does
+            return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
         }
 
         @Override
         public GearRatio getRClimberGearRatio() {
-            return new GearRatio(1, false, 40); //Gear ratio does not matter but inversion does
+            return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
         }
     }
+
     public class Pneumatics extends Constants.PneumaticsConstants {
 
         @Override

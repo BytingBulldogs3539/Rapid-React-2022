@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  * @since 02/02/17
  */
 
-public class TriggerButton extends Button
-{
+public class TriggerButton extends Button {
     private int triggerAxis;
     /* The joystick that the trigger is on. */
     private GenericHID joystick;
@@ -23,8 +22,7 @@ public class TriggerButton extends Button
     /* The minimal value until the button activates */
     private double topRange = .75;
 
-    public TriggerButton(GenericHID joystick, int axis)
-    {
+    public TriggerButton(GenericHID joystick, int axis) {
         triggerAxis = axis;
         this.joystick = joystick;
     }
@@ -32,7 +30,9 @@ public class TriggerButton extends Button
     /**
      * returns the current value of the trigger
      */
-    public double getValue() { return joystick.getRawAxis(triggerAxis); }
+    public double getValue() {
+        return joystick.getRawAxis(triggerAxis);
+    }
 
     /**
      * Allows us to change the range of the button
@@ -50,12 +50,9 @@ public class TriggerButton extends Button
      */
     @Override
     public boolean get() {
-        if (Math.abs(joystick.getRawAxis(triggerAxis)) > topRange)
-        {
+        if (Math.abs(joystick.getRawAxis(triggerAxis)) > topRange) {
             isTriggered = true;
-        }
-        else if (Math.abs(joystick.getRawAxis(triggerAxis)) < lowRange)
-        {
+        } else if (Math.abs(joystick.getRawAxis(triggerAxis)) < lowRange) {
             isTriggered = false;
         }
         return isTriggered;

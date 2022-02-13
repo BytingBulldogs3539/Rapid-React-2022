@@ -9,32 +9,34 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 
 public class GrabBarCommand extends CommandBase {
-  ClimberSubsystem climberSubsystem;
-  PneumaticsSubsystem pneumaticsSubsystem;
-  
-  /** Creates a new GrabBarCommand. */
-  public GrabBarCommand(ClimberSubsystem climberSubsystem, PneumaticsSubsystem pneumatics) {
-    this.climberSubsystem = climberSubsystem;
-    this.pneumaticsSubsystem = pneumatics;
-  }
+	ClimberSubsystem climberSubsystem;
+	PneumaticsSubsystem pneumaticsSubsystem;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    pneumaticsSubsystem.grabClimbBar(); // Closes grabber
-  }
+	/** Creates a new GrabBarCommand. */
+	public GrabBarCommand(ClimberSubsystem climberSubsystem, PneumaticsSubsystem pneumatics) {
+		this.climberSubsystem = climberSubsystem;
+		this.pneumaticsSubsystem = pneumatics;
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		pneumaticsSubsystem.grabClimbBar(); // Closes grabber
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

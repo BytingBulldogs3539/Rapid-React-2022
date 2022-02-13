@@ -15,75 +15,69 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** Used to get the mac addresses of the robot and other devices. */
 public class MacAddress {
-    String practice;
-    public MacAddress(String practice)
-    {
-        this.practice = practice;
-    }
-    public boolean getIsPractice()
-    {
-        try {
-            for (byte[] macAddress : getMacAddresses())
-            {
-                // Check if we are the practice bot
-                if (practice.equals(macToString(macAddress)))
-                {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            DriverStation.reportError("Error Retrieving Mac Addresses.", e.getStackTrace());
-        }
-        return false;
-    }
-    /**
-   * Gets the MAC addresses of all present network adapters.
-   *
-   * @return the MAC addresses of all network adapters.
-   */
-  public List<byte[]> getMacAddresses() throws IOException {
-    List<byte[]> macAddresses = new ArrayList<>();
+	String practice;
 
-    Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+	public MacAddress(String practice) {
+		this.practice = practice;
+	}
 
-    NetworkInterface networkInterface;
-    while (networkInterfaces.hasMoreElements())
-    {
-      networkInterface = networkInterfaces.nextElement();
+	public boolean getIsPractice() {
+		try {
+			for (byte[] macAddress : getMacAddresses()) {
+				// Check if we are the practice bot
+				if (practice.equals(macToString(macAddress))) {
+					return true;
+				}
+			}
+		} catch (IOException e) {
+			DriverStation.reportError("Error Retrieving Mac Addresses.", e.getStackTrace());
+		}
+		return false;
+	}
 
-      byte[] address = networkInterface.getHardwareAddress();
-      if (address == null)
-      {
-        continue;
-      }
+	/**
+	 * Gets the MAC addresses of all present network adapters.
+	 *
+	 * @return the MAC addresses of all network adapters.
+	 */
+	public List<byte[]> getMacAddresses() throws IOException {
+		List<byte[]> macAddresses = new ArrayList<>();
 
-      macAddresses.add(address);
-    }
-    listAddresses(macAddresses);
+		Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
 
-    return macAddresses;
-  }
+		NetworkInterface networkInterface;
+		while (networkInterfaces.hasMoreElements()) {
+			networkInterface = networkInterfaces.nextElement();
 
-  public void listAddresses(List<byte[]> macAddresses)
-  {
-        String[] macAddressStrings;
-        macAddressStrings = macAddresses.stream().map(this::macToString).toArray(String[]::new);
-        SmartDashboard.putStringArray("MAC Addresses", macAddressStrings);
-        SmartDashboard.putString("Practice Bot MAC Address",practice);
+			byte[] address = networkInterface.getHardwareAddress();
+			if (address == null) {
+				continue;
+			}
 
-  }
+			macAddresses.add(address);
+		}
+		listAddresses(macAddresses);
 
-  public String macToString(byte[] address) {
-    StringBuilder builder = new StringBuilder();
-    for (int i = 0; i < address.length; i++)
-    {
-      if (i != 0)
-      {
-        builder.append(':');
-      }
-      builder.append(String.format("%02X", address[i]));
-    }
-    return builder.toString();
-  }
+		return macAddresses;
+	}
+
+	public void listAddresses(List<byte[]> macAddresses) {
+		String[] macAddressStrings;
+		macAddressStrings = macAddresses.stream().map(this::macToString).toArray(String[]::new);
+		SmartDashboard.putStringArray("MAC Addresses", macAddressStrings);
+		SmartDashboard.putString("Practice Bot MAC Address", practice);
+
+	}
+
+	public String macToString(byte[] address) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < address.length; i++) {
+			if (i != 0) {
+				builder.append(':');
+			}
+			builder.append(String.format("%02X", address[i]));
+		}
+		return builder.toString();
+	}
 
 }

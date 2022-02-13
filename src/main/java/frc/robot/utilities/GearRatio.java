@@ -19,6 +19,7 @@ public class GearRatio {
     // Getter methods
     /**
      * Gets value of gear ratio constant
+     * 
      * @return Value of gear ratio constant
      */
     public double getGearRatio() {
@@ -27,6 +28,7 @@ public class GearRatio {
 
     /**
      * Gets value of current limit constant
+     * 
      * @return Value of current limit constant
      */
     public double getCurrentLimit() {
@@ -35,6 +37,7 @@ public class GearRatio {
 
     /***
      * Gets value of inverted constant
+     * 
      * @return Value of inverted constant
      */
     public boolean getInverted() {

@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
  * @since 11/12/17
  */
 
-public class DirectionalButton extends Button
-{
+public class DirectionalButton extends Button {
 	private int neededAngle;
 	private Direction direction;
 	private GenericHID joystick;
@@ -28,8 +27,7 @@ public class DirectionalButton extends Button
 	 * <li>{@link #LEFT}</li>
 	 * <li>{@link #UPLEFT}</li>
 	 */
-	public enum Direction
-	{
+	public enum Direction {
 
 		/** The Top Directional Button */
 		UP,
@@ -53,43 +51,41 @@ public class DirectionalButton extends Button
 	 * Constructor of the directional button wrapper requires a GenericHID joystick
 	 * and a direction.
 	 * 
-	 * @param joystick the joystick that this button is on.
+	 * @param joystick  the joystick that this button is on.
 	 * @param direction the direction enum the relates to the direction that
-	 *            triggers this button.
+	 *                  triggers this button.
 	 */
 
-	public DirectionalButton(GenericHID joystick, Direction direction)
-	{
+	public DirectionalButton(GenericHID joystick, Direction direction) {
 		neededAngle = 1;
 		this.direction = direction;
 		this.joystick = joystick;
 
-		switch (direction)
-		{
-		case UP:
-			neededAngle = 0;
-			break;
-		case UPRIGHT:
-			neededAngle = 45;
-			break;
-		case RIGHT:
-			neededAngle = 90;
-			break;
-		case DOWNRIGHT:
-			neededAngle = 135;
-			break;
-		case DOWN:
-			neededAngle = 180;
-			break;
-		case DOWNLEFT:
-			neededAngle = 225;
-			break;
-		case LEFT:
-			neededAngle = 270;
-			break;
-		case UPLEFT:
-			neededAngle = 315;
-			break;
+		switch (direction) {
+			case UP:
+				neededAngle = 0;
+				break;
+			case UPRIGHT:
+				neededAngle = 45;
+				break;
+			case RIGHT:
+				neededAngle = 90;
+				break;
+			case DOWNRIGHT:
+				neededAngle = 135;
+				break;
+			case DOWN:
+				neededAngle = 180;
+				break;
+			case DOWNLEFT:
+				neededAngle = 225;
+				break;
+			case LEFT:
+				neededAngle = 270;
+				break;
+			case UPLEFT:
+				neededAngle = 315;
+				break;
 
 		}
 	}
@@ -100,7 +96,9 @@ public class DirectionalButton extends Button
 	 * 
 	 * @return the angle value of the directional button
 	 */
-	public int getPOV() { return joystick.getPOV(); }
+	public int getPOV() {
+		return joystick.getPOV();
+	}
 
 	/**
 	 * Returns if the button is currently pressed.
@@ -108,12 +106,9 @@ public class DirectionalButton extends Button
 	 * @return a boolean which is true if the button is currently pressed.
 	 */
 	public boolean get() {
-		if (joystick.getPOV() == neededAngle)
-		{
+		if (joystick.getPOV() == neededAngle) {
 			return true;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
@@ -123,5 +118,7 @@ public class DirectionalButton extends Button
 	 * 
 	 * @return the direction enum of this button.
 	 */
-	public Direction getDirection() { return direction; }
+	public Direction getDirection() {
+		return direction;
+	}
 }

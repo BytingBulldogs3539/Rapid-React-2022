@@ -17,63 +17,66 @@ import frc.robot.utilities.GearRatio;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  TalonFX intakeMotor;
-  TalonSRX knockDownMotor;
+	TalonFX intakeMotor;
+	TalonSRX knockDownMotor;
 
-  DigitalInput sensor;
+	DigitalInput sensor;
 
-  final boolean hasIntakeMotor;
-  final boolean hasKnockDownMotor;
+	final boolean hasIntakeMotor;
+	final boolean hasKnockDownMotor;
 
-  public IntakeSubsystem() {
-    if (RobotContainer.constants.getIntakeConstants().getIntakeMotorID() != -1) {
-      hasIntakeMotor = true;
-      intakeMotor = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
-      GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getIntakeGearRatio();
-      intakeMotor.setInverted(gearRatio.getInverted());
-      intakeMotor.setSensorPhase(gearRatio.getInverted());
-      intakeMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
-    } else {
-      hasIntakeMotor = false;
-    }
+	public IntakeSubsystem() {
+		if (RobotContainer.constants.getIntakeConstants().getIntakeMotorID() != -1) {
+			hasIntakeMotor = true;
+			intakeMotor = new TalonFX(RobotContainer.constants.getIntakeConstants().getIntakeMotorID());
+			GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getIntakeGearRatio();
+			intakeMotor.setInverted(gearRatio.getInverted());
+			intakeMotor.setSensorPhase(gearRatio.getInverted());
+			intakeMotor.configSupplyCurrentLimit(
+					new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(), gearRatio.getCurrentLimit(),
+							0));
+		} else {
+			hasIntakeMotor = false;
+		}
 
-    if (RobotContainer.constants.getIntakeConstants().getKnockDownMotorID() != -1) {
-      hasKnockDownMotor = true;
-      knockDownMotor = new TalonSRX(RobotContainer.constants.getIntakeConstants().getKnockDownMotorID());
-      GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getKnockDownGearRatio();
-      knockDownMotor.setInverted(gearRatio.getInverted());
-      knockDownMotor.setSensorPhase(gearRatio.getInverted());
-      knockDownMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
-    } else {
-      hasKnockDownMotor = false;
-    }
+		if (RobotContainer.constants.getIntakeConstants().getKnockDownMotorID() != -1) {
+			hasKnockDownMotor = true;
+			knockDownMotor = new TalonSRX(RobotContainer.constants.getIntakeConstants().getKnockDownMotorID());
+			GearRatio gearRatio = RobotContainer.constants.getIntakeConstants().getKnockDownGearRatio();
+			knockDownMotor.setInverted(gearRatio.getInverted());
+			knockDownMotor.setSensorPhase(gearRatio.getInverted());
+			knockDownMotor.configSupplyCurrentLimit(
+					new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(), gearRatio.getCurrentLimit(),
+							0));
+		} else {
+			hasKnockDownMotor = false;
+		}
 
-  }
+	}
 
+	/**
+	 * @param speed a value between -1 & 1
+	 */
+	public void setIntakeSpeed(double speed) {
+		if (!hasIntakeMotor) {
+			return;
+		}
+		intakeMotor.set(TalonFXControlMode.PercentOutput, speed);
+	}
 
-  /**
-   * @param speed a value between -1 & 1
-   */
-  public void setIntakeSpeed(double speed) {
-    if (!hasIntakeMotor) {
-      return;
-    }
-    intakeMotor.set(TalonFXControlMode.PercentOutput, speed);
-  }
+	/**
+	 * 
+	 * @param speed a value between -1 & 1
+	 */
+	public void setKnockDownSpeed(double speed) {
+		if (!hasKnockDownMotor) {
+			return;
+		}
+		knockDownMotor.set(ControlMode.PercentOutput, speed);
+	}
 
-  /**
-   * 
-   * @param speed a value between -1 & 1
-   */
-  public void setKnockDownSpeed(double speed) {
-    if (!hasKnockDownMotor) {
-      return;
-    }
-    knockDownMotor.set(ControlMode.PercentOutput, speed);
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
 }

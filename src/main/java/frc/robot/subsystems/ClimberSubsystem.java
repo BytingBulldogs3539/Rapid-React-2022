@@ -14,51 +14,53 @@ import frc.robot.commands.MoveClimberCommand;
 import frc.robot.utilities.GearRatio;
 
 public class ClimberSubsystem extends SubsystemBase {
-  private TalonSRX lClimber;
-  private TalonSRX rClimber;
+	private TalonSRX lClimber;
+	private TalonSRX rClimber;
 
-  final boolean hasLClimber;
-  final boolean hasRClimber;
+	final boolean hasLClimber;
+	final boolean hasRClimber;
 
-  /** Creates a new ClimberSubsystem. */
-  public ClimberSubsystem() {
-    if (RobotContainer.constants.getClimberConstants().getLClimberMotorID() != -1) {
-      lClimber = configMotor(RobotContainer.constants.getClimberConstants().getLClimberMotorID(),RobotContainer.constants.getClimberConstants().getLClimberGearRatio());
-      hasLClimber = true;
-    } else {
-      hasLClimber = false;
-    }
+	/** Creates a new ClimberSubsystem. */
+	public ClimberSubsystem() {
+		if (RobotContainer.constants.getClimberConstants().getLClimberMotorID() != -1) {
+			lClimber = configMotor(RobotContainer.constants.getClimberConstants().getLClimberMotorID(),
+					RobotContainer.constants.getClimberConstants().getLClimberGearRatio());
+			hasLClimber = true;
+		} else {
+			hasLClimber = false;
+		}
 
-    if (RobotContainer.constants.getClimberConstants().getRClimberMotorID() != -1) {
-      rClimber = configMotor(RobotContainer.constants.getClimberConstants().getRClimberMotorID(),RobotContainer.constants.getClimberConstants().getRClimberGearRatio());
-      hasRClimber = true;
-    } else {
-      hasRClimber = false;
-    }
+		if (RobotContainer.constants.getClimberConstants().getRClimberMotorID() != -1) {
+			rClimber = configMotor(RobotContainer.constants.getClimberConstants().getRClimberMotorID(),
+					RobotContainer.constants.getClimberConstants().getRClimberGearRatio());
+			hasRClimber = true;
+		} else {
+			hasRClimber = false;
+		}
 
-    this.setDefaultCommand(new MoveClimberCommand(this));
-  }
+		this.setDefaultCommand(new MoveClimberCommand(this));
+	}
 
-  public TalonSRX configMotor(int id, GearRatio gearRatio)
-  {
-    TalonSRX motor = new TalonSRX(id);
-    motor.setInverted(gearRatio.getInverted());
-    motor.setSensorPhase(gearRatio.getInverted());
-    motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(),gearRatio.getCurrentLimit(),0));
-    return motor;
-  }
+	public TalonSRX configMotor(int id, GearRatio gearRatio) {
+		TalonSRX motor = new TalonSRX(id);
+		motor.setInverted(gearRatio.getInverted());
+		motor.setSensorPhase(gearRatio.getInverted());
+		motor.configSupplyCurrentLimit(
+				new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(), gearRatio.getCurrentLimit(), 0));
+		return motor;
+	}
 
-  /*** Sets the speed of both the left and right climbers. */
-  public void setMotorSpeed(double lClimberSpeed, double rClimberSpeed) {
-    if (hasLClimber)
-      lClimber.set(ControlMode.PercentOutput, lClimberSpeed);
+	/*** Sets the speed of both the left and right climbers. */
+	public void setMotorSpeed(double lClimberSpeed, double rClimberSpeed) {
+		if (hasLClimber)
+			lClimber.set(ControlMode.PercentOutput, lClimberSpeed);
 
-    if (hasRClimber)
-      rClimber.set(ControlMode.PercentOutput, rClimberSpeed);
-  }
+		if (hasRClimber)
+			rClimber.set(ControlMode.PercentOutput, rClimberSpeed);
+	}
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
 }

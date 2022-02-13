@@ -10,60 +10,61 @@ import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class IntakeCommand extends CommandBase {
-  
-  IntakeSubsystem intakeSubsystem;
-  PneumaticsSubsystem pneumatics;
-  ShooterSubsystem shooterSubsystem;
-  
-  double speed = 0.0;
-  double kDwnSpeed = 0.0;
-  
-  /** Creates a new IntakeCommand. */
-  public IntakeCommand(double speed, double kDwnSpeed, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumatics, ShooterSubsystem shooterSubsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intakeSubsystem);
 
-    this.speed = speed;
-    this.kDwnSpeed = kDwnSpeed;
-    this.pneumatics = pneumatics;
-    this.shooterSubsystem = shooterSubsystem;
+	IntakeSubsystem intakeSubsystem;
+	PneumaticsSubsystem pneumatics;
+	ShooterSubsystem shooterSubsystem;
 
-    this.intakeSubsystem = intakeSubsystem;
-  }
+	double speed = 0.0;
+	double kDwnSpeed = 0.0;
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() 
-  {
-    pneumatics.setIntakeOut();
-    intakeSubsystem.setIntakeSpeed(speed);
-    intakeSubsystem.setKnockDownSpeed(kDwnSpeed);
-  }
+	/** Creates a new IntakeCommand. */
+	public IntakeCommand(double speed, double kDwnSpeed, IntakeSubsystem intakeSubsystem,
+			PneumaticsSubsystem pneumatics,
+			ShooterSubsystem shooterSubsystem) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(intakeSubsystem);
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    if(!shooterSubsystem.getSensor()) {
-      shooterSubsystem.setKMPercentOutput(0.5);
-    } else {
-      shooterSubsystem.setKMPercentOutput(0.0);
-    }
-  }
+		this.speed = speed;
+		this.kDwnSpeed = kDwnSpeed;
+		this.pneumatics = pneumatics;
+		this.shooterSubsystem = shooterSubsystem;
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    pneumatics.setIntakeIn();
-    intakeSubsystem.setIntakeSpeed(0);
-    shooterSubsystem.setKMPercentOutput(0.0);
-    intakeSubsystem.setKnockDownSpeed(0.0);
+		this.intakeSubsystem = intakeSubsystem;
+	}
 
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		pneumatics.setIntakeOut();
+		intakeSubsystem.setIntakeSpeed(speed);
+		intakeSubsystem.setKnockDownSpeed(kDwnSpeed);
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		if (!shooterSubsystem.getSensor()) {
+			shooterSubsystem.setKMPercentOutput(0.5);
+		} else {
+			shooterSubsystem.setKMPercentOutput(0.0);
+		}
+	}
 
-    return false;
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		pneumatics.setIntakeIn();
+		intakeSubsystem.setIntakeSpeed(0);
+		shooterSubsystem.setKMPercentOutput(0.0);
+		intakeSubsystem.setKnockDownSpeed(0.0);
+
+	}
+
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+
+		return false;
+	}
 }

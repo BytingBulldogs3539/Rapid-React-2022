@@ -11,7 +11,6 @@ public class PIDConstants {
     private double d = 0;
     private double f = 0;
 
-
     public PIDConstants(double p) {
         this.p = p;
     }
@@ -37,6 +36,7 @@ public class PIDConstants {
     // Getter Methods
     /**
      * Returns p value for PID
+     * 
      * @return p value for PID
      */
     public double getP() {
@@ -45,6 +45,7 @@ public class PIDConstants {
 
     /**
      * Returns i value for PID
+     * 
      * @return i value for PID
      */
     public double getI() {
@@ -53,6 +54,7 @@ public class PIDConstants {
 
     /**
      * Returns d value for PID
+     * 
      * @return d value for PID
      */
     public double getD() {
@@ -61,6 +63,7 @@ public class PIDConstants {
 
     /**
      * Returns f value for PID
+     * 
      * @return f value for PID
      */
     public double getF() {
@@ -70,6 +73,7 @@ public class PIDConstants {
     // Setter Methods
     /**
      * Sets the value of p for PID
+     * 
      * @param p (new value of p)
      */
     public void setP(double p) {
@@ -78,14 +82,16 @@ public class PIDConstants {
 
     /**
      * Sets the value of i for PID
+     * 
      * @param i (new value of i)
-     */    
+     */
     public void setI(double i) {
         this.i = i;
     }
 
     /**
      * Sets the value of d for PID
+     * 
      * @param d (new value of d)
      */
     public void setD(double d) {
@@ -94,6 +100,7 @@ public class PIDConstants {
 
     /**
      * Sets the value of f for PID
+     * 
      * @param f (new value of f)
      */
     public void setF(double f) {

@@ -13,68 +13,75 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
 public class PneumaticsSubsystem extends SubsystemBase {
-  //Final variables for pressure on and off
-  final double minPressure = 80;
-  final double maxPressure = 120;
+	// Final variables for pressure on and off
+	final double minPressure = 80;
+	final double maxPressure = 120;
 
-  // Creates compressor & solenoid objects
-  Compressor compressor;
-  DoubleSolenoid intakeSolenoid;
-  DoubleSolenoid staticClimberSolenoid;
-  DoubleSolenoid climberSolenoid;
+	// Creates compressor & solenoid objects
+	Compressor compressor;
+	DoubleSolenoid intakeSolenoid;
+	DoubleSolenoid staticClimberSolenoid;
+	DoubleSolenoid climberSolenoid;
 
-  /** Creates a new Pneumatics. */
-  public PneumaticsSubsystem() {
-    // Creates a compressor object
-    compressor = new Compressor(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH);
-    compressor.enableAnalog(minPressure, maxPressure);
-    compressor.disable();
+	/** Creates a new Pneumatics. */
+	public PneumaticsSubsystem() {
+		// Creates a compressor object
+		compressor = new Compressor(RobotContainer.constants.getPneumaticsConstants().getCompressorID(),
+				PneumaticsModuleType.REVPH);
+		compressor.enableAnalog(minPressure, maxPressure);
+		compressor.disable();
 
-    // Creates 3 solenoid objects
-    intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidOut());
-    staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidOpen(), RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidClose());
-    climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(), PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidIn(), RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidOut());
+		// Creates 3 solenoid objects
+		intakeSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(),
+				PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidIn(),
+				RobotContainer.constants.getPneumaticsConstants().getIntakeSolenoidOut());
+		staticClimberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(),
+				PneumaticsModuleType.REVPH,
+				RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidOpen(),
+				RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidClose());
+		climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(),
+				PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidIn(),
+				RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidOut());
 
-    //Add the compressor to the dashboard to see when its running.
-    SmartDashboard.putData(compressor);
-    setIntakeIn();
-    releaseClimbBar();
-  }
-  public void setIntakeIn()
-  {
-    intakeSolenoid.set(Value.kForward);
-  }
-  public void setIntakeOut()
-  {
-    intakeSolenoid.set(Value.kReverse);
-  }
-  public void grabClimbBar()
-  {
-    staticClimberSolenoid.set(Value.kForward);
-  }
-  public void releaseClimbBar()
-  {
-    staticClimberSolenoid.set(Value.kReverse);
-  }
-  public void moveClimberIn()
-  {
-    climberSolenoid.set(Value.kForward);
-  }
-  public void moveClimberOut()
-  {
-    climberSolenoid.set(Value.kReverse);
-  }
+		// Add the compressor to the dashboard to see when its running.
+		SmartDashboard.putData(compressor);
+		setIntakeIn();
+		releaseClimbBar();
+	}
 
+	public void setIntakeIn() {
+		intakeSolenoid.set(Value.kForward);
+	}
 
-  public void enableCompressor() {
-    compressor.enableAnalog(minPressure, maxPressure);
-  }
+	public void setIntakeOut() {
+		intakeSolenoid.set(Value.kReverse);
+	}
 
-  public void disableCompressor() {
-    compressor.disable();
-  }
+	public void grabClimbBar() {
+		staticClimberSolenoid.set(Value.kForward);
+	}
 
-  @Override
-  public void periodic() {
-  }
+	public void releaseClimbBar() {
+		staticClimberSolenoid.set(Value.kReverse);
+	}
+
+	public void moveClimberIn() {
+		climberSolenoid.set(Value.kForward);
+	}
+
+	public void moveClimberOut() {
+		climberSolenoid.set(Value.kReverse);
+	}
+
+	public void enableCompressor() {
+		compressor.enableAnalog(minPressure, maxPressure);
+	}
+
+	public void disableCompressor() {
+		compressor.disable();
+	}
+
+	@Override
+	public void periodic() {
+	}
 }

@@ -254,7 +254,7 @@ public class CompConstants extends Constants {
 		@Override
 		public int getPDHID() {
 			// TODO Auto-generated method stub
-			return 20;
+			return -1;
 		}
 	}
 
@@ -398,7 +398,7 @@ public class CompConstants extends Constants {
 		}
 
 		@Override
-		public int getCLimberSolenoidOut() {
+		public int getClimberSolenoidOut() {
 			return 5;
 		}
 	}

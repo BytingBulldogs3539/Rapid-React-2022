@@ -41,7 +41,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
 				RobotContainer.constants.getPneumaticsConstants().getStaticClimberSolenoidClose());
 		climberSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(),
 				PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidIn(),
-				RobotContainer.constants.getPneumaticsConstants().getCLimberSolenoidOut());
+				RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidOut());
 
 		// Add the compressor to the dashboard to see when its running.
 		SmartDashboard.putData(compressor);

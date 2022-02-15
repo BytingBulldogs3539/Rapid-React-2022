@@ -42,6 +42,8 @@ public class ShooterCommand extends CommandBase {
 				// shooterSubsystem.SM2AtTarget(tolerance) &&
 				// shooterSubsystem.SM3AtTarget(tolerance))
 				shooterSubsystem.setKMSpeed(SmartDashboard.getNumber("KM Speed", 0));
+			} else {
+				shooterSubsystem.setKMPercentOutput(0);
 			}
 
 		}

@@ -45,7 +45,7 @@ public class IntakeCommand extends CommandBase {
 	@Override
 	public void execute() {
 		if (!shooterSubsystem.getSensor()) {
-			shooterSubsystem.setKMPercentOutput(0.5);
+			shooterSubsystem.setKMPercentOutput(0.35);
 		} else {
 			shooterSubsystem.setKMPercentOutput(0.0);
 		}

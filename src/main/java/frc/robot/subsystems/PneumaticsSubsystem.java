@@ -47,6 +47,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
 		SmartDashboard.putData(compressor);
 		setIntakeIn();
 		releaseClimbBar();
+		moveClimberIn();
 	}
 
 	public void setIntakeIn() {

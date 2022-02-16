@@ -11,7 +11,6 @@ import frc.robot.subsystems.PneumaticsSubsystem;
 public class ClimberOutCommand extends CommandBase {
 	ClimberSubsystem climberSubsystem;
 	PneumaticsSubsystem pneumaticsSubsystem;
-
 	/** Creates a new GrabBarCommand. */
 	public ClimberOutCommand(ClimberSubsystem climberSubsystem, PneumaticsSubsystem pneumatics) {
 		this.climberSubsystem = climberSubsystem;
@@ -22,6 +21,7 @@ public class ClimberOutCommand extends CommandBase {
 	@Override
 	public void initialize() {
 		pneumaticsSubsystem.moveClimberOut();
+		pneumaticsSubsystem.setIntakeOut();
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -37,6 +37,6 @@ public class ClimberOutCommand extends CommandBase {
 	// Returns true when the command should end.
 	@Override
 	public boolean isFinished() {
-		return false;
+		return true;
 	}
 }

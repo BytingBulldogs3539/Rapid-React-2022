@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -45,6 +46,7 @@ public class ClimberSubsystem extends SubsystemBase {
 		TalonSRX motor = new TalonSRX(id);
 		motor.setInverted(gearRatio.getInverted());
 		motor.setSensorPhase(gearRatio.getInverted());
+		motor.setNeutralMode(NeutralMode.Brake);
 		motor.configSupplyCurrentLimit(
 				new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(), gearRatio.getCurrentLimit(), 0));
 		return motor;

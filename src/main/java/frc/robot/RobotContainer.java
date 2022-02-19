@@ -17,6 +17,7 @@ import frc.robot.commands.ClimberOutCommand;
 import frc.robot.commands.GrabBarCommand;
 import frc.robot.commands.ClimberInCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.MoveShooterHood;
 import frc.robot.commands.ReleaseBarCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.constants.CompConstants;
@@ -91,6 +92,7 @@ public class RobotContainer {
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonX.whenPressed(new GrabBarCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonY.whenPressed(new ReleaseBarCommand(climberSubsystem, pneumaticsSubsystem));
+		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
 	}
 
 	public void putAuton() {

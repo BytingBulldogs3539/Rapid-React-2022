@@ -22,6 +22,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
 	DoubleSolenoid intakeSolenoid;
 	DoubleSolenoid staticClimberSolenoid;
 	DoubleSolenoid climberSolenoid;
+	DoubleSolenoid shooterSolenoid;
 
 	/** Creates a new Pneumatics. */
 	public PneumaticsSubsystem() {
@@ -43,11 +44,24 @@ public class PneumaticsSubsystem extends SubsystemBase {
 				PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidIn(),
 				RobotContainer.constants.getPneumaticsConstants().getClimberSolenoidOut());
 
+		shooterSolenoid = new DoubleSolenoid(RobotContainer.constants.getPneumaticsConstants().getCompressorID(),
+		PneumaticsModuleType.REVPH, RobotContainer.constants.getPneumaticsConstants().getShooterForward(),
+		RobotContainer.constants.getPneumaticsConstants().getShooterReverse());
+
 		// Add the compressor to the dashboard to see when its running.
 		SmartDashboard.putData(compressor);
 		setIntakeIn();
 		releaseClimbBar();
 		moveClimberIn();
+		setShooterReverse();
+	}
+
+	public void setShooterForward() {
+		shooterSolenoid.set(Value.kForward);
+	}
+
+	public void setShooterReverse() {
+		shooterSolenoid.set(Value.kReverse);
 	}
 
 	public void setIntakeIn() {

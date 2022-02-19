@@ -206,5 +206,8 @@ public abstract class Constants {
 
         public abstract int getClimberSolenoidIn();
         public abstract int getClimberSolenoidOut();
+
+        public abstract int getShooterForward();
+        public abstract int getShooterReverse();
     }
 }

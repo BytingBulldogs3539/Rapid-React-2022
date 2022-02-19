@@ -278,7 +278,7 @@ public class PracConstants extends Constants
         @Override
         public int getSM1ID() {
             // TODO Auto-generated method stub
-            return -1;
+            return 11;
         }
 
         @Override
@@ -308,7 +308,7 @@ public class PracConstants extends Constants
         @Override
         public int getKMID() {
             // TODO Auto-generated method stub
-            return -1;
+            return 12;
         }
 
         @Override
@@ -397,6 +397,18 @@ public class PracConstants extends Constants
         @Override
         public int getClimberSolenoidOut() {
             return 5;
+        }
+
+        @Override
+        public int getShooterForward() {
+            // TODO Auto-generated method stub
+            return 7;
+        }
+
+        @Override
+        public int getShooterReverse() {
+            // TODO Auto-generated method stub
+            return 6;
         }
     }
 }

@@ -291,7 +291,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getSM2ID() {
-			return 6;
+			return -1;
 		}
 
 		@Override
@@ -307,7 +307,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getSM3ID() {
-			return 5;
+			return -1;
 		}
 
 		@Override
@@ -400,6 +400,18 @@ public class CompConstants extends Constants {
 		@Override
 		public int getClimberSolenoidOut() {
 			return 5;
+		}
+
+		@Override
+		public int getShooterForward() {
+			// TODO Auto-generated method stub
+			return 7;
+		}
+
+		@Override
+		public int getShooterReverse() {
+			// TODO Auto-generated method stub
+			return 6;
 		}
 	}
 }

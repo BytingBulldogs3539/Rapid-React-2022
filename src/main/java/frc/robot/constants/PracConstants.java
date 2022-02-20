@@ -39,7 +39,7 @@ public class PracConstants extends Constants
         @Override
         public double getWheelDiameter() {
             // TODO Auto-generated method stub
-            return 0.1016;
+            return 0.0983;
         }
 
         @Override

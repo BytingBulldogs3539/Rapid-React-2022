@@ -13,6 +13,7 @@ import frc.robot.auton.ArchTest;
 import frc.robot.auton.Back2Start;
 import frc.robot.auton.DistanceTest;
 import frc.robot.auton.Lapse;
+import frc.robot.auton.ThreeBallFromMiddleTest;
 import frc.robot.commands.ClimberOutCommand;
 import frc.robot.commands.GrabBarCommand;
 import frc.robot.commands.ClimberInCommand;
@@ -101,6 +102,7 @@ public class RobotContainer {
 		chooser.addOption("ArchTest", new ArchTest(driveSubsystem));
 		chooser.addOption("Lapse", new Lapse(driveSubsystem));
 		chooser.addOption("Back2Start", new Back2Start(driveSubsystem));
+		chooser.addOption("ThreeBallFromMiddleTest", new ThreeBallFromMiddleTest(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		SmartDashboard.putData("Auto Chooser", chooser);
 	}
 

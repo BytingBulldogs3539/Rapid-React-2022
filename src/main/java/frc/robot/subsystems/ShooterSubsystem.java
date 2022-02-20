@@ -41,6 +41,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		if (RobotContainer.constants.getShooterConstants().getSM1ID() != -1) {
 			hasSM1 = true;
 			SM1 = configureMotor(SM1ID, SM1GearRatio, pidConstants);
+			SM1.setNeutralMode(NeutralMode.Coast);
 		} else {
 			hasSM1 = false;
 		}
@@ -50,6 +51,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		if (RobotContainer.constants.getShooterConstants().getSM2ID() != -1) {
 			hasSM2 = true;
 			SM2 = configureMotor(SM2ID, SM2GearRatio, pidConstants);
+			SM2.setNeutralMode(NeutralMode.Coast);
 		} else {
 			hasSM2 = false;
 		}
@@ -59,6 +61,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		if (RobotContainer.constants.getShooterConstants().getSM3ID() != -1) {
 			hasSM3 = true;
 			SM3 = configureMotor(SM3ID, SM3GearRatio, pidConstants);
+			SM3.setNeutralMode(NeutralMode.Coast);
 		} else {
 			hasSM3 = false;
 

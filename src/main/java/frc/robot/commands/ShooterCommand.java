@@ -17,10 +17,8 @@ public class ShooterCommand extends CommandBase {
 
 	public ShooterCommand(ShooterSubsystem shooterSubsystem) {
 		this.shooterSubsystem = shooterSubsystem;
-		SmartDashboard.putNumber("KM Speed", 0);
-		SmartDashboard.putNumber("SM1 Speed", 0);
-		SmartDashboard.putNumber("SM2 Speed", 0);
-		SmartDashboard.putNumber("SM3 Speed", 0);
+		SmartDashboard.putNumber("KM Speed", 3000);
+		SmartDashboard.putNumber("SM1 Speed", 4000);
 	}
 
 	// Called when the command is initially scheduled.

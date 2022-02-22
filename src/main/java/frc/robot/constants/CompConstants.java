@@ -297,7 +297,7 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getPIDConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(0.05, 0.0, 0.0, 0.04);
+			return new PIDConstants(0.1, 0, 5, 0.045);
 		}
 
 		@Override

@@ -17,7 +17,7 @@ import com.swervedrivespecialties.swervelib.math.Vector2;
 
 public class ThreeBallFromMiddleTest extends SequentialCommandGroup {
     public ThreeBallFromMiddleTest(DriveSubsystem driveSub, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumaticsSubsystem, ShooterSubsystem shooterSubsystem) {
-        super(new Command[] {new ShooterCommand(shooterSubsystem, 4250, 3000).withTimeout(2), //Shoots for 4 seconds
+        super(new Command[] {new ShooterCommand(shooterSubsystem, 3850, 3000).withTimeout(2), //Shoots for 4 seconds
             new ParallelRaceGroup( TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
                         .lineTo(new Vector2(-0.38, 0.125), Rotation2.fromDegrees(-135))
@@ -27,6 +27,6 @@ public class ThreeBallFromMiddleTest extends SequentialCommandGroup {
                         .lineTo(new Vector2(-0.1, -0.8), Rotation2.fromDegrees(-370))
                         .build(), false, driveSub),
                         new IntakeCommand(.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)), // Runs intake while driving
-                        new ShooterCommand(shooterSubsystem, 4600, 3000).withTimeout(4)}); // Shoots after it has finished driving
+                        new ShooterCommand(shooterSubsystem, 4300, 3000).withTimeout(4)}); // Shoots after it has finished driving
     }
 }

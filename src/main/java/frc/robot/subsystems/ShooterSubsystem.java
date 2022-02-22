@@ -95,6 +95,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		motor.config_kI(0, pidConstants.getI());
 		motor.config_kD(0, pidConstants.getD());
 		motor.config_kF(0, pidConstants.getF());
+		motor.configMaxIntegralAccumulator(0, 0);
 
 		return motor;
 	}

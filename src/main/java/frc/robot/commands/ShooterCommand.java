@@ -15,8 +15,15 @@ public class ShooterCommand extends CommandBase {
 	/*** Create a new timer */
 	Timer timer = new Timer();
 
-	public ShooterCommand(ShooterSubsystem shooterSubsystem) {
+	// Class variables for SM1Speed and KMSpeed
+	int SM1Speed;
+	int KMSpeed;
+
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, int SM1Speed, int KMSpeed) {
 		this.shooterSubsystem = shooterSubsystem;
+		this.SM1Speed = SM1Speed;
+		this.KMSpeed = KMSpeed;
+		
 		SmartDashboard.putNumber("KM Speed", 3000);
 		SmartDashboard.putNumber("SM1 Speed", 4000);
 	}
@@ -31,15 +38,21 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		// If not in target range, reset and then start the timer. This effectively checks for if SM1 is running at the right RPM.
+		if(!shooterSubsystem.SM1AtTarget(1500)) {
+			timer.stop();
+			timer.reset();
+			timer.start();
+		}
 		if (SmartDashboard.getNumber("KM Speed", 0) == 0) {
 			shooterSubsystem.setKMPercentOutput(0);
 		} else {
 			double tolerance = 200;
-			if (timer.hasElapsed(2)) {
+			if (timer.hasElapsed(1)) {
 				// if(shooterSubsystem.SM1AtTarget(tolerance) &&
 				// shooterSubsystem.SM2AtTarget(tolerance) &&
 				// shooterSubsystem.SM3AtTarget(tolerance))
-				shooterSubsystem.setKMSpeed(SmartDashboard.getNumber("KM Speed", 0));
+				shooterSubsystem.setKMSpeed(KMSpeed);
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);
 			}
@@ -48,7 +61,7 @@ public class ShooterCommand extends CommandBase {
 		if (SmartDashboard.getNumber("SM1 Speed", 0) == 0) {
 			shooterSubsystem.setSM1PercentOutput(0);
 		} else
-			shooterSubsystem.setSM1Speed(SmartDashboard.getNumber("SM1 Speed", 0));
+			shooterSubsystem.setSM1Speed(SM1Speed);
 		if (SmartDashboard.getNumber("SM2 Speed", 0) == 0) {
 			shooterSubsystem.setSM2PercentOutput(0);
 		} else

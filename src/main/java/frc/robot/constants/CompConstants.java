@@ -241,13 +241,13 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getRotationConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(0.2, 0, 0, 0);
+			return new PIDConstants(0.35, 0, 0, 0);
 		}
 
 		@Override
 		public TrajectoryConstraint[] getConstraints() {
 			TrajectoryConstraint[] constraints = { (TrajectoryConstraint) new MaxAccelerationConstraint(1),
-					(TrajectoryConstraint) new MaxVelocityConstraint(1) };
+					(TrajectoryConstraint) new MaxVelocityConstraint(2) };
 			return constraints;
 		}
 
@@ -297,7 +297,7 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getPIDConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(0.05, 0.0005, 0, 0.04);
+			return new PIDConstants(0.05, 0.0, 0.0, 0.04);
 		}
 
 		@Override

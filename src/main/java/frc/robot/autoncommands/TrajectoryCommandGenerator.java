@@ -10,11 +10,11 @@ import com.swervedrivespecialties.swervelib.control.Path;
 import com.swervedrivespecialties.swervelib.control.PidConstants;
 import com.swervedrivespecialties.swervelib.control.PidController;
 import com.swervedrivespecialties.swervelib.control.Trajectory;
+import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
 public class TrajectoryCommandGenerator {
-	public static Command getMotionCommand(Path path, boolean reverse, DriveSubsystem driveSub) {
-		Trajectory trajectory = new Trajectory(path,
-				RobotContainer.constants.getDriveConstants().getConstraints(), 0.2);
+	public static Command getMotionCommand(Path path, TrajectoryConstraint[] constraints,boolean reverse, DriveSubsystem driveSub) {
+		Trajectory trajectory = new Trajectory(path, constraints, 0.2);
 		SwerveController swerveControllerCommand = new SwerveController(trajectory, driveSub::getPose,
 				new PidController(new PidConstants(
 						RobotContainer.constants.getDriveConstants()

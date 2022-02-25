@@ -73,11 +73,11 @@ public class PneumaticsSubsystem extends SubsystemBase {
 	}
 
 	public void grabClimbBar() {
-		staticClimberSolenoid.set(Value.kForward);
+		staticClimberSolenoid.set(Value.kReverse);
 	}
 
 	public void releaseClimbBar() {
-		staticClimberSolenoid.set(Value.kReverse);
+		staticClimberSolenoid.set(Value.kForward);
 	}
 
 	public void moveClimberIn() {

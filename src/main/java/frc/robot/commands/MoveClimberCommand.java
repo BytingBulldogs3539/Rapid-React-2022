@@ -28,10 +28,10 @@ public class MoveClimberCommand extends CommandBase {
 	public void execute() {
 		double lMotorSpeed = 0.0;
 		double rMotorSpeed = 0.0;
-		double motorDirection = 1.0;
+		double motorDirection = -1.0;
 
 		if (RobotContainer.operatorController.buttonB.get()) {
-			motorDirection = -1.0;
+			motorDirection = 1.0;
 		}
 
 		// Allows for robot to be tilted by pressing one trigger and for the robot to go
@@ -45,6 +45,23 @@ public class MoveClimberCommand extends CommandBase {
 		}
 
 		climberSubsystem.setMotorSpeed(lMotorSpeed, rMotorSpeed); // Sets the motor speeds
+
+		// If X is pressed, grab the bar.
+		if (RobotContainer.operatorController.buttonX.get()) {
+			RobotContainer.pneumaticsSubsystem.grabClimbBar();
+		}
+
+		// If Y is pressed, release the bar.
+		if (RobotContainer.operatorController.buttonY.get()) {
+			RobotContainer.pneumaticsSubsystem.releaseClimbBar();
+		// When Y is not pressed, use the limit switches to determine if grabbers need to be closed.
+		} else {
+			// If both switches are pressed, close the all grabbers.
+			if (RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
+				RobotContainer.pneumaticsSubsystem.grabClimbBar();
+			}
+		}
+
 	}
 
 	// Called once the command ends or is interrupted.

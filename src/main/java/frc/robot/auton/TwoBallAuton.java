@@ -15,7 +15,7 @@ import com.swervedrivespecialties.swervelib.control.*;
 import com.swervedrivespecialties.swervelib.math.Rotation2;
 import com.swervedrivespecialties.swervelib.math.Vector2;
 
-/*** Auton command where the robot starts with one ball, picks up another, and shoots both. */
+/*** Auton command where the robot starts with one ball, picks up another, and then shoots both. */
 public class TwoBallAuton extends SequentialCommandGroup {
 
     static TrajectoryConstraint[] constraints = { (TrajectoryConstraint) new MaxAccelerationConstraint(.5),

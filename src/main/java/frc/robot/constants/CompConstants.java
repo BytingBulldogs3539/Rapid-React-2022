@@ -356,12 +356,36 @@ public class CompConstants extends Constants {
 
 		@Override
 		public GearRatio getLClimberGearRatio() {
-			return new GearRatio(1, true, 40); // Gear ratio does not matter but inversion does
+			return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
 		}
 
 		@Override
 		public GearRatio getRClimberGearRatio() {
-			return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
+			return new GearRatio(1, true, 40); // Gear ratio does not matter but inversion does
+		}
+
+		@Override
+		public int getLeftLimitID() {
+			// TODO Auto-generated method stub
+			return 1;
+		}
+
+		@Override
+		public int getRightLimitID() {
+			// TODO Auto-generated method stub
+			return 2;
+		}
+
+		@Override
+		public boolean invertLeftLimitSensor() {
+			// TODO Auto-generated method stub
+			return true;
+		}
+
+		@Override
+		public boolean invertRightLimitSensor() {
+			// TODO Auto-generated method stub
+			return true;
 		}
 	}
 

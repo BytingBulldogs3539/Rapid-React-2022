@@ -184,10 +184,22 @@ public abstract class Constants {
     /*** Class containing climber constants */
     public abstract class ClimberConstants {
         // Climber Motor ID
-        /*** @return the id of the first climber motor*/
+        /*** @return the ID of the first climber motor*/
         public abstract int getLClimberMotorID();
-        /*** @return the id of the second climber motor*/
+        /*** @return the ID of the second climber motor*/
         public abstract int getRClimberMotorID();
+        
+        // Limit Switch Motor IDs
+        /*** @return the ID of the left limit switch */
+        public abstract int getLeftLimitID();
+        /*** @return the ID of the right limit switch*/
+        public abstract int getRightLimitID();
+
+        // Limit Switch Inversion IDs
+        /*** @return True if inverted, false if not */
+        public abstract boolean invertLeftLimitSensor();
+        /*** @return True if inverted, false if not */
+        public abstract boolean invertRightLimitSensor();
 
         /*** @return the gear ratio of the left climber */
         public abstract GearRatio getLClimberGearRatio();

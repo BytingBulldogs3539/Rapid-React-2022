@@ -16,11 +16,9 @@ import frc.robot.auton.Lapse;
 import frc.robot.auton.TwoBallAuton;
 import frc.robot.auton.ThreeBallAuton;
 import frc.robot.commands.ClimberOutCommand;
-import frc.robot.commands.GrabBarCommand;
 import frc.robot.commands.ClimberInCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.MoveShooterHood;
-import frc.robot.commands.ReleaseBarCommand;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
@@ -34,7 +32,7 @@ import frc.robot.utilities.LogitechF310;
 import frc.robot.utilities.MacAddress;
 
 public class RobotContainer {
-	private static final String PRACTICE_BOT_MAC_ADDRESS = "00:80:2F:33:C3:8F:00:80:2F:33:C3:90";
+	private static final String PRACTICE_BOT_MAC_ADDRESS = "00:80:2F:33:C3:90";
 
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -59,8 +57,10 @@ public class RobotContainer {
 
 	public RobotContainer() {
 		// Configure the button bindings
-
+		
+		SmartDashboard.putBoolean("Practice", false);
 		if (macAddress.getIsPractice()) {
+			SmartDashboard.putBoolean("Practice", true);
 			constants = new PracConstants();
 		} else {
 			constants = new CompConstants();
@@ -92,8 +92,6 @@ public class RobotContainer {
 		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, 3850, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
-		operatorController.buttonX.whenPressed(new GrabBarCommand(climberSubsystem, pneumaticsSubsystem));
-		operatorController.buttonY.whenPressed(new ReleaseBarCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
 	}
 

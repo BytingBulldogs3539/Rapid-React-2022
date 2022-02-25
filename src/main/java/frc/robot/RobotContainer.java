@@ -56,7 +56,6 @@ public class RobotContainer {
 	public SendableChooser<Command> chooser;
 
 	public RobotContainer() {
-		// Configure the button bindings
 		
 		SmartDashboard.putBoolean("Practice", false);
 		if (macAddress.getIsPractice()) {

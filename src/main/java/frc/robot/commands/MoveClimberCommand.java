@@ -34,10 +34,9 @@ public class MoveClimberCommand extends CommandBase {
 			motorDirection = 1.0;
 		}
 
-		// Allows for robot to be tilted by pressing one trigger and for the robot to go
-		// straight by pressing both.
-		if (RobotContainer.operatorController.getLeftTrigger() > 0.1) {
-			lMotorSpeed = motorDirection * RobotContainer.operatorController.getLeftTrigger();
+		// Allows for robot to climb up by pressing the right trigger (moves both arms).
+		if (RobotContainer.operatorController.getRightTrigger() > 0.1) {
+			lMotorSpeed = motorDirection * RobotContainer.operatorController.getRightTrigger();
 		}
 
 		if (RobotContainer.operatorController.getRightTrigger() > 0.1) {

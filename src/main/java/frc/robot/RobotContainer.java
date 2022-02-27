@@ -88,7 +88,7 @@ public class RobotContainer {
 
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(0.75, 0.5, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, false, 2500, 2500)); // 3850, 3000
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, false, 3850, 3000));
 		operatorController.buttonPadRight.whenHeld(new ShooterCommand(shooterSubsystem, true, 3850, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));

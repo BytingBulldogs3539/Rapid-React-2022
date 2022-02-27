@@ -4,9 +4,8 @@
 
 package frc.robot.commands;
 
-import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -69,10 +68,16 @@ public class ShooterCommand extends CommandBase {
 		{
 			if(this.useVision)
 			{
-				shooterSubsystem.setSM1Speed(-42.0211 * RobotContainer.driveSubsystem.getShooterVisionPitch() + 3941);
-			}
-			else
+				if(RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
+					shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(RobotContainer.driveSubsystem.getShooterVisionPitch()));
+					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
+				} else {
+					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 1); // Starts controller rumble
+					shooterSubsystem.stop();
+				}
+			} else {
 				shooterSubsystem.setSM1Speed(SM1Speed);
+			}
 
 		}
 		if (SmartDashboard.getNumber("SM2 Speed", 0) == 0) {
@@ -91,6 +96,7 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		shooterSubsystem.stop();
+		RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
 	}
 
 	// Returns true when the command should end.

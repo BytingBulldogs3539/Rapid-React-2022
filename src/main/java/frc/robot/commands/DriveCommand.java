@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
@@ -77,8 +78,14 @@ public class DriveCommand extends CommandBase {
 		}
 
 		if (RobotContainer.driverController.buttonBL.get()) {
-			rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
-			System.out.println(rotationPercent);
+			if(drivetrain.getShooterVisionSeeing()) {
+				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+				RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 0);
+			} else {
+				RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 1);
+			}
+		} else {
+			RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 0);
 		}
 
 		drivetrain.drive(
@@ -93,5 +100,6 @@ public class DriveCommand extends CommandBase {
 	public void end(boolean interrupted) {
 		// Stop the drivetrain
 		drivetrain.drive(new ChassisSpeeds(0.0, 0.0, 0.0));
+		RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 0);
 	}
 }

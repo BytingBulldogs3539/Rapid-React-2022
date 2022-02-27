@@ -73,6 +73,7 @@ public class ClimberSubsystem extends SubsystemBase {
 		motor.setInverted(gearRatio.getInverted());
 		motor.setSensorPhase(gearRatio.getInverted());
 		motor.setNeutralMode(NeutralMode.Brake);
+		motor.setSelectedSensorPosition(0);
 		motor.configSupplyCurrentLimit(
 				new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(), gearRatio.getCurrentLimit(), 0));
 		return motor;
@@ -85,6 +86,26 @@ public class ClimberSubsystem extends SubsystemBase {
 
 		if (hasRClimber)
 			rClimber.set(ControlMode.PercentOutput, rClimberSpeed);
+	}
+
+	/*** Sets the speed of both the left and right climbers to the same thing. */
+	public void setMotorSpeed(double climberSpeed) {
+		double lMotorSpeed = climberSpeed;
+		double rMotorSpeed = climberSpeed;
+		
+		// Sets the lClimber motor speed to 0 if the difference between its position and the right climber's position is greater than 500.
+		// Likewise, it does the same for the rClimber motor speed if the difference between its position and the left climber's position is greater than 500.
+		if (lClimber.getSelectedSensorPosition() - rClimber.getSelectedSensorPosition() > 500) {
+			lMotorSpeed = 0.0;
+		} else if (rClimber.getSelectedSensorPosition() - lClimber.getSelectedSensorPosition() > 500) {
+			rMotorSpeed = 0.0;
+		}
+		
+		if (hasLClimber)
+			lClimber.set(ControlMode.PercentOutput, lMotorSpeed);
+
+		if (hasRClimber)
+			rClimber.set(ControlMode.PercentOutput, rMotorSpeed);
 	}
 
 	/*** Getter method for the left limit switch */

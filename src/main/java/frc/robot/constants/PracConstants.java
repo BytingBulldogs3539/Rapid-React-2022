@@ -340,6 +340,11 @@ public class PracConstants extends Constants {
 			return true;
 		}
 
+		@Override
+		public double getShooterSpeed(double pitch) {
+			return (-42.0211 * pitch + 3941);
+		}
+
 	}
 
 	public class ClimberConstants extends Constants.ClimberConstants {

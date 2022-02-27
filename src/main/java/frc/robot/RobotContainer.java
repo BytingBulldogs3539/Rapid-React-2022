@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.util.net.PortForwarder;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -56,6 +57,7 @@ public class RobotContainer {
 	public SendableChooser<Command> chooser;
 
 	public RobotContainer() {
+		PortForwarder.add(5800, "10.35.39.10", 5800);
 		
 		SmartDashboard.putBoolean("Practice", false);
 		if (macAddress.getIsPractice()) {

@@ -341,6 +341,11 @@ public class CompConstants extends Constants {
 			return true;
 		}
 
+		@Override
+		public double getShooterSpeed(double pitch) {
+			return (-42.0211 * pitch + 3941);
+		}
+
 	}
 
 	public class ClimberConstants extends Constants.ClimberConstants {
@@ -362,7 +367,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public GearRatio getRClimberGearRatio() {
-			return new GearRatio(1, true, 40); // Gear ratio does not matter but inversion does
+			return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
 		}
 
 		@Override
@@ -419,12 +424,12 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getClimberSolenoidIn() {
-			return 4;
+			return 5;
 		}
 
 		@Override
 		public int getClimberSolenoidOut() {
-			return 5;
+			return 4;
 		}
 
 		@Override

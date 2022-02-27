@@ -179,6 +179,8 @@ public abstract class Constants {
         public abstract int getDigitalInput();
         /*** @return True if inverted, false if not */
         public abstract boolean invertSensor();
+        /***  @return */
+        public abstract double getShooterSpeed(double pitch);
 
     }
     /*** Class containing climber constants */

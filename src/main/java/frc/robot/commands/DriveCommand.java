@@ -77,9 +77,8 @@ public class DriveCommand extends CommandBase {
 		}
 
 		if (RobotContainer.driverController.buttonBL.get()) {
-			if (!shooterPIDController.atSetpoint()) {
-				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
-			}
+			rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+			System.out.println(rotationPercent);
 		}
 
 		drivetrain.drive(

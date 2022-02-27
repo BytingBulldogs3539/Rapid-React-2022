@@ -4,9 +4,12 @@
 
 package frc.robot.commands;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends CommandBase {
@@ -18,14 +21,16 @@ public class ShooterCommand extends CommandBase {
 	// Class variables for SM1Speed and KMSpeed
 	int SM1Speed;
 	int KMSpeed;
+	boolean useVision = false;
 
-	public ShooterCommand(ShooterSubsystem shooterSubsystem, int SM1Speed, int KMSpeed) {
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, boolean useVision, int SM1Speed, int KMSpeed) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.SM1Speed = SM1Speed;
 		this.KMSpeed = KMSpeed;
 		
 		SmartDashboard.putNumber("KM Speed", 3000);
 		SmartDashboard.putNumber("SM1 Speed", 4000);
+		this.useVision = useVision;
 	}
 
 	// Called when the command is initially scheduled.
@@ -61,7 +66,15 @@ public class ShooterCommand extends CommandBase {
 		if (SmartDashboard.getNumber("SM1 Speed", 0) == 0) {
 			shooterSubsystem.setSM1PercentOutput(0);
 		} else
-			shooterSubsystem.setSM1Speed(SM1Speed);
+		{
+			if(this.useVision)
+			{
+				shooterSubsystem.setSM1Speed(-42.0211 * RobotContainer.driveSubsystem.getShooterVisionPitch() + 3941);
+			}
+			else
+				shooterSubsystem.setSM1Speed(SM1Speed);
+
+		}
 		if (SmartDashboard.getNumber("SM2 Speed", 0) == 0) {
 			shooterSubsystem.setSM2PercentOutput(0);
 		} else

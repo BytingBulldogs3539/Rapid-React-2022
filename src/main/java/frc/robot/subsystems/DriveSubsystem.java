@@ -233,7 +233,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public double getShooterVisionYaw() {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
-			if (getFrontVisionSeeing()) {
+			if (getShooterVisionSeeing()) {
 				return shooterCamera.getLatestResult().getBestTarget().getYaw();
 			}
 		}

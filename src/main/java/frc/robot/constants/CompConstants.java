@@ -123,35 +123,36 @@ public class CompConstants extends Constants {
 		@Override
 		public double getFLSteerOffset() {
 			// TODO Auto-generated method stub
-			return -2.922;
+			return -2.2287+Math.PI;
 		}
 
 		@Override
 		public double getFRSteerOffset() {
 			// TODO Auto-generated method stub
-			return -0.248;
+			return -2.0401+Math.PI;
 		}
 
 		@Override
 		public double getBLSteerOffset() {
 			// TODO Auto-generated method stub
-			return -5.419;
+			return -.7453+Math.PI;
 		}
 
 		@Override
 		public double getBRSteerOffset() {
 			// TODO Auto-generated method stub
-			return -1.265;
+			return -3.4498+Math.PI;
 		}
 
 		@Override
 		public double getDriveGearReduction() {
-			return 1.0 / 6.75; // From MK4 Swerve Drive Specialties (specifically for L2s)
+			return 1.0 / 7.13;
 		}
 
 		@Override
 		public double getSteerGearReduction() {
-			return 1.0 / 12.8; // From MK4 Swerve Drive Specialties
+			// Eight to twenty-four, fourteen to seventy-two			
+			return -1*(8.0 / 24.0 * 14.0 / 72.0);
 		}
 
 		@Override
@@ -223,7 +224,7 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getShooterCameraPIDConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(0.01, 0, 0);
+			return new PIDConstants(0.07, 0, 0);
 		}
 
 		@Override
@@ -254,7 +255,7 @@ public class CompConstants extends Constants {
 		@Override
 		public int getPDHID() {
 			// TODO Auto-generated method stub
-			return -1;
+			return 53;
 		}
 	}
 
@@ -398,22 +399,22 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getIntakeSolenoidIn() {
-			return 2;
-		}
-
-		@Override
-		public int getIntakeSolenoidOut() {
 			return 3;
 		}
 
 		@Override
+		public int getIntakeSolenoidOut() {
+			return 2;
+		}
+
+		@Override
 		public int getStaticClimberSolenoidOpen() {
-			return 0;
+			return 1;
 		}
 
 		@Override
 		public int getStaticClimberSolenoidClose() {
-			return 1;
+			return 0;
 		}
 
 		@Override

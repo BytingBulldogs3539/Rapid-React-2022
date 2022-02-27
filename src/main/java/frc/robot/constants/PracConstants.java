@@ -223,7 +223,7 @@ public class PracConstants extends Constants {
 		@Override
 		public PIDConstants getShooterCameraPIDConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(0.01, 0, 0);
+			return new PIDConstants(0.07, 0, 0);
 		}
 
 		@Override

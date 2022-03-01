@@ -39,6 +39,12 @@ public abstract class Constants {
      */
     public abstract PneumaticsConstants getPneumaticsConstants();
 
+    /** 
+     * @return the Candle/Lights Constants
+     * @see LightsConstants
+     */
+    public abstract LightsConstants getLightsConstants();
+
     /*** Class containing drive constants */
     public abstract class DriveConstants {
         // Trajectory constraints for auton paths.
@@ -223,5 +229,14 @@ public abstract class Constants {
 
         public abstract int getShooterForward();
         public abstract int getShooterReverse();
+    }
+
+    /*** Class containing the Candle/Lights Constants */
+    public abstract class LightsConstants {
+        // Candle ID
+        public abstract int getCandleID();
+
+        // Number of lights on comp and practice bots
+        public abstract int getNumOfLights();
     }
 }

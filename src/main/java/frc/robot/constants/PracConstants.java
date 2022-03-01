@@ -32,7 +32,12 @@ public class PracConstants extends Constants {
 
 	@Override
 	public PneumaticsConstants getPneumaticsConstants() {
-		return new Pneumatics();
+		return new PneumaticsConstants();
+	}
+
+	@Override
+	public LightsConstants getLightsConstants() {
+		return new LightsConstants();
 	}
 
 	public class DriveConstants extends Constants.DriveConstants {
@@ -394,7 +399,7 @@ public class PracConstants extends Constants {
         }
 	}
 
-	public class Pneumatics extends Constants.PneumaticsConstants {
+	public class PneumaticsConstants extends Constants.PneumaticsConstants {
 
 		@Override
 		public int getCompressorID() {
@@ -441,6 +446,18 @@ public class PracConstants extends Constants {
 		public int getShooterReverse() {
 			// TODO Auto-generated method stub
 			return 6;
+		}
+	}
+	
+	public class LightsConstants extends Constants.LightsConstants {
+		@Override
+		public int getCandleID() {
+			return 50;
+		}
+
+		@Override
+		public int getNumOfLights() {
+			return 8;
 		}
 	}
 }

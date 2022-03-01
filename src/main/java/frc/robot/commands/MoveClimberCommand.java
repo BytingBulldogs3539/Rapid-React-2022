@@ -26,8 +26,7 @@ public class MoveClimberCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		double lMotorSpeed = 0.0;
-		double rMotorSpeed = 0.0;
+		double motorSpeed = 0.0;
 		double motorDirection = -1.0;
 
 		if (RobotContainer.operatorController.buttonB.get()) {
@@ -36,14 +35,10 @@ public class MoveClimberCommand extends CommandBase {
 
 		// Allows for robot to climb up by pressing the right trigger (moves both arms).
 		if (RobotContainer.operatorController.getRightTrigger() > 0.1) {
-			lMotorSpeed = motorDirection * RobotContainer.operatorController.getRightTrigger();
+			motorSpeed = motorDirection * RobotContainer.operatorController.getRightTrigger();
 		}
 
-		if (RobotContainer.operatorController.getRightTrigger() > 0.1) {
-			rMotorSpeed = motorDirection * RobotContainer.operatorController.getRightTrigger();
-		}
-
-		climberSubsystem.setMotorSpeed(lMotorSpeed, rMotorSpeed); // Sets the motor speeds
+		climberSubsystem.setMotorSpeed(motorSpeed); // Sets the motor speeds
 
 		// If X is pressed, grab the bar.
 		if (RobotContainer.operatorController.buttonX.get()) {

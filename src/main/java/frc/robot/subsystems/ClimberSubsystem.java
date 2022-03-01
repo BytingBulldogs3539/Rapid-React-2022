@@ -93,12 +93,22 @@ public class ClimberSubsystem extends SubsystemBase {
 		double lMotorSpeed = climberSpeed;
 		double rMotorSpeed = climberSpeed;
 		
-		// Sets the lClimber motor speed to 0 if the difference between its position and the right climber's position is greater than 500.
-		// Likewise, it does the same for the rClimber motor speed if the difference between its position and the left climber's position is greater than 500.
-		if (lClimber.getSelectedSensorPosition() - rClimber.getSelectedSensorPosition() > 500) {
-			lMotorSpeed = 0.0;
-		} else if (rClimber.getSelectedSensorPosition() - lClimber.getSelectedSensorPosition() > 500) {
-			rMotorSpeed = 0.0;
+		// The following code checks to see if one climber is farther along in the process of climbing up or down than one another. In doing so, it looks to see which direction the climber arms are going and will check to see which arm it needs to stop from there if any arm needs to be stopped at all (must be stopped if it is 500 or higher units along).
+
+		// If climber speed is positive, check to see if one arm is lower than the other by 500 or more and then adjust it.
+		if(climberSpeed > 0) {
+			if(lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
+				lMotorSpeed = 0.0;
+			} else if (rClimber.getSelectedSensorPosition() - 500 > lClimber.getSelectedSensorPosition()) {
+				rMotorSpeed = 0.0;
+			}
+		// Otherwise, check to see if climber speed is negative. If so, check to see if one arm is higher than the other by 500 or more and then adjust it.
+		} else if (climberSpeed < 0) {
+			if(lClimber.getSelectedSensorPosition() + 500 > rClimber.getSelectedSensorPosition()) {
+				lMotorSpeed = 0.0;
+			} else if (rClimber.getSelectedSensorPosition() + 500 > lClimber.getSelectedSensorPosition()) {
+				rMotorSpeed = 0.0;
+			}
 		}
 		
 		if (hasLClimber)

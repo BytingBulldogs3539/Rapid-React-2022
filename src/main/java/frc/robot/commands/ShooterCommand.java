@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import com.revrobotics.ColorSensorV3;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -69,7 +71,7 @@ public class ShooterCommand extends CommandBase {
 			if(this.useVision)
 			{
 				if(RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
-					shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(RobotContainer.driveSubsystem.getShooterVisionPitch()));
+					shooterSubsystem.setSM1Speed(SmartDashboard.getNumber("SM1 Speed", 0));
 					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
 				} else {
 					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 1); // Starts controller rumble

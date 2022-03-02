@@ -260,7 +260,7 @@ public class CompConstants extends Constants {
 		@Override
 		public int getPDHID() {
 			// TODO Auto-generated method stub
-			return 53;
+			return -1;
 		}
 	}
 
@@ -283,7 +283,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public GearRatio getKnockDownGearRatio() {
-			return new GearRatio(1, false, 40); // Gear ratio does not matter but direction does.
+			return new GearRatio(1, true, 40); // Gear ratio does not matter but direction does.
 		}
 
 	}
@@ -348,7 +348,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public double getShooterSpeed(double pitch) {
-			return (-42.0211 * pitch + 3941);
+			return (-42.0211 * pitch + 4500);
 		}
 
 	}
@@ -395,6 +395,18 @@ public class CompConstants extends Constants {
 
 		@Override
 		public boolean invertRightLimitSensor() {
+			// TODO Auto-generated method stub
+			return true;
+		}
+
+		@Override
+		public boolean getLClimberMotorInversion() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean getRClimberMotorInversion() {
 			// TODO Auto-generated method stub
 			return true;
 		}
@@ -453,7 +465,7 @@ public class CompConstants extends Constants {
 	public class LightsConstants extends Constants.LightsConstants {
 		@Override
 		public int getCandleID() {
-			return 50;
+			return 40;
 		}
 
 		@Override

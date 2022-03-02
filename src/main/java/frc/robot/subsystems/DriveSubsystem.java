@@ -4,12 +4,15 @@
 
 package frc.robot.subsystems;
 
+import javax.lang.model.util.ElementScanner6;
+
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.swervedrivespecialties.swervelib.Mk3SwerveModuleHelper;
 import com.swervedrivespecialties.swervelib.SwerveModule;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
+import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -234,7 +237,11 @@ public class DriveSubsystem extends SubsystemBase {
 	public double getShooterVisionYaw() {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
 			if (getShooterVisionSeeing()) {
-				return shooterCamera.getLatestResult().getBestTarget().getYaw();
+				PhotonTrackedTarget target = shooterCamera.getLatestResult().getBestTarget();
+				if(target!=null)
+					return target.getYaw();
+				else 
+					return 0;
 			}
 		}
 		return 0;
@@ -243,7 +250,11 @@ public class DriveSubsystem extends SubsystemBase {
 	public double getShooterVisionPitch() {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
 			if (getShooterVisionSeeing()) {
-				return shooterCamera.getLatestResult().getBestTarget().getPitch();
+				PhotonTrackedTarget target = shooterCamera.getLatestResult().getBestTarget();
+				if(target!=null)
+					return target.getPitch();
+				else
+					return 0;
 			}
 		}
 

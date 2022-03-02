@@ -27,6 +27,7 @@ import frc.robot.constants.PracConstants;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LightsSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.utilities.LogitechF310;
@@ -54,6 +55,8 @@ public class RobotContainer {
 
 	public static PneumaticsSubsystem pneumaticsSubsystem;
 
+	public static LightsSubsystem lightsSubsystem;
+
 	public SendableChooser<Command> chooser;
 
 	public RobotContainer() {
@@ -72,6 +75,7 @@ public class RobotContainer {
 		driveSubsystem = new DriveSubsystem();
 		pneumaticsSubsystem = new PneumaticsSubsystem();
 		climberSubsystem = new ClimberSubsystem();
+		lightsSubsystem = new LightsSubsystem();
 
 		configureButtonBindings();
 		putAuton();
@@ -89,8 +93,8 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		operatorController.buttonPadDown
-				.whenHeld(new IntakeCommand(0.75, 0.5, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, false, 3850, 3000));
+				.whenHeld(new IntakeCommand(0.5, 0.5, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, false, 4300, 3000));
 		operatorController.buttonPadRight.whenHeld(new ShooterCommand(shooterSubsystem, true, 3850, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));

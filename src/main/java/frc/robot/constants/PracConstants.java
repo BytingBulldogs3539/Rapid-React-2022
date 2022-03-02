@@ -397,6 +397,16 @@ public class PracConstants extends Constants {
             // TODO Auto-generated method stub
             return true;
         }
+
+		@Override
+		public boolean getLClimberMotorInversion() {
+			return false;
+		}
+
+		@Override
+		public boolean getRClimberMotorInversion() {
+			return true;
+		}
 	}
 
 	public class PneumaticsConstants extends Constants.PneumaticsConstants {
@@ -452,7 +462,7 @@ public class PracConstants extends Constants {
 	public class LightsConstants extends Constants.LightsConstants {
 		@Override
 		public int getCandleID() {
-			return 50;
+			return 40;
 		}
 
 		@Override

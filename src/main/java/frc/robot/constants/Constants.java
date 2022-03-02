@@ -196,6 +196,12 @@ public abstract class Constants {
         public abstract int getLClimberMotorID();
         /*** @return the ID of the second climber motor*/
         public abstract int getRClimberMotorID();
+
+        // Climber Motor Inversions
+        /*** @return True if inverted, false if not*/
+        public abstract boolean getLClimberMotorInversion();
+        /*** @return True if inverted, false if not*/
+        public abstract boolean getRClimberMotorInversion();
         
         // Limit Switch Motor IDs
         /*** @return the ID of the left limit switch */

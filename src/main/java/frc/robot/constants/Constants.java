@@ -187,7 +187,8 @@ public abstract class Constants {
         public abstract boolean invertSensor();
         /***  @return */
         public abstract double getShooterSpeed(double pitch);
-
+        /***  @return */
+        public abstract boolean getUseHood(double pitch);
     }
     /*** Class containing climber constants */
     public abstract class ClimberConstants {

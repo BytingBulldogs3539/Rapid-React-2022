@@ -127,7 +127,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	 */
 	public void setShooterPercentOutput(double SM1Speed, double SM2Speed, double SM3Speed, double KMSpeed) {
 		if (hasSM1)
-			SM1.set(TalonFXControlMode.PercentOutput, SM1Speed);
+			SM1.set(TalonFXControlMode.PercentOutput, SM1Speed*RobotContainer.constants.getShooterConstants().getSM1GearRatio().getGearRatio());
 
 		if (hasSM2)
 			SM2.set(TalonFXControlMode.PercentOutput, SM2Speed);
@@ -136,7 +136,7 @@ public class ShooterSubsystem extends SubsystemBase {
 			SM3.set(TalonFXControlMode.PercentOutput, SM3Speed);
 
 		if (hasKM)
-			KM.set(TalonFXControlMode.PercentOutput, KMSpeed);
+			KM.set(TalonFXControlMode.PercentOutput, KMSpeed*RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
 	}
 
 	/***
@@ -146,7 +146,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	 */
 	public void setSM1PercentOutput(double SM1Speed) {
 		if (hasSM1)
-			SM1.set(TalonFXControlMode.PercentOutput, SM1Speed);
+			SM1.set(TalonFXControlMode.PercentOutput, SM1Speed*RobotContainer.constants.getShooterConstants().getSM1GearRatio().getGearRatio());
 	}
 
 	/***
@@ -176,7 +176,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	 */
 	public void setKMPercentOutput(double KMSpeed) {
 		if (hasKM)
-			KM.set(TalonFXControlMode.PercentOutput, KMSpeed);
+			KM.set(TalonFXControlMode.PercentOutput, KMSpeed*RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
 	}
 
 	/**

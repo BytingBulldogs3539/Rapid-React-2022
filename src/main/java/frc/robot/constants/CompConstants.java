@@ -128,25 +128,25 @@ public class CompConstants extends Constants {
 		@Override
 		public double getFLSteerOffset() {
 			// TODO Auto-generated method stub
-			return -2.2287+Math.PI;
+			return -5.3274;
 		}
 
 		@Override
 		public double getFRSteerOffset() {
 			// TODO Auto-generated method stub
-			return -2.0401+Math.PI;
+			return -3.4821;
 		}
 
 		@Override
 		public double getBLSteerOffset() {
 			// TODO Auto-generated method stub
-			return -.7453+Math.PI;
+			return -3.9284;
 		}
 
 		@Override
 		public double getBRSteerOffset() {
 			// TODO Auto-generated method stub
-			return -3.4498+Math.PI;
+			return -.2883;
 		}
 
 		@Override
@@ -333,7 +333,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public GearRatio getKMGearRatio() {
-			return new GearRatio(1, true, 40);
+			return new GearRatio(2, true, 40);
 		}
 
 		@Override
@@ -348,7 +348,17 @@ public class CompConstants extends Constants {
 
 		@Override
 		public double getShooterSpeed(double pitch) {
-			return (-42.0211 * pitch + 4500);
+			if(!getUseHood(pitch))
+			{
+				return(-87.7414*pitch + 4791.31);
+			}
+			else
+				return (-96.2351 * pitch + 3897.74);
+		}
+
+		@Override
+		public boolean getUseHood(double pitch) {
+			return pitch<=-3.3;
 		}
 
 	}

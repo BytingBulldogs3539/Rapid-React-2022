@@ -350,6 +350,11 @@ public class PracConstants extends Constants {
 			return (-42.0211 * pitch + 3941);
 		}
 
+		@Override
+		public boolean getUseHood(double pitch) {
+			return false;
+		}
+
 	}
 
 	public class ClimberConstants extends Constants.ClimberConstants {

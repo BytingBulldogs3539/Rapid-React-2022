@@ -71,7 +71,16 @@ public class ShooterCommand extends CommandBase {
 			if(this.useVision)
 			{
 				if(RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
-					shooterSubsystem.setSM1Speed(SmartDashboard.getNumber("SM1 Speed", 0));
+					double pitch = RobotContainer.driveSubsystem.getShooterVisionPitch();
+					if(RobotContainer.constants.getShooterConstants().getUseHood(pitch))
+					{
+						RobotContainer.pneumaticsSubsystem.setShooterForward();
+					}
+					else
+					{
+						RobotContainer.pneumaticsSubsystem.setShooterReverse();
+					}
+					shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(pitch));//SmartDashboard.getNumber("SM1 Speed", 0)
 					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
 				} else {
 					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 1); // Starts controller rumble
@@ -82,6 +91,7 @@ public class ShooterCommand extends CommandBase {
 			}
 
 		}
+		
 		if (SmartDashboard.getNumber("SM2 Speed", 0) == 0) {
 			shooterSubsystem.setSM2PercentOutput(0);
 		} else

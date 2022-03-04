@@ -10,7 +10,10 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.math.controller.ControlAffinePlantInversionFeedforward;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.utilities.GearRatio;
@@ -86,6 +89,10 @@ public class ShooterSubsystem extends SubsystemBase {
 		} else {
 			hasSensor = false;
 		}
+
+		if(RobotContainer.constants.getShooterConstants().getColorSensor()) {
+			colorSensor = new ColorSensorV3(Port.kOnboard);
+		}
 	}
 
 	public TalonFX configureMotor(int motorID, GearRatio gearRatio, PIDConstants pidConstants) {
@@ -115,6 +122,54 @@ public class ShooterSubsystem extends SubsystemBase {
 			return sensor.get();
 		}
 		return true;
+	}
+
+	/*** @return True if the robot has a ball (regardless of color), false if it does not have one. */
+	public boolean hasBall() {
+		int redTolerance = RobotContainer.constants.getShooterConstants().getRedTolerance();
+		int redR = RobotContainer.constants.getShooterConstants().getRedR();
+		int redG = RobotContainer.constants.getShooterConstants().getRedG();
+		int redB = RobotContainer.constants.getShooterConstants().getRedB();
+
+		int blueTolerance = RobotContainer.constants.getShooterConstants().getBlueTolerance();
+		int blueR = RobotContainer.constants.getShooterConstants().getBlueR();
+		int blueG = RobotContainer.constants.getShooterConstants().getBlueG();
+		int blueB = RobotContainer.constants.getShooterConstants().getBlueB();
+
+
+		if(redR + redTolerance > colorSensor.getRed() && redR - redTolerance < colorSensor.getRed()) {
+			if(redG + redTolerance > colorSensor.getGreen() && redG - redTolerance < colorSensor.getGreen()) {
+				if(redB + redTolerance > colorSensor.getBlue() && redB - redTolerance < colorSensor.getBlue()) {
+					return true;
+				}
+			}
+
+			if(blueR + blueTolerance > colorSensor.getRed() && blueR - blueTolerance < colorSensor.getRed()) {
+				if(blueG + blueTolerance > colorSensor.getGreen() && blueG - blueTolerance < colorSensor.getGreen()) {
+					if(blueB + blueTolerance > colorSensor.getBlue() && blueB - blueTolerance < colorSensor.getBlue()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	/*** @return True if the ball in the robot is red, false if not.*/
+	public boolean hasRedBall() {
+		int redTolerance = RobotContainer.constants.getShooterConstants().getRedTolerance();
+		int redR = RobotContainer.constants.getShooterConstants().getRedR();
+		int redG = RobotContainer.constants.getShooterConstants().getRedG();
+		int redB = RobotContainer.constants.getShooterConstants().getRedB();
+
+		if(redR + redTolerance > colorSensor.getRed() && redR - redTolerance < colorSensor.getRed()) {
+			if(redG + redTolerance > colorSensor.getGreen() && redG - redTolerance < colorSensor.getGreen()) {
+				if(redB + redTolerance > colorSensor.getBlue() && redB - redTolerance < colorSensor.getBlue()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/***
@@ -278,6 +333,12 @@ public class ShooterSubsystem extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
+		// If there is a color sensor, display its RGB values to the SmartDashboard.
+		if(colorSensor != null) {
+			SmartDashboard.putNumber("Get Red", colorSensor.getRed());
+			SmartDashboard.putNumber("Get Green", colorSensor.getGreen());
+			SmartDashboard.putNumber("Get Blue", colorSensor.getBlue());
+		}
 	}
 
 	public void stop() {

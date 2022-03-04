@@ -355,6 +355,51 @@ public class PracConstants extends Constants {
 			return false;
 		}
 
+		@Override
+		public boolean getColorSensor() {
+			return true;
+		}
+
+		@Override
+		public int getBlueR() {
+			return 0;
+		}
+
+		@Override
+		public int getBlueG() {
+			return 0;
+		}
+
+		@Override
+		public int getBlueB() {
+			return 255;
+		}
+
+		@Override
+		public int getBlueTolerance() {
+			return 50;
+		}
+
+		@Override
+		public int getRedR() {
+			return 255;
+		}
+
+		@Override
+		public int getRedG() {
+			return 0;
+		}
+
+		@Override
+		public int getRedB() {
+			return 0;
+		}
+
+		@Override
+		public int getRedTolerance() {
+			return 50;
+		}
+
 	}
 
 	public class ClimberConstants extends Constants.ClimberConstants {
@@ -371,7 +416,7 @@ public class PracConstants extends Constants {
 
 		@Override
 		public GearRatio getLClimberGearRatio() {
-			return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
+			return new GearRatio(1, true, 40); // Gear ratio does not matter but inversion does
 		}
 
 		@Override
@@ -472,7 +517,7 @@ public class PracConstants extends Constants {
 
 		@Override
 		public int getNumOfLights() {
-			return 8;
+			return 30;
 		}
 	}
 }

@@ -361,6 +361,50 @@ public class CompConstants extends Constants {
 			return pitch<=-3.3;
 		}
 
+		@Override
+		public boolean getColorSensor() {
+			return true;
+		}
+
+		@Override
+		public int getBlueR() {
+			return 0;
+		}
+
+		@Override
+		public int getBlueG() {
+			return 0;
+		}
+
+		@Override
+		public int getBlueB() {
+			return 255;
+		}
+
+		@Override
+		public int getBlueTolerance() {
+			return 50;
+		}
+
+		@Override
+		public int getRedR() {
+			return 255;
+		}
+
+		@Override
+		public int getRedG() {
+			return 0;
+		}
+
+		@Override
+		public int getRedB() {
+			return 0;
+		}
+
+		@Override
+		public int getRedTolerance() {
+			return 50;
+		}
 	}
 
 	public class ClimberConstants extends Constants.ClimberConstants {
@@ -480,7 +524,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getNumOfLights() {
-			return 8;
+			return 30;
 		}
 
 	}

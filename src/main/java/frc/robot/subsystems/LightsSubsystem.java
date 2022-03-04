@@ -14,6 +14,7 @@ public class LightsSubsystem extends SubsystemBase {
   // This creates a new CANdle object, configures it, and sets its lights to be green.
   private final CANdle candle = new CANdle(RobotContainer.constants.getLightsConstants().getCandleID(), "rio");
   private final int ledCount = RobotContainer.constants.getLightsConstants().getNumOfLights(); // Variable for total # of lights
+  private final int w = 0; // This constant is only defined here and not in the constants because it will only be used in this file.
   
   /** Creates a new LightsSubsystem. */
   public LightsSubsystem() {
@@ -26,6 +27,9 @@ public class LightsSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    candle.setLEDs(0, 255, 0); // Sets the LEDs of the candle to be green.
+    candle.setLEDs(255, 255, 0, w, 0, 30); // Sets the LEDs of the candle to be green.
+
+    // candle.setLEDs(255, 0, 0, w, 0, 10);
+    // candle.setLEDs(0, 0, 255, w, 11, 30);
   }
 }

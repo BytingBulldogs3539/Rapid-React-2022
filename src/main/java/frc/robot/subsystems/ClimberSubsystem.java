@@ -85,10 +85,10 @@ public class ClimberSubsystem extends SubsystemBase {
 	/*** Sets the speed of both the left and right climbers. */
 	public void setMotorSpeed(double lClimberSpeed, double rClimberSpeed) {
 		if (hasLClimber)
-			lClimber.set(ControlMode.PercentOutput, lClimberSpeed);
+			lClimber.set(ControlMode.PercentOutput, lClimberSpeed*RobotContainer.constants.getClimberConstants().getLClimberGearRatio().getGearRatio());
 
 		if (hasRClimber)
-			rClimber.set(ControlMode.PercentOutput, rClimberSpeed);
+			rClimber.set(ControlMode.PercentOutput, rClimberSpeed*RobotContainer.constants.getClimberConstants().getRClimberGearRatio().getGearRatio());
 	}
 
 	/*** Sets the speed of both the left and right climbers to the same thing. */
@@ -123,11 +123,7 @@ public class ClimberSubsystem extends SubsystemBase {
 			}
 		}
 		
-		if (hasLClimber)
-			lClimber.set(ControlMode.PercentOutput, lMotorSpeed);
-
-		if (hasRClimber)
-			rClimber.set(ControlMode.PercentOutput, rMotorSpeed);
+		setMotorSpeed(lMotorSpeed, rMotorSpeed);
 	}
 
 	/*** Getter method for the left limit switch */

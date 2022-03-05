@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 
@@ -21,7 +22,18 @@ public class ClimberInCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		pneumaticsSubsystem.moveClimberIn();
+		//Unless the command is overriden by the dpad up button dont allow the operator bring in the climber unless it is in frame height.
+		if(!RobotContainer.operatorController.buttonPadUp.get())
+		{
+			if(!climberSubsystem.armsAboveFrameHeight())
+			{
+				pneumaticsSubsystem.moveClimberIn();
+			}
+		}
+		else
+		{
+			pneumaticsSubsystem.moveClimberIn();
+		}
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.

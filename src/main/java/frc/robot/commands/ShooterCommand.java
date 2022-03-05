@@ -112,6 +112,7 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		shooterSubsystem.stop();
+		intakeSubsystem.setIntakeSpeed(0.0);
 		RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
 	}
 

@@ -39,8 +39,10 @@ public class ClimberSubsystem extends SubsystemBase {
 			hasLClimber = false;
 		}
 
-		// Checks for a left limit switch. If it is on the robot (if there is an ID for it), then an object for it is created here. Otherwise, it is not created and its lack of presence is noted.
-		if(RobotContainer.constants.getClimberConstants().getLeftLimitID() != -1) {
+		// Checks for a left limit switch. If it is on the robot (if there is an ID for
+		// it), then an object for it is created here. Otherwise, it is not created and
+		// its lack of presence is noted.
+		if (RobotContainer.constants.getClimberConstants().getLeftLimitID() != -1) {
 			leftLimit = new DigitalInput(RobotContainer.constants.getClimberConstants().getLeftLimitID());
 			SmartDashboard.putData(leftLimit);
 			hasLeftLimit = true;
@@ -48,8 +50,10 @@ public class ClimberSubsystem extends SubsystemBase {
 			hasLeftLimit = false;
 		}
 
-		// Checks for a right limit switch. If it is on the robot (if there is an ID for it), then an object for it is created here. Otherwise, it is not created and its lack of presence is noted.
-		if(RobotContainer.constants.getClimberConstants().getRightLimitID() != -1) {
+		// Checks for a right limit switch. If it is on the robot (if there is an ID for
+		// it), then an object for it is created here. Otherwise, it is not created and
+		// its lack of presence is noted.
+		if (RobotContainer.constants.getClimberConstants().getRightLimitID() != -1) {
 			rightLimit = new DigitalInput(RobotContainer.constants.getClimberConstants().getRightLimitID());
 			SmartDashboard.putData(rightLimit);
 			hasRightLimit = true;
@@ -85,58 +89,100 @@ public class ClimberSubsystem extends SubsystemBase {
 	/*** Sets the speed of both the left and right climbers. */
 	public void setMotorSpeed(double lClimberSpeed, double rClimberSpeed) {
 		if (hasLClimber)
-			lClimber.set(ControlMode.PercentOutput, lClimberSpeed*RobotContainer.constants.getClimberConstants().getLClimberGearRatio().getGearRatio());
+			lClimber.set(ControlMode.PercentOutput, lClimberSpeed
+					* RobotContainer.constants.getClimberConstants().getLClimberGearRatio().getGearRatio());
 
 		if (hasRClimber)
-			rClimber.set(ControlMode.PercentOutput, rClimberSpeed*RobotContainer.constants.getClimberConstants().getRClimberGearRatio().getGearRatio());
+			rClimber.set(ControlMode.PercentOutput, rClimberSpeed
+					* RobotContainer.constants.getClimberConstants().getRClimberGearRatio().getGearRatio());
+	}
+
+	public boolean armsAboveFrameHeight() {
+		double leftPos = lClimber.getSelectedSensorPosition();
+		double rightPos = rClimber.getSelectedSensorPosition();
+		if (leftPos > RobotContainer.constants.getClimberConstants().getLFrameHeight()
+				|| rightPos > RobotContainer.constants.getClimberConstants().getRFrameHeight()) {
+			return true;
+		}
+		return false;
 	}
 
 	/*** Sets the speed of both the left and right climbers to the same thing. */
 	public void setMotorSpeed(double climberSpeed, boolean override) {
 		double lMotorSpeed = climberSpeed;
 		double rMotorSpeed = climberSpeed;
-		// The following code checks to see if one climber is farther along in the process of climbing up or down than one another. In doing so, it looks to see which direction the climber arms are going and will check to see which arm it needs to stop from there if any arm needs to be stopped at all (must be stopped if it is 500 or higher units along).
+		double leftPos = lClimber.getSelectedSensorPosition();
+		double rightPos = rClimber.getSelectedSensorPosition();
+		// The following code checks to see if one climber is farther along in the
+		// process of climbing up or down than one another. In doing so, it looks to see
+		// which direction the climber arms are going and will check to see which arm it
+		// needs to stop from there if any arm needs to be stopped at all (must be
+		// stopped if it is 500 or higher units along).
 		// Can be overidden by hitting up in the d-pad of the operator controller.
-		if(!override) {
-			// If the position of a particular climber arm is less than the soft bottom and the climber speed is negative, stop that particular climber.
+		if (!override) {
+			// If the position of a particular climber arm is less than the soft bottom and
+			// the climber speed is negative, stop that particular climber.
 			// This effectively sets a soft limit.
-			if(lClimber.getSelectedSensorPosition() < RobotContainer.constants.getClimberConstants().getLClimberSoftBottom() && climberSpeed < 0) {
+			if (leftPos < RobotContainer.constants.getClimberConstants().getLClimberSoftBottom() && climberSpeed < 0) {
 				lMotorSpeed = 0.0;
 			}
-			if(rClimber.getSelectedSensorPosition() < RobotContainer.constants.getClimberConstants().getRClimberSoftBottom() && climberSpeed < 0) {
+			if (rightPos < RobotContainer.constants.getClimberConstants().getRClimberSoftBottom() && climberSpeed < 0) {
 				rMotorSpeed = 0.0;
 			}
 
-			// If the climber arms are out, 
-			if(RobotContainer.pneumaticsSubsystem.areArmsOut) {
-				
+			// Apply height limits if the climber direction is up "positive"
+			if (climberSpeed > 0) {
+				// If the climber arms are not out, only allow the arms to extend to the robots
+				// max height.
+				if (!RobotContainer.pneumaticsSubsystem.areArmsOut) {
+					if (leftPos > RobotContainer.constants.getClimberConstants().getLFrameHeight()) {
+						lMotorSpeed = 0.0;
+					}
+					if (rightPos > RobotContainer.constants.getClimberConstants().getRFrameHeight()) {
+						rMotorSpeed = 0.0;
+					}
+				}
+				// If the climber arms are out, allow the arms to be extended to their full
+				// length.
+				else {
+					if (leftPos > RobotContainer.constants.getClimberConstants().getLMaxExtensionHeight()) {
+						lMotorSpeed = 0.0;
+					}
+					if (rightPos > RobotContainer.constants.getClimberConstants().getRMaxExtensionHeight()) {
+						rMotorSpeed = 0.0;
+					}
+				}
 			}
 
-			// If climber speed is positive, check to see if one arm is lower than the other by 500 or more and then adjust it.
-			if(climberSpeed > 0) {
-				if(lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
+			// If climber speed is positive, check to see if one arm is lower than the other
+			// by 500 or more and then adjust it.
+			if (climberSpeed > 0) {
+				if (lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
 					lMotorSpeed = 0.0;
 				} else if (rClimber.getSelectedSensorPosition() - 500 > lClimber.getSelectedSensorPosition()) {
 					rMotorSpeed = 0.0;
 				}
-			// Otherwise, check to see if climber speed is negative. If so, check to see if one arm is higher than the other by 500 or more and then adjust it.
+				// Otherwise, check to see if climber speed is negative. If so, check to see if
+				// one arm is higher than the other by 500 or more and then adjust it.
 			} else if (climberSpeed < 0) {
-				if(lClimber.getSelectedSensorPosition() + 500 < rClimber.getSelectedSensorPosition()) {
+				if (lClimber.getSelectedSensorPosition() + 500 < rClimber.getSelectedSensorPosition()) {
 					lMotorSpeed = 0.0;
 				} else if (rClimber.getSelectedSensorPosition() + 500 < lClimber.getSelectedSensorPosition()) {
 					rMotorSpeed = 0.0;
 				}
 			}
 		}
-			
-			setMotorSpeed(lMotorSpeed, rMotorSpeed);
-		}
+
+		setMotorSpeed(lMotorSpeed, rMotorSpeed);
+	}
 
 	/*** Getter method for the left limit switch */
 	public boolean getLeftLimit() {
-		if(hasLeftLimit) {
-			// Returns the left limit switch as inverted if it is. Otherwise, the method returns it as normal. If left limit switch is not present, the method returns false.
-			if(RobotContainer.constants.getClimberConstants().invertLeftLimitSensor()) {
+		if (hasLeftLimit) {
+			// Returns the left limit switch as inverted if it is. Otherwise, the method
+			// returns it as normal. If left limit switch is not present, the method returns
+			// false.
+			if (RobotContainer.constants.getClimberConstants().invertLeftLimitSensor()) {
 				return !leftLimit.get(); // Inverted
 			}
 			return leftLimit.get(); // Not inverted
@@ -146,9 +192,11 @@ public class ClimberSubsystem extends SubsystemBase {
 
 	/*** Getter method for the right limit switch */
 	public boolean getRightLimit() {
-		if(hasRightLimit) {
-			// Returns the right limit switch as inverted if it is. Otherwise, the method returns it as normal. If right limit switch is not present, the method returns false.
-			if(RobotContainer.constants.getClimberConstants().invertRightLimitSensor()) {
+		if (hasRightLimit) {
+			// Returns the right limit switch as inverted if it is. Otherwise, the method
+			// returns it as normal. If right limit switch is not present, the method
+			// returns false.
+			if (RobotContainer.constants.getClimberConstants().invertRightLimitSensor()) {
 				return !rightLimit.get(); // Inverted
 			}
 			return rightLimit.get(); // Not inverted

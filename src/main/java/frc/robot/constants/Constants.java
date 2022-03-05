@@ -7,6 +7,7 @@ package frc.robot.constants;
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
+import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
@@ -185,28 +186,20 @@ public abstract class Constants {
         public abstract int getDigitalInput();
         /*** @return True if the robot has a color sensor, false if not */
         public abstract boolean getColorSensor();
-        /*** @return The R value of the blue ball (RGB) */
-        public abstract int getBlueR(); //R value of blue ball
-        /*** @return The G value of the blue ball (RGB) */
-        public abstract int getBlueG(); // G value of blue ball
-        /*** @return The B value of the blue ball (RGB) */
-        public abstract int getBlueB(); // B value of the blue ball
+        /*** @return The color of the blue ball respective to the color sensor.*/
+        public abstract Color getBlueColor();
+        /*** @return The color of the red ball respective to the color sensor.*/
+        public abstract Color getRedColor();
         /*** @return The tolerance of the blue ball's RGB values */
         public abstract int getBlueTolerance();
-        /*** @return The R value of the red ball (RGB) */
-        public abstract int getRedR(); // R value of the red ball
-        /*** @return The G value of the red ball (RGB) */
-        public abstract int getRedG(); // G value of the red ball
-        /*** @return The B value of the red ball (RGB) */
-        public abstract int getRedB(); // B value of the red ball
         /*** @return The tolerance of the red ball's RGB values */
         public abstract int getRedTolerance();
 
         /*** @return True if inverted, false if not */
         public abstract boolean invertSensor();
-        /***  @return */
+        /***  @return Used to calculate the shooter speed using the pitch of the target in the cameras view.*/
         public abstract double getShooterSpeed(double pitch);
-        /***  @return */
+        /***  @return Used to see if the hood should be used or not according the the pitch of the target in the cameras view.*/
         public abstract boolean getUseHood(double pitch);
     }
     /*** Class containing climber constants */

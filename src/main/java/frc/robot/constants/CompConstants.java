@@ -5,6 +5,7 @@ import com.swervedrivespecialties.swervelib.control.MaxAccelerationConstraint;
 import com.swervedrivespecialties.swervelib.control.MaxVelocityConstraint;
 import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
+import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
@@ -366,44 +367,26 @@ public class CompConstants extends Constants {
 			return true;
 		}
 
-		@Override
-		public int getBlueR() {
-			return 0;
-		}
-
-		@Override
-		public int getBlueG() {
-			return 0;
-		}
-
-		@Override
-		public int getBlueB() {
-			return 255;
-		}
 
 		@Override
 		public int getBlueTolerance() {
 			return 50;
 		}
 
-		@Override
-		public int getRedR() {
-			return 255;
-		}
-
-		@Override
-		public int getRedG() {
-			return 0;
-		}
-
-		@Override
-		public int getRedB() {
-			return 0;
-		}
 
 		@Override
 		public int getRedTolerance() {
 			return 50;
+		}
+
+		@Override
+		public Color getBlueColor() {
+			return new Color(0, 0, .5);
+		}
+
+		@Override
+		public Color getRedColor() {
+			return new Color(.5, 0, 0);
 		}
 	}
 

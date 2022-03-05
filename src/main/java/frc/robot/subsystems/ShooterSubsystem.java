@@ -8,9 +8,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.revrobotics.ColorMatch;
+import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
-
-import edu.wpi.first.math.controller.ControlAffinePlantInversionFeedforward;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,13 +20,19 @@ import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-	// Declares shooter motor objects, but does not define them yet.
+	// Declares shooter motor objects, but does not initialize them yet.
 	TalonFX SM1;
 	TalonFX SM2;
 	TalonFX SM3;
 	TalonFX KM;
 
-	// Creates final boolean variables for each object.
+	enum Color {
+		BLUE,
+		RED,
+		NONE
+	}
+
+	// Creates final boolean variables for each shooter motor.
 	final boolean hasSM1; // Shooter motor 1
 	final boolean hasSM2; // Shooter motor 2
 	final boolean hasSM3; // Shooter motor 3
@@ -34,11 +40,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
 	final Double VELCONV = (2048.0 / 600.0);
 
-	// Creates a new object for the sensor
+	// Creates a new object for the ball sensor (light beam sensor).
 	DigitalInput sensor;
 	final boolean hasSensor;
-	ColorSensorV3 colorSensor;
 
+	// Create color sensor and corosponding color matcher.
+	ColorSensorV3 colorSensor;
+	private final ColorMatch colorMatcher = new ColorMatch();
 
 	public ShooterSubsystem() {
 		PIDConstants pidConstants = RobotContainer.constants.getShooterConstants().getPIDConstants();
@@ -90,9 +98,13 @@ public class ShooterSubsystem extends SubsystemBase {
 			hasSensor = false;
 		}
 
-		if(RobotContainer.constants.getShooterConstants().getColorSensor()) {
+		if (RobotContainer.constants.getShooterConstants().getColorSensor()) {
 			colorSensor = new ColorSensorV3(Port.kOnboard);
 		}
+		// Add the blue ball color to the color matcher.
+		colorMatcher.addColorMatch(RobotContainer.constants.getShooterConstants().getBlueColor());
+		// Add the red ball color to the color matcher.
+		colorMatcher.addColorMatch(RobotContainer.constants.getShooterConstants().getRedColor());
 	}
 
 	public TalonFX configureMotor(int motorID, GearRatio gearRatio, PIDConstants pidConstants) {
@@ -101,13 +113,26 @@ public class ShooterSubsystem extends SubsystemBase {
 		motor.setSensorPhase(RobotContainer.constants.getShooterConstants().getSM1GearRatio().getInverted());
 		motor.configSupplyCurrentLimit(
 				new SupplyCurrentLimitConfiguration(true, gearRatio.getCurrentLimit(), gearRatio.getCurrentLimit(), 0));
-		motor.config_kP(0, pidConstants.getP());
-		motor.config_kI(0, pidConstants.getI());
-		motor.config_kD(0, pidConstants.getD());
-		motor.config_kF(0, pidConstants.getF());
-		motor.configMaxIntegralAccumulator(0, 0);
+		setPIDConstants(motor, pidConstants);
 
 		return motor;
+	}
+
+		/***
+	 * Configures PID constants for the given shooter motor
+	 * 
+	 * @param motor        (motor whose PID constants will be set)
+	 * @param PIDConstants (PID constants to set the shooter motor's PID constants
+	 *                     to)
+	 */
+	public void setPIDConstants(TalonFX motor, PIDConstants pidConstants) {
+		if (motor != null) {
+			motor.config_kP(0, pidConstants.getP());
+			motor.config_kI(0, pidConstants.getI());
+			motor.config_kD(0, pidConstants.getD());
+			motor.config_kF(0, pidConstants.getF());
+			motor.configMaxIntegralAccumulator(0, 0);
+		}
 	}
 
 	/**
@@ -124,54 +149,6 @@ public class ShooterSubsystem extends SubsystemBase {
 		return true;
 	}
 
-	/*** @return True if the robot has a ball (regardless of color), false if it does not have one. */
-	public boolean hasBall() {
-		int redTolerance = RobotContainer.constants.getShooterConstants().getRedTolerance();
-		int redR = RobotContainer.constants.getShooterConstants().getRedR();
-		int redG = RobotContainer.constants.getShooterConstants().getRedG();
-		int redB = RobotContainer.constants.getShooterConstants().getRedB();
-
-		int blueTolerance = RobotContainer.constants.getShooterConstants().getBlueTolerance();
-		int blueR = RobotContainer.constants.getShooterConstants().getBlueR();
-		int blueG = RobotContainer.constants.getShooterConstants().getBlueG();
-		int blueB = RobotContainer.constants.getShooterConstants().getBlueB();
-
-
-		if(redR + redTolerance > colorSensor.getRed() && redR - redTolerance < colorSensor.getRed()) {
-			if(redG + redTolerance > colorSensor.getGreen() && redG - redTolerance < colorSensor.getGreen()) {
-				if(redB + redTolerance > colorSensor.getBlue() && redB - redTolerance < colorSensor.getBlue()) {
-					return true;
-				}
-			}
-
-			if(blueR + blueTolerance > colorSensor.getRed() && blueR - blueTolerance < colorSensor.getRed()) {
-				if(blueG + blueTolerance > colorSensor.getGreen() && blueG - blueTolerance < colorSensor.getGreen()) {
-					if(blueB + blueTolerance > colorSensor.getBlue() && blueB - blueTolerance < colorSensor.getBlue()) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	/*** @return True if the ball in the robot is red, false if not.*/
-	public boolean hasRedBall() {
-		int redTolerance = RobotContainer.constants.getShooterConstants().getRedTolerance();
-		int redR = RobotContainer.constants.getShooterConstants().getRedR();
-		int redG = RobotContainer.constants.getShooterConstants().getRedG();
-		int redB = RobotContainer.constants.getShooterConstants().getRedB();
-
-		if(redR + redTolerance > colorSensor.getRed() && redR - redTolerance < colorSensor.getRed()) {
-			if(redG + redTolerance > colorSensor.getGreen() && redG - redTolerance < colorSensor.getGreen()) {
-				if(redB + redTolerance > colorSensor.getBlue() && redB - redTolerance < colorSensor.getBlue()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
 	/***
 	 * Sets the percent output of all of the shooter motors
 	 * 
@@ -182,7 +159,8 @@ public class ShooterSubsystem extends SubsystemBase {
 	 */
 	public void setShooterPercentOutput(double SM1Speed, double SM2Speed, double SM3Speed, double KMSpeed) {
 		if (hasSM1)
-			SM1.set(TalonFXControlMode.PercentOutput, SM1Speed*RobotContainer.constants.getShooterConstants().getSM1GearRatio().getGearRatio());
+			SM1.set(TalonFXControlMode.PercentOutput,
+					SM1Speed * RobotContainer.constants.getShooterConstants().getSM1GearRatio().getGearRatio());
 
 		if (hasSM2)
 			SM2.set(TalonFXControlMode.PercentOutput, SM2Speed);
@@ -191,7 +169,8 @@ public class ShooterSubsystem extends SubsystemBase {
 			SM3.set(TalonFXControlMode.PercentOutput, SM3Speed);
 
 		if (hasKM)
-			KM.set(TalonFXControlMode.PercentOutput, KMSpeed*RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
+			KM.set(TalonFXControlMode.PercentOutput,
+					KMSpeed * RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
 	}
 
 	/***
@@ -201,7 +180,8 @@ public class ShooterSubsystem extends SubsystemBase {
 	 */
 	public void setSM1PercentOutput(double SM1Speed) {
 		if (hasSM1)
-			SM1.set(TalonFXControlMode.PercentOutput, SM1Speed*RobotContainer.constants.getShooterConstants().getSM1GearRatio().getGearRatio());
+			SM1.set(TalonFXControlMode.PercentOutput,
+					SM1Speed * RobotContainer.constants.getShooterConstants().getSM1GearRatio().getGearRatio());
 	}
 
 	/***
@@ -231,7 +211,8 @@ public class ShooterSubsystem extends SubsystemBase {
 	 */
 	public void setKMPercentOutput(double KMSpeed) {
 		if (hasKM)
-			KM.set(TalonFXControlMode.PercentOutput, KMSpeed*RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
+			KM.set(TalonFXControlMode.PercentOutput,
+					KMSpeed * RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
 	}
 
 	/**
@@ -257,7 +238,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	/**
 	 * Sets the speed of the first shooter motor.
 	 * 
-	 * @param speed (Value to set the speed of the first shooter motor to)
+	 * @param speed (Value to set the speed of the first shooter motor to in rpm)
 	 */
 	public void setSM1Speed(double speed) {
 		if (hasSM1)
@@ -268,7 +249,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	/**
 	 * Sets the speed of the second shooter motor.
 	 * 
-	 * @param speed (Value to set the speed of the second shooter motor to)
+	 * @param speed (Value to set the speed of the second shooter motor to in rpm)
 	 */
 	public void setSM2Speed(double speed) {
 		if (hasSM2)
@@ -279,7 +260,7 @@ public class ShooterSubsystem extends SubsystemBase {
 	/**
 	 * Sets the speed of the third shooter motor.
 	 * 
-	 * @param speed (Value to set the speed of the third shooter motor to)
+	 * @param speed (Value to set the speed of the third shooter motor to in rpm)
 	 */
 	public void setSM3Speed(double speed) {
 		if (hasSM3)
@@ -290,28 +271,12 @@ public class ShooterSubsystem extends SubsystemBase {
 	/**
 	 * Sets the speed of the kicker motor.
 	 * 
-	 * @param speed (Value to set the speed of the kicker motor to)
+	 * @param speed (Value to set the speed of the kicker motor to in rpm)
 	 */
 	public void setKMSpeed(double speed) {
 		if (hasKM)
 			KM.set(TalonFXControlMode.Velocity,
 					speed * VELCONV * RobotContainer.constants.getShooterConstants().getKMGearRatio().getGearRatio());
-	}
-
-	/***
-	 * Configures PID constants for the given shooter motor
-	 * 
-	 * @param motor        (motor whose PID constants will be set)
-	 * @param PIDConstants (PID constants to set the shooter motor's PID constants
-	 *                     to)
-	 */
-	public void setPIDConstants(TalonFX motor, PIDConstants PIDConstants) {
-		if (motor != null) {
-			motor.config_kP(0, PIDConstants.getP());
-			motor.config_kI(0, PIDConstants.getI());
-			motor.config_kD(0, PIDConstants.getD());
-			motor.config_kF(0, PIDConstants.getF());
-		}
 	}
 
 	public boolean SM1AtTarget(double tolerance) {
@@ -330,11 +295,30 @@ public class ShooterSubsystem extends SubsystemBase {
 		return KM.getClosedLoopError() < tolerance;
 	}
 
+	public Color getColorSensorColor()
+	{
+		ColorMatchResult results = colorMatcher.matchColor(colorSensor.getColor());
+		if(results == null)
+		{
+			return Color.NONE;
+		}
+		if (results.color == RobotContainer.constants.getShooterConstants().getRedColor())
+		{
+			return Color.RED;
+		}
+		if (results.color == RobotContainer.constants.getShooterConstants().getBlueColor())
+		{
+			return Color.BLUE;
+		}
+		return Color.NONE;
+	}
+
 	@Override
 	public void periodic() {
-		// This method will be called once per scheduler run
+		// This method will be called once per scheduler run.
+
 		// If there is a color sensor, display its RGB values to the SmartDashboard.
-		if(colorSensor != null) {
+		if (colorSensor != null) {
 			SmartDashboard.putNumber("Get Red", colorSensor.getRed());
 			SmartDashboard.putNumber("Get Green", colorSensor.getGreen());
 			SmartDashboard.putNumber("Get Blue", colorSensor.getBlue());

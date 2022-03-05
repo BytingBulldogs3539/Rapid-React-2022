@@ -21,6 +21,7 @@ import frc.robot.commands.ClimberInCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.MoveShooterHood;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ZeroGyroCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
 import frc.robot.constants.PracConstants;
@@ -93,12 +94,14 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		operatorController.buttonPadDown
-				.whenHeld(new IntakeCommand(0.5, 0.5, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, false, 4300, 3000));
-		operatorController.buttonPadRight.whenHeld(new ShooterCommand(shooterSubsystem, true, 3850, 3000));
+				.whenHeld(new IntakeCommand(0.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 4300, 3000));
+		operatorController.buttonPadRight.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 3850, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
+
+		driverController.buttonSTART.whenPressed(new ZeroGyroCommand());
 	}
 
 	public void putAuton() {

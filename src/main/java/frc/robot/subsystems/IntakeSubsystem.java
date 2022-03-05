@@ -72,7 +72,7 @@ public class IntakeSubsystem extends SubsystemBase {
 		if (!hasKnockDownMotor) {
 			return;
 		}
-		knockDownMotor.set(ControlMode.PercentOutput, speed);
+		knockDownMotor.set(ControlMode.PercentOutput, speed * RobotContainer.constants.getIntakeConstants().getKnockDownGearRatio().getGearRatio());
 	}
 
 	@Override

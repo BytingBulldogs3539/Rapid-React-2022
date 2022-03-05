@@ -282,7 +282,7 @@ public class PracConstants extends Constants {
 
 		@Override
 		public GearRatio getKnockDownGearRatio() {
-			return new GearRatio(1, false, 40); // Gear ratio does not matter but direction does.
+			return new GearRatio(1, false, 40); // Gear ratio impacts the speed that the knockdown belts move at.
 		}
 
 	}

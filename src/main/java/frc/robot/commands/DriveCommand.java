@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
@@ -18,6 +19,9 @@ public class DriveCommand extends CommandBase {
 		this.drivetrain = drivetrain;
 
 		addRequirements(drivetrain);
+
+		SmartDashboard.putNumber("Steer Ratio", 0.3);
+		SmartDashboard.putNumber("Drive Ratio", 0.3);
 
 		// Declares and initializes variables holding the values of the PID constants
 		// for both cameras. This helps to make the code easier to read.
@@ -90,9 +94,9 @@ public class DriveCommand extends CommandBase {
 
 		drivetrain.drive(
 				ChassisSpeeds.fromFieldRelativeSpeeds(
-						.3 * translationXPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-						.3 * translationYPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-						.3 * rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+						SmartDashboard.getNumber("Drive Ratio", 0.3) * translationXPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+						SmartDashboard.getNumber("Drive Ratio", 0.3) * translationYPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
+						SmartDashboard.getNumber("Steer Ratio", 0.3) * rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
 						gyroAngle));
 	}
 

@@ -11,11 +11,13 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterCommand extends CommandBase {
 	/** Creates a new ShooterCommand. */
 	ShooterSubsystem shooterSubsystem;
+	IntakeSubsystem intakeSubsystem;
 	/*** Create a new timer */
 	Timer timer = new Timer();
 
@@ -24,8 +26,9 @@ public class ShooterCommand extends CommandBase {
 	int KMSpeed;
 	boolean useVision = false;
 
-	public ShooterCommand(ShooterSubsystem shooterSubsystem, boolean useVision, int SM1Speed, int KMSpeed) {
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean useVision, int SM1Speed, int KMSpeed) {
 		this.shooterSubsystem = shooterSubsystem;
+		this.intakeSubsystem = intakeSubsystem;
 		this.SM1Speed = SM1Speed;
 		this.KMSpeed = KMSpeed;
 		
@@ -59,6 +62,7 @@ public class ShooterCommand extends CommandBase {
 				// shooterSubsystem.SM2AtTarget(tolerance) &&
 				// shooterSubsystem.SM3AtTarget(tolerance))
 				shooterSubsystem.setKMSpeed(KMSpeed);
+				intakeSubsystem.setIntakeSpeed(0.3);
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);
 			}

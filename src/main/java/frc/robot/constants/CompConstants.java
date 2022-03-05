@@ -283,7 +283,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public GearRatio getKnockDownGearRatio() {
-			return new GearRatio(1, true, 40); // Gear ratio does not matter but direction does.
+			return new GearRatio(0.5, true, 40); // Gear ratio impacts the speed that the knockdown belts move at.
 		}
 
 	}

@@ -38,7 +38,7 @@ public class MoveClimberCommand extends CommandBase {
 			motorSpeed = motorDirection * RobotContainer.operatorController.getRightTrigger();
 		}
 
-		climberSubsystem.setMotorSpeed(motorSpeed); // Sets the motor speeds
+		climberSubsystem.setMotorSpeed(motorSpeed, RobotContainer.operatorController.buttonPadUp.get()); // Sets the motor speeds
 
 		// If X is pressed, grab the bar.
 		if (RobotContainer.operatorController.buttonX.get()) {

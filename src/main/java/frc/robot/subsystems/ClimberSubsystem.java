@@ -92,39 +92,34 @@ public class ClimberSubsystem extends SubsystemBase {
 	}
 
 	/*** Sets the speed of both the left and right climbers to the same thing. */
-	public void setMotorSpeed(double climberSpeed) {
+	public void setMotorSpeed(double climberSpeed, boolean override) {
 		double lMotorSpeed = climberSpeed;
 		double rMotorSpeed = climberSpeed;
 		// The following code checks to see if one climber is farther along in the process of climbing up or down than one another. In doing so, it looks to see which direction the climber arms are going and will check to see which arm it needs to stop from there if any arm needs to be stopped at all (must be stopped if it is 500 or higher units along).
-
-		// If climber speed is positive, check to see if one arm is lower than the other by 500 or more and then adjust it.
-		if(climberSpeed > 0) {
-			System.out.println("Climber speed input: " + climberSpeed);
-			if(lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
-				System.out.println("Current left motor speed: " + lMotorSpeed);
-				lMotorSpeed = 0.0;
-				System.out.println("Left motor speed is now 0");
-			} else if (rClimber.getSelectedSensorPosition() - 500 > lClimber.getSelectedSensorPosition()) {
-				System.out.println("Current right motor speed: " + rMotorSpeed);
-				rMotorSpeed = 0.0;
-				System.out.println("Right motor speed is now 0");
-			}
-		// Otherwise, check to see if climber speed is negative. If so, check to see if one arm is higher than the other by 500 or more and then adjust it.
-		 } else if (climberSpeed < 0) {
-			System.out.println("Climber speed input: " + climberSpeed);
-			if(lClimber.getSelectedSensorPosition() + 500 < rClimber.getSelectedSensorPosition()) {
-				System.out.println("Current left motor speed: " + lMotorSpeed);
-				lMotorSpeed = 0.0;
-				System.out.println("Left motor speed is now 0");
-			} else if (rClimber.getSelectedSensorPosition() + 500 < lClimber.getSelectedSensorPosition()) {
-				System.out.println("Current right motor speed: " + rMotorSpeed);
-				rMotorSpeed = 0.0;
-				System.out.println("Right motor speed is now 0");
+		// Can be overidden by hitting up in the d-pad of the operator controller.
+		if(!override) {
+			// If climber speed is positive, check to see if one arm is lower than the other by 500 or more and then adjust it.
+			if(climberSpeed > 0) {
+				System.out.println("Climber speed input: " + climberSpeed);
+				if(lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
+					lMotorSpeed = 0.0;
+					System.out.println("Left motor speed is now 0");
+				} else if (rClimber.getSelectedSensorPosition() - 500 > lClimber.getSelectedSensorPosition()) {
+					rMotorSpeed = 0.0;
+				}
+			// Otherwise, check to see if climber speed is negative. If so, check to see if one arm is higher than the other by 500 or more and then adjust it.
+			} else if (climberSpeed < 0) {
+				System.out.println("Climber speed input: " + climberSpeed);
+				if(lClimber.getSelectedSensorPosition() + 500 < rClimber.getSelectedSensorPosition()) {
+					lMotorSpeed = 0.0;
+				} else if (rClimber.getSelectedSensorPosition() + 500 < lClimber.getSelectedSensorPosition()) {
+					rMotorSpeed = 0.0;
+				}
 			}
 		}
-		
-		setMotorSpeed(lMotorSpeed, rMotorSpeed);
-	}
+			
+			setMotorSpeed(lMotorSpeed, rMotorSpeed);
+		}
 
 	/*** Getter method for the left limit switch */
 	public boolean getLeftLimit() {

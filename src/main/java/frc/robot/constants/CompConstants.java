@@ -464,6 +464,18 @@ public class CompConstants extends Constants {
 			// TODO Auto-generated method stub
 			return true;
 		}
+
+		@Override
+		public int getLClimberSoftBottom() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getRClimberSoftBottom() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	}
 
 	public class PneumaticsConstants extends Constants.PneumaticsConstants {

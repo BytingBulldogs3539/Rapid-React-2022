@@ -457,6 +457,18 @@ public class PracConstants extends Constants {
 		public boolean getRClimberMotorInversion() {
 			return true;
 		}
+
+		@Override
+		public int getLClimberSoftBottom() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getRClimberSoftBottom() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	}
 
 	public class PneumaticsConstants extends Constants.PneumaticsConstants {

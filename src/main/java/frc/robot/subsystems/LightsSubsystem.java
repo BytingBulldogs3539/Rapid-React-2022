@@ -27,9 +27,9 @@ public class LightsSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    candle.setLEDs(255, 255, 0, w, 0, 30); // Sets the LEDs of the candle to be green.
+    // candle.setLEDs(255, 255, 0, w, 0, 30); // Sets the LEDs of the candle to be green.
 
-    // candle.setLEDs(255, 0, 0, w, 0, 10);
-    // candle.setLEDs(0, 0, 255, w, 11, 30);
+    candle.setLEDs(255, 0, 0, w, 0, 10);
+    candle.setLEDs(0, 0, 255, w, 11, 30);
   }
 }

@@ -239,6 +239,11 @@ public abstract class Constants {
         public abstract GearRatio getLClimberGearRatio();
         /*** @return the gear ratio of the right climber*/
         public abstract GearRatio getRClimberGearRatio();
+
+        /*** @return the encoder value that corresponds to the bottom of the range for climbing on the left*/
+        public abstract int getLClimberSoftBottom();
+        /*** @return the encoder value that corresponds to the bottom of the range for climbing on the right*/
+        public abstract int getRClimberSoftBottom();
     }
 
     /*** Class containing the Pneumatics Constants (for the compressor & the solenoids) */

@@ -469,6 +469,30 @@ public class PracConstants extends Constants {
 			// TODO Auto-generated method stub
 			return 0;
 		}
+
+		@Override
+		public int getLFrameHeight() {
+			// TODO Auto-generated method stub
+			return 9000;
+		}
+
+		@Override
+		public int getLMaxExtensionHeight() {
+			// TODO Auto-generated method stub
+			return 18000;
+		}
+
+		@Override
+		public int getRFrameHeight() {
+			// TODO Auto-generated method stub
+			return 9000;
+		}
+
+		@Override
+		public int getRMaxExtensionHeight() {
+			// TODO Auto-generated method stub
+			return 18000;
+		}
 	}
 
 	public class PneumaticsConstants extends Constants.PneumaticsConstants {

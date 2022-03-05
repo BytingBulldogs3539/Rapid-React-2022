@@ -98,18 +98,29 @@ public class ClimberSubsystem extends SubsystemBase {
 		// The following code checks to see if one climber is farther along in the process of climbing up or down than one another. In doing so, it looks to see which direction the climber arms are going and will check to see which arm it needs to stop from there if any arm needs to be stopped at all (must be stopped if it is 500 or higher units along).
 		// Can be overidden by hitting up in the d-pad of the operator controller.
 		if(!override) {
+			// If the position of a particular climber arm is less than the soft bottom and the climber speed is negative, stop that particular climber.
+			// This effectively sets a soft limit.
+			if(lClimber.getSelectedSensorPosition() < RobotContainer.constants.getClimberConstants().getLClimberSoftBottom() && climberSpeed < 0) {
+				lMotorSpeed = 0.0;
+			}
+			if(rClimber.getSelectedSensorPosition() < RobotContainer.constants.getClimberConstants().getRClimberSoftBottom() && climberSpeed < 0) {
+				rMotorSpeed = 0.0;
+			}
+
+			// If the climber arms are out, 
+			if(RobotContainer.pneumaticsSubsystem.areArmsOut) {
+				
+			}
+
 			// If climber speed is positive, check to see if one arm is lower than the other by 500 or more and then adjust it.
 			if(climberSpeed > 0) {
-				System.out.println("Climber speed input: " + climberSpeed);
 				if(lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
 					lMotorSpeed = 0.0;
-					System.out.println("Left motor speed is now 0");
 				} else if (rClimber.getSelectedSensorPosition() - 500 > lClimber.getSelectedSensorPosition()) {
 					rMotorSpeed = 0.0;
 				}
 			// Otherwise, check to see if climber speed is negative. If so, check to see if one arm is higher than the other by 500 or more and then adjust it.
 			} else if (climberSpeed < 0) {
-				System.out.println("Climber speed input: " + climberSpeed);
 				if(lClimber.getSelectedSensorPosition() + 500 < rClimber.getSelectedSensorPosition()) {
 					lMotorSpeed = 0.0;
 				} else if (rClimber.getSelectedSensorPosition() + 500 < lClimber.getSelectedSensorPosition()) {

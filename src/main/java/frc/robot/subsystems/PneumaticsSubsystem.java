@@ -17,6 +17,9 @@ public class PneumaticsSubsystem extends SubsystemBase {
 	final double minPressure = 80;
 	final double maxPressure = 120;
 
+	// Boolean for the direction of the arms
+	public boolean areArmsOut;
+
 	// Creates compressor & solenoid objects
 	Compressor compressor;
 	DoubleSolenoid intakeSolenoid;
@@ -81,10 +84,12 @@ public class PneumaticsSubsystem extends SubsystemBase {
 	}
 
 	public void moveClimberIn() {
+		areArmsOut = false; // Arms are in, so this is false.
 		climberSolenoid.set(Value.kForward);
 	}
 
 	public void moveClimberOut() {
+		areArmsOut = true; // Arms are out, so this is true.
 		climberSolenoid.set(Value.kReverse);
 	}
 

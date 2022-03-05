@@ -240,10 +240,22 @@ public abstract class Constants {
         /*** @return the gear ratio of the right climber*/
         public abstract GearRatio getRClimberGearRatio();
 
+        // Soft bottom getters for the override
         /*** @return the encoder value that corresponds to the bottom of the range for climbing on the left*/
         public abstract int getLClimberSoftBottom();
         /*** @return the encoder value that corresponds to the bottom of the range for climbing on the right*/
         public abstract int getRClimberSoftBottom();
+
+        // Left and right climber frame height and extension height constants
+        /*** @return The left climber arm's frame height */
+        public abstract int getLFrameHeight();
+        /*** @return The left climber arm's max extension height */
+        public abstract int getLMaxExtensionHeight();
+
+        /*** @return The right climber arm's frame height */
+        public abstract int getRFrameHeight();
+        /*** @return The right climber arm's max extension height */
+        public abstract int getRMaxExtensionHeight();
     }
 
     /*** Class containing the Pneumatics Constants (for the compressor & the solenoids) */

@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import com.revrobotics.ColorSensorV3;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -56,11 +55,7 @@ public class ShooterCommand extends CommandBase {
 		if (SmartDashboard.getNumber("KM Speed", 0) == 0) {
 			shooterSubsystem.setKMPercentOutput(0);
 		} else {
-			double tolerance = 200;
 			if (timer.hasElapsed(1)) {
-				// if(shooterSubsystem.SM1AtTarget(tolerance) &&
-				// shooterSubsystem.SM2AtTarget(tolerance) &&
-				// shooterSubsystem.SM3AtTarget(tolerance))
 				shooterSubsystem.setKMSpeed(KMSpeed);
 				intakeSubsystem.setIntakeSpeed(0.3);
 			} else {

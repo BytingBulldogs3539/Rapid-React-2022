@@ -9,7 +9,10 @@ import com.swervedrivespecialties.swervelib.control.*;
 import com.swervedrivespecialties.swervelib.math.Rotation2;
 import com.swervedrivespecialties.swervelib.math.Vector2;
 
-public class DistanceTest extends SequentialCommandGroup {
+/**
+ * Used to calibrate the wheel diameter.
+ */
+public class DistanceTest extends SequentialCommandGroup {    
     public DistanceTest(DriveSubsystem driveSub) {
         super(new Command[] { TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))

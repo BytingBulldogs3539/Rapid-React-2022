@@ -10,10 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.auton.ArchTest;
-import frc.robot.auton.Back2Start;
 import frc.robot.auton.DistanceTest;
-import frc.robot.auton.Lapse;
 import frc.robot.auton.TwoBallAuton;
 import frc.robot.auton.ThreeBallAuton;
 import frc.robot.commands.ClimberOutCommand;
@@ -106,10 +103,7 @@ public class RobotContainer {
 
 	public void putAuton() {
 		chooser = new SendableChooser<Command>();
-		chooser.setDefaultOption("DistanceTest", new DistanceTest(driveSubsystem));
-		chooser.addOption("ArchTest", new ArchTest(driveSubsystem));
-		chooser.addOption("Lapse", new Lapse(driveSubsystem));
-		chooser.addOption("Back2Start", new Back2Start(driveSubsystem));
+
 		chooser.addOption("TwoBallAuton", new TwoBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("ThreeBallAuton", new ThreeBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		SmartDashboard.putData("Auto Chooser", chooser);

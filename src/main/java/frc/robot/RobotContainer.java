@@ -59,7 +59,7 @@ public class RobotContainer {
 
 	public RobotContainer() {
 		PortForwarder.add(5800, "10.35.39.10", 5800);
-		
+
 		SmartDashboard.putBoolean("Practice", false);
 		if (macAddress.getIsPractice()) {
 			SmartDashboard.putBoolean("Practice", true);
@@ -93,7 +93,8 @@ public class RobotContainer {
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(0.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 4300, 3000));
-		operatorController.buttonPadRight.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 3850, 3000));
+		operatorController.buttonPadRight
+				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 3850, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
@@ -104,8 +105,10 @@ public class RobotContainer {
 	public void putAuton() {
 		chooser = new SendableChooser<Command>();
 
-		chooser.addOption("TwoBallAuton", new TwoBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		chooser.addOption("ThreeBallAuton", new ThreeBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		chooser.addOption("TwoBallAuton",
+				new TwoBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		chooser.addOption("ThreeBallAuton",
+				new ThreeBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		SmartDashboard.putData("Auto Chooser", chooser);
 	}
 

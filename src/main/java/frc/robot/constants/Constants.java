@@ -7,6 +7,7 @@ package frc.robot.constants;
 import com.swervedrivespecialties.swervelib.ModuleConfiguration;
 import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
@@ -197,10 +198,18 @@ public abstract class Constants {
 
         /*** @return True if inverted, false if not */
         public abstract boolean invertSensor();
-        /***  @return Used to calculate the shooter speed using the pitch of the target in the cameras view.*/
+        /***  @return The shooter speed using the pitch of the target in the cameras view.*/
         public abstract double getShooterSpeed(double pitch);
-        /***  @return Used to see if the hood should be used or not according the the pitch of the target in the cameras view.*/
+        /***  @return If the hood should be used or not according the the pitch of the target in the cameras view.*/
         public abstract boolean getUseHood(double pitch);
+        /***  @return The distance the robot is from the target in meters.*/
+        public abstract double getDistance(double pitch);
+        /***  @return The pitch the camera would see at a distance.*/
+        public abstract double getPitch(double distance);
+        /***  @return The estimated time that it takes the ball from leaving the robot to entering the hub.*/
+        public abstract double getShotTime(double pitch);
+        /***  @return The estimated yaw to target to for moving shots.*/
+        public abstract double[] getMovingShotInfo(double pitch, ChassisSpeeds chassisSpeeds);
     }
     /*** Class containing climber constants */
     public abstract class ClimberConstants {

@@ -236,9 +236,9 @@ public class DriveSubsystem extends SubsystemBase {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
 			if (getShooterVisionSeeing()) {
 				PhotonTrackedTarget target = shooterCamera.getLatestResult().getBestTarget();
-				if(target!=null)
+				if (target != null)
 					return target.getYaw();
-				else 
+				else
 					return 0;
 			}
 		}
@@ -249,7 +249,7 @@ public class DriveSubsystem extends SubsystemBase {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
 			if (getShooterVisionSeeing()) {
 				PhotonTrackedTarget target = shooterCamera.getLatestResult().getBestTarget();
-				if(target!=null)
+				if (target != null)
 					return target.getPitch();
 				else
 					return 0;
@@ -289,6 +289,12 @@ public class DriveSubsystem extends SubsystemBase {
 					Units.degreesToRadians(getFrontVisionPitch()));
 		}
 		return 0; // This is the return value
+	}
+
+	public ChassisSpeeds getChassisSpeeds() {
+		return m_kinematics.toChassisSpeeds(getState(m_frontLeftModule),
+				getState(m_frontRightModule),
+				getState(m_backLeftModule), getState(m_backRightModule));
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import com.swervedrivespecialties.swervelib.control.MaxAccelerationConstraint;
 import com.swervedrivespecialties.swervelib.control.MaxVelocityConstraint;
 import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
@@ -348,21 +349,6 @@ public class CompConstants extends Constants {
 		}
 
 		@Override
-		public double getShooterSpeed(double pitch) {
-			if(!getUseHood(pitch))
-			{
-				return(-87.7414*pitch + 4791.31);
-			}
-			else
-				return (-96.2351 * pitch + 3897.74);
-		}
-
-		@Override
-		public boolean getUseHood(double pitch) {
-			return pitch<=-3.3;
-		}
-
-		@Override
 		public boolean getColorSensor() {
 			return true;
 		}
@@ -387,6 +373,66 @@ public class CompConstants extends Constants {
 		@Override
 		public Color getRedColor() {
 			return new Color(.5, 0, 0);
+		}
+
+		@Override
+		public boolean getUseHood(double pitch) {
+			return pitch<=-3.3;
+		}
+		
+		@Override
+		public double getShooterSpeed(double pitch) {
+			if(!getUseHood(pitch))
+			{
+				return(-87.7414*pitch + 4791.31);
+			}
+			else
+				return (-96.2351 * pitch + 3897.74);
+		}
+
+		@Override
+		public double getDistance(double pitch) {
+			double m = 0.0;
+			double b = 0.0;
+			return (m*pitch) + b;
+		}
+
+		@Override
+		public double getPitch(double distance) {
+			double m = 0.0;
+			double b = 0.0;
+			return (distance - b)/m;
+		}
+
+		@Override
+		public double getShotTime(double pitch) {
+
+			return 0;
+		}
+
+		@Override
+		public double[] getMovingShotInfo(double pitch, ChassisSpeeds chassisSpeeds) {
+			//Calculate the y distance that the ball will travel in the time that it takes for the ball to get to the hub.
+
+			double time = getShotTime(pitch);
+			double yVel = chassisSpeeds.vyMetersPerSecond;
+			double xVel = chassisSpeeds.vxMetersPerSecond;
+
+
+			double yDistance = -yVel*time; // Distance the shot will be off left to right. (positive to the right)
+
+			double xDistance = xVel*time; // Distance the shot will be off forward to backward. (positive to the front)
+
+
+			double distance = getDistance(pitch); //Distance the robot is away from the target in meters.
+
+			double yawOffset = Math.toDegrees(Math.atan(yDistance/distance));
+
+			double shooterSpeed = getShooterSpeed(getPitch(distance - xDistance));
+
+			double[] info = {shooterSpeed, yawOffset};
+
+			return info;
 		}
 	}
 

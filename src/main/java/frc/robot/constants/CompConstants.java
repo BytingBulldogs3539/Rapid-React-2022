@@ -136,7 +136,7 @@ public class CompConstants extends Constants {
 		@Override
 		public double getFRSteerOffset() {
 			// TODO Auto-generated method stub
-			return -3.4821;
+			return -3.4821-5.8153;
 		}
 
 		@Override
@@ -497,37 +497,37 @@ public class CompConstants extends Constants {
 		@Override
 		public int getLClimberSoftBottom() {
 			// TODO Auto-generated method stub
-			return 0;
+			return -1000;
 		}
 
 		@Override
 		public int getRClimberSoftBottom() {
 			// TODO Auto-generated method stub
-			return 0;
+			return -1000;
 		}
 
 		@Override
 		public int getLFrameHeight() {
 			// TODO Auto-generated method stub
-			return 9000;
+			return 18177;
 		}
 
 		@Override
 		public int getLMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 18000;
+			return 24000;
 		}
 
 		@Override
 		public int getRFrameHeight() {
 			// TODO Auto-generated method stub
-			return 9000;
+			return 18177;
 		}
 
 		@Override
 		public int getRMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 18000;
+			return 24000;
 		}
 	}
 

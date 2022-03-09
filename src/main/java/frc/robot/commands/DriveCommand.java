@@ -21,7 +21,7 @@ public class DriveCommand extends CommandBase {
 		addRequirements(drivetrain);
 
 		SmartDashboard.putNumber("Steer Ratio", 0.3);
-		SmartDashboard.putNumber("Drive Ratio", 0.3);
+		SmartDashboard.putNumber("Drive Ratio", 0.4);
 
 		// Declares and initializes variables holding the values of the PID constants
 		// for both cameras. This helps to make the code easier to read.

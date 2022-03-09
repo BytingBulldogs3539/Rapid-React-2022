@@ -86,6 +86,7 @@ public class ShooterCommand extends CommandBase {
 					shooterSubsystem.stop();
 				}
 			} else {
+				RobotContainer.pneumaticsSubsystem.setShooterReverse();
 				shooterSubsystem.setSM1Speed(SM1Speed);
 			}
 

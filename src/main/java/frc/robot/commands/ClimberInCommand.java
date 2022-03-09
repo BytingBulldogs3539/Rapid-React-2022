@@ -25,10 +25,7 @@ public class ClimberInCommand extends CommandBase {
 		//Unless the command is overriden by the dpad up button dont allow the operator bring in the climber unless it is in frame height.
 		if(!RobotContainer.operatorController.buttonPadUp.get())
 		{
-			if(!climberSubsystem.armsAboveFrameHeight())
-			{
-				pneumaticsSubsystem.moveClimberIn();
-			}
+			pneumaticsSubsystem.moveClimberIn();
 		}
 		else
 		{

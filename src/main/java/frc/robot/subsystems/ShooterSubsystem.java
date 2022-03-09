@@ -12,6 +12,8 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -26,9 +28,10 @@ public class ShooterSubsystem extends SubsystemBase {
 	TalonFX SM3;
 	TalonFX KM;
 
-	enum Color {
+	public enum Color {
 		BLUE,
 		RED,
+		UNKNOWN,
 		NONE
 	}
 
@@ -101,10 +104,6 @@ public class ShooterSubsystem extends SubsystemBase {
 		if (RobotContainer.constants.getShooterConstants().getColorSensor()) {
 			colorSensor = new ColorSensorV3(Port.kOnboard);
 		}
-		// Add the blue ball color to the color matcher.
-		colorMatcher.addColorMatch(RobotContainer.constants.getShooterConstants().getBlueColor());
-		// Add the red ball color to the color matcher.
-		colorMatcher.addColorMatch(RobotContainer.constants.getShooterConstants().getRedColor());
 	}
 
 	public TalonFX configureMotor(int motorID, GearRatio gearRatio, PIDConstants pidConstants) {
@@ -295,18 +294,25 @@ public class ShooterSubsystem extends SubsystemBase {
 		return KM.getClosedLoopError() < tolerance;
 	}
 
+	public Color getAllianceColor()
+	{
+		if(DriverStation.getAlliance() == Alliance.Blue)
+			return Color.BLUE;
+		if(DriverStation.getAlliance() == Alliance.Red)
+			return Color.RED;
+		if(DriverStation.getAlliance() == Alliance.Invalid)
+			return Color.UNKNOWN;
+		return Color.UNKNOWN;
+	}
+
 	public Color getColorSensorColor()
 	{
-		ColorMatchResult results = colorMatcher.matchColor(colorSensor.getColor());
-		if(results == null)
-		{
-			return Color.NONE;
-		}
-		if (results.color == RobotContainer.constants.getShooterConstants().getRedColor())
+		
+		if(colorSensor.getRed()>colorSensor.getBlue() && colorSensor.getRed()>300)
 		{
 			return Color.RED;
 		}
-		if (results.color == RobotContainer.constants.getShooterConstants().getBlueColor())
+		if(colorSensor.getBlue()>colorSensor.getRed() && colorSensor.getBlue()>300)
 		{
 			return Color.BLUE;
 		}

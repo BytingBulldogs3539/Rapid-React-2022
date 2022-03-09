@@ -89,7 +89,7 @@ public class RobotContainer {
 	 * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
-
+		operatorController.buttonTR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2000, 3000));
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(0.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 4300, 3000));

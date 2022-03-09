@@ -57,7 +57,7 @@ public class ShooterCommand extends CommandBase {
 		} else {
 			if (timer.hasElapsed(1)) {
 				shooterSubsystem.setKMSpeed(KMSpeed);
-				intakeSubsystem.setIntakeSpeed(0.3);
+				intakeSubsystem.setIntakeSpeed(0.2);
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);
 			}
@@ -108,7 +108,7 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		shooterSubsystem.stop();
-		intakeSubsystem.setIntakeSpeed(0.0);
+		intakeSubsystem.setIntakeSpeed(0);
 		RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
 	}
 

@@ -11,6 +11,11 @@ import frc.robot.subsystems.ShooterSubsystem.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class LightsSubsystem extends SubsystemBase {
 
   private final CANdle candle; // This creates a new CANdle object
@@ -45,6 +50,7 @@ public class LightsSubsystem extends SubsystemBase {
   private void updateLightTop(Color hue){
     if(top != hue && !frame){     
       top = hue;
+      SmartDashboard.putString("Bottom Lights", top.toString());
       if(hue == Color.RED){
         candle.setLEDs(255, 0, 0, w, cutoff, ledCount);
       }else if(hue == Color.BLUE){
@@ -60,6 +66,7 @@ public class LightsSubsystem extends SubsystemBase {
   private void updateLightBottom(Color huex){
     if(bottom != huex && frame){
       bottom = huex;
+      SmartDashboard.putString("Bottom Lights", bottom.toString());
       if(huex == Color.RED){
         candle.setLEDs(255, 0, 0, w, 8, cutoff-8);
       }else if(huex == Color.BLUE){
@@ -70,19 +77,6 @@ public class LightsSubsystem extends SubsystemBase {
         candle.setLEDs(110, 255, 20, w, 8, cutoff-8); 
       }
     }
-  }
-
-  /**
-   * Sets a block of LEDs to the specified color
-   * 
-   * @param r        The amount of Red to set, range is [0, 255]
-   * @param g        The amount of Green to set, range is [0, 255]
-   * @param b        The amount of Blue to set, range is [0, 255]
-   * @param startIdx Where to start setting the LEDs
-   * @param count    The number of LEDs to apply this to
-   */
-  public void setLEDColor(int r, int g, int b, int startIndex, int count) {
-    candle.setLEDs(r, g, b, 0, startIndex, count);
   }
 
   @Override

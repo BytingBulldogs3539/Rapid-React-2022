@@ -42,7 +42,7 @@ public class DriveCommand extends CommandBase {
 
 		shooterPIDController.setIntegratorRange(0.0, 1.0);
 		shooterPIDController.setTolerance(4.0);
-		shooterPIDController.setSetpoint(0);
+		shooterPIDController.setSetpoint(2.5);
 	}
 
 	private static double deadband(double value, double deadband) {

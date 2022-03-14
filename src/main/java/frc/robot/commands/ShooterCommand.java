@@ -48,19 +48,35 @@ public class ShooterCommand extends CommandBase {
 	public void execute() {
 		// If not in target range, reset and then start the timer. This effectively checks for if SM1 is running at the right RPM.
 		if(!shooterSubsystem.SM1AtTarget(1500)) {
-			timer.stop();
-			timer.reset();
+			if(SM1Speed>3000)
+			{
+				timer.stop();
+				timer.reset();
+			}
 			timer.start();
 		}
 		if (SmartDashboard.getNumber("KM Speed", 0) == 0) {
 			shooterSubsystem.setKMPercentOutput(0);
 		} else {
-			if (timer.hasElapsed(1)) {
-				shooterSubsystem.setKMSpeed(KMSpeed);
-				intakeSubsystem.setIntakeSpeed(0.2);
-			} else {
-				shooterSubsystem.setKMPercentOutput(0);
+			if(SM1Speed<3000)
+			{
+				if (timer.hasElapsed(.25)) {
+					shooterSubsystem.setKMSpeed(KMSpeed);
+					intakeSubsystem.setIntakeSpeed(0.2);
+				} else {
+					shooterSubsystem.setKMPercentOutput(0);
+				}
 			}
+			else
+			{
+				if (timer.hasElapsed(1)) {
+					shooterSubsystem.setKMSpeed(KMSpeed);
+					intakeSubsystem.setIntakeSpeed(0.2);
+				} else {
+					shooterSubsystem.setKMPercentOutput(0);
+				}
+			}
+			
 
 		}
 		if (SmartDashboard.getNumber("SM1 Speed", 0) == 0) {
@@ -88,6 +104,7 @@ public class ShooterCommand extends CommandBase {
 			} else {
 				RobotContainer.pneumaticsSubsystem.setShooterReverse();
 				shooterSubsystem.setSM1Speed(SM1Speed);
+
 			}
 
 		}

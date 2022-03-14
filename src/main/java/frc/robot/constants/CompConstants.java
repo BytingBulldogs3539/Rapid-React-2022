@@ -189,7 +189,7 @@ public class CompConstants extends Constants {
 		@Override
 		public String getFrontCameraName() {
 			// TODO Auto-generated method stub
-			return "HD_USB_Camera";
+			return "Microsoft_LifeCam_HD-3000";
 		}
 
 		@Override
@@ -515,7 +515,7 @@ public class CompConstants extends Constants {
 		@Override
 		public int getLMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 24000;
+			return 28000;
 		}
 
 		@Override
@@ -527,7 +527,7 @@ public class CompConstants extends Constants {
 		@Override
 		public int getRMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 24000;
+			return 28000;
 		}
 	}
 

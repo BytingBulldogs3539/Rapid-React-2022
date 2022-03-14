@@ -149,6 +149,7 @@ public class DriveSubsystem extends SubsystemBase {
 			shouldRunFront = true;
 			frontCamera = new PhotonCamera(
 					RobotContainer.constants.getDriveConstants().getFrontCameraName());
+			frontCamera.setDriverMode(true);
 		}
 
 		if (RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {

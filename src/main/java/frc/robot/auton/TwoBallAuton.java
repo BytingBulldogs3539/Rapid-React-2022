@@ -26,8 +26,8 @@ public class TwoBallAuton extends SequentialCommandGroup {
         super(new Command[] {
             new ParallelRaceGroup( TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
-                .lineTo(new Vector2(-0.38, 0.125), Rotation2.fromDegrees(-135))
-                .lineTo(new Vector2(-1.52, 0.700), Rotation2.fromDegrees(-135))
+                .lineTo(new Vector2(-0.38, 0.125), Rotation2.fromDegrees(-145))
+                .lineTo(new Vector2(-1.52, 0.700), Rotation2.fromDegrees(-145))
                 .lineTo(new Vector2(-0.38, 0.125), Rotation2.ZERO)
                 .lineTo(new Vector2(0.0, -0.3), Rotation2.ZERO)
                 .build(),constraints, false, driveSub),

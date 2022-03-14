@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.DistanceTest;
+import frc.robot.auton.OneBallAuton;
 import frc.robot.auton.TwoBallAuton;
 import frc.robot.auton.ThreeBallAuton;
 import frc.robot.commands.ClimberOutCommand;
 import frc.robot.commands.ClimberInCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.MoveShooterHood;
+import frc.robot.commands.ShootReverse;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.commands.ZeroGyroCommand;
 import frc.robot.constants.CompConstants;
@@ -59,6 +61,14 @@ public class RobotContainer {
 
 	public RobotContainer() {
 		PortForwarder.add(5800, "10.35.39.10", 5800);
+		
+		PortForwarder.add(1181, "10.35.39.10", 1181);
+		
+		PortForwarder.add(1182, "10.35.39.10", 1182);
+		
+		PortForwarder.add(1183, "10.35.39.10", 1183);
+		
+		PortForwarder.add(1184, "10.35.39.10", 1184);
 
 		SmartDashboard.putBoolean("Practice", false);
 		if (macAddress.getIsPractice()) {
@@ -89,10 +99,11 @@ public class RobotContainer {
 	 * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
-		operatorController.buttonTR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2000, 3000));
+		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  2100, 3000));
+		operatorController.buttonBL.whenHeld(new ShootReverse(shooterSubsystem));
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(0.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 4300, 3000));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 4050, 3000));
 		operatorController.buttonPadRight
 				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 3850, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
@@ -109,6 +120,8 @@ public class RobotContainer {
 				new TwoBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("ThreeBallAuton",
 				new ThreeBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+				chooser.addOption("OneBallAuton",
+						new OneBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		SmartDashboard.putData("Auto Chooser", chooser);
 	}
 

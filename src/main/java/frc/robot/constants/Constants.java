@@ -198,8 +198,10 @@ public abstract class Constants {
 
         /*** @return True if inverted, false if not */
         public abstract boolean invertSensor();
-        /***  @return The shooter speed using the pitch of the target in the cameras view.*/
+        /***  @return The shooter speed using the pitch of the target in the cameras view (bottom wheels). */
         public abstract double getShooterSpeed(double pitch);
+        /*** @return The shooter speed of the top wheels using pitch. */
+        public abstract double getTopShooterSpeed(double pitch);
         /***  @return If the hood should be used or not according the the pitch of the target in the cameras view.*/
         public abstract boolean getUseHood(double pitch);
         /***  @return The distance the robot is from the target in meters.*/

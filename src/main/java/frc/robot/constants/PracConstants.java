@@ -298,7 +298,7 @@ public class PracConstants extends Constants {
 
 		@Override
 		public int getSM2ID() {
-			return -1;
+			return 5;
 		}
 
 		@Override
@@ -349,6 +349,11 @@ public class PracConstants extends Constants {
 
 		@Override
 		public double getShooterSpeed(double pitch) {
+			return (-42.0211 * pitch + 3941);
+		}
+
+		@Override
+		public double getTopShooterSpeed(double pitch) {
 			return (-42.0211 * pitch + 3941);
 		}
 

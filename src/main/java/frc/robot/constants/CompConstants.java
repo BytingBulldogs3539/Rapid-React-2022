@@ -382,12 +382,12 @@ public class CompConstants extends Constants {
 		
 		@Override
 		public double getShooterSpeed(double pitch) {
-			if(!getUseHood(pitch))
-			{
-				return(-87.7414*pitch + 4791.31);
-			}
-			else
-				return (-96.2351 * pitch + 3897.74);
+			return(-87.7414 * pitch + 4791.31);
+		}
+
+		@Override
+		public double getTopShooterSpeed(double pitch) {
+			return(-87.7414 * pitch + 4791.31);
 		}
 
 		@Override

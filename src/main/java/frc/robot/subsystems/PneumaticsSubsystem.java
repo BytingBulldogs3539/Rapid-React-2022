@@ -20,6 +20,9 @@ public class PneumaticsSubsystem extends SubsystemBase {
 	// Boolean for the direction of the arms
 	public boolean areArmsOut;
 
+	// Boolean for if the grabber is closed (true) or open (false)
+	public boolean grabberStatus;
+
 	// Creates compressor & solenoid objects
 	Compressor compressor;
 	DoubleSolenoid intakeSolenoid;
@@ -76,11 +79,13 @@ public class PneumaticsSubsystem extends SubsystemBase {
 	}
 
 	public void grabClimbBar() {
+		grabberStatus = true;
 		staticClimberSolenoid.set(Value.kReverse);
 	}
 
 	public void releaseClimbBar() {
 		staticClimberSolenoid.set(Value.kForward);
+		grabberStatus = false;
 	}
 
 	public void moveClimberIn() {

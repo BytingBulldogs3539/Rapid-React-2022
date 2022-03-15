@@ -99,13 +99,13 @@ public class RobotContainer {
 	 * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
-		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  2100, 3000));
+		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  1000, 1000, 3000));
 		operatorController.buttonBL.whenHeld(new ShootReverse(shooterSubsystem));
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(0.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 4050, 3000));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2800, 2800, 3000));
 		operatorController.buttonPadRight
-				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 3850, 3000));
+				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 2800, 2800, 3000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));

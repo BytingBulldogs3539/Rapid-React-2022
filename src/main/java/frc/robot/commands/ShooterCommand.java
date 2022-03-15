@@ -4,9 +4,7 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -21,18 +19,22 @@ public class ShooterCommand extends CommandBase {
 	Timer timer = new Timer();
 
 	// Class variables for SM1Speed and KMSpeed
-	int SM1Speed;
-	int KMSpeed;
+	double SM1Speed;
+	double SM2Speed;
+	double KMSpeed;
 	boolean useVision = false;
 
-	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean useVision, int SM1Speed, int KMSpeed) {
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean useVision,
+			int SM1Speed, int SM2Speed, int KMSpeed) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.intakeSubsystem = intakeSubsystem;
 		this.SM1Speed = SM1Speed;
+		this.SM2Speed = SM2Speed;
 		this.KMSpeed = KMSpeed;
-		
+
 		SmartDashboard.putNumber("KM Speed", 3000);
 		SmartDashboard.putNumber("SM1 Speed", 4000);
+		SmartDashboard.putNumber("SM2 Speed", 4000);
 		this.useVision = useVision;
 	}
 
@@ -46,79 +48,52 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		// If not in target range, reset and then start the timer. This effectively checks for if SM1 is running at the right RPM.
-		if(!shooterSubsystem.SM1AtTarget(1500)) {
-			if(SM1Speed>3000)
-			{
+		SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
+		SM2Speed = SmartDashboard.getNumber("SM2 Speed", 0);
+		
+		// If not in target range, reset and then start the timer. This effectively
+		// checks for if SM1 is running at the right RPM.
+		if (!shooterSubsystem.SM1AtTarget(1500)) {
+			if (SM1Speed > 3000) {
 				timer.stop();
 				timer.reset();
 			}
 			timer.start();
 		}
-		if (SmartDashboard.getNumber("KM Speed", 0) == 0) {
-			shooterSubsystem.setKMPercentOutput(0);
-		} else {
-			if(SM1Speed<3000)
-			{
-				if (timer.hasElapsed(.25)) {
-					shooterSubsystem.setKMSpeed(KMSpeed);
-					intakeSubsystem.setIntakeSpeed(0.2);
-				} else {
-					shooterSubsystem.setKMPercentOutput(0);
-				}
-			}
-			else
-			{
-				if (timer.hasElapsed(1)) {
-					shooterSubsystem.setKMSpeed(KMSpeed);
-					intakeSubsystem.setIntakeSpeed(0.2);
-				} else {
-					shooterSubsystem.setKMPercentOutput(0);
-				}
-			}
-			
-
-		}
-		if (SmartDashboard.getNumber("SM1 Speed", 0) == 0) {
-			shooterSubsystem.setSM1PercentOutput(0);
-		} else
-		{
-			if(this.useVision)
-			{
-				if(RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
-					double pitch = RobotContainer.driveSubsystem.getShooterVisionPitch();
-					if(RobotContainer.constants.getShooterConstants().getUseHood(pitch))
-					{
-						RobotContainer.pneumaticsSubsystem.setShooterForward();
-					}
-					else
-					{
-						RobotContainer.pneumaticsSubsystem.setShooterReverse();
-					}
-					shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(pitch));//SmartDashboard.getNumber("SM1 Speed", 0)
-					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
-				} else {
-					RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 1); // Starts controller rumble
-					shooterSubsystem.stop();
-				}
+		if (SM1Speed < 3000) {
+			if (timer.hasElapsed(.25)) {
+				shooterSubsystem.setKMSpeed(KMSpeed);
+				intakeSubsystem.setIntakeSpeed(0.2);
 			} else {
-				RobotContainer.pneumaticsSubsystem.setShooterReverse();
-				shooterSubsystem.setSM1Speed(SM1Speed);
-
+				shooterSubsystem.setKMPercentOutput(0);
 			}
-
+		} else {
+			if (timer.hasElapsed(1)) {
+				shooterSubsystem.setKMSpeed(KMSpeed);
+				intakeSubsystem.setIntakeSpeed(0.2);
+			} else {
+				shooterSubsystem.setKMPercentOutput(0);
+			}
 		}
-		
-		if (SmartDashboard.getNumber("SM2 Speed", 0) == 0) {
-			shooterSubsystem.setSM2PercentOutput(0);
-		} else
-			shooterSubsystem.setSM2Speed(SmartDashboard.getNumber("SM2 Speed", 0));
 
-		if (SmartDashboard.getNumber("SM3 Speed", 0) == 0) {
-			shooterSubsystem.setSM3PercentOutput(0);
-		} else
-			shooterSubsystem.setSM3Speed(SmartDashboard.getNumber("SM3 Speed", 0));
-
+		if (this.useVision) {
+			if (RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
+				double pitch = RobotContainer.driveSubsystem.getShooterVisionPitch();
+				if (RobotContainer.constants.getShooterConstants().getUseHood(pitch)) {
+					RobotContainer.pneumaticsSubsystem.setShooterForward();
+				} else {
+					RobotContainer.pneumaticsSubsystem.setShooterReverse();
+				}
+				shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(pitch));
+				shooterSubsystem.setSM2Speed(RobotContainer.constants.getShooterConstants().getTopShooterSpeed(pitch));
+			} else {
+				shooterSubsystem.stop();
+			}
+		} else {
+			RobotContainer.pneumaticsSubsystem.setShooterReverse();
+			shooterSubsystem.setSM1Speed(SM1Speed);
+			shooterSubsystem.setSM2Speed(SM2Speed);
+		}
 	}
 
 	// Called once the command ends or is interrupted.
@@ -126,7 +101,6 @@ public class ShooterCommand extends CommandBase {
 	public void end(boolean interrupted) {
 		shooterSubsystem.stop();
 		intakeSubsystem.setIntakeSpeed(0);
-		RobotContainer.operatorController.setRumble(RumbleType.kLeftRumble, 0); // Stops controller rumble
 	}
 
 	// Returns true when the command should end.

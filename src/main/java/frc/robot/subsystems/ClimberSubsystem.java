@@ -86,6 +86,11 @@ public class ClimberSubsystem extends SubsystemBase {
 		return motor;
 	}
 
+
+	public double getClimberPosition() {
+		return (lClimber.getSelectedSensorPosition() + rClimber.getSelectedSensorPosition()) / 2.0;
+	}
+
 	/*** Sets the speed of both the left and right climbers. */
 	public void setMotorSpeed(double lClimberSpeed, double rClimberSpeed) {
 		if (hasLClimber)

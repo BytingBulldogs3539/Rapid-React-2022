@@ -173,8 +173,10 @@ public abstract class Constants {
         public abstract int getSM3ID();
         /*** @return  The ID of the kicker motor*/
         public abstract int getKMID();
-        /*** @return The values of the p, i, d, & f PID constants*/
+        /*** @return The values of the bottom p, i, d, & f PID constants*/
         public abstract PIDConstants getPIDConstants();
+        /*** @return The values of the top p, i, d, & f PID constants*/
+        public abstract PIDConstants getTopPIDConstants();
         /*** @return The values of the gear ratio and inverted constants for shooter motor 1*/
         public abstract GearRatio getSM1GearRatio();
         /*** @return The values of the gear ratio and inverted constants for shooter motor 2*/

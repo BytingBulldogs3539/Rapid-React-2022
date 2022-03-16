@@ -62,6 +62,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		} else {
 			hasSM1 = false;
 		}
+		pidConstants = RobotContainer.constants.getShooterConstants().getTopPIDConstants();
 
 		int SM2ID = RobotContainer.constants.getShooterConstants().getSM2ID();
 		GearRatio SM2GearRatio = RobotContainer.constants.getShooterConstants().getSM2GearRatio();
@@ -72,6 +73,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		} else {
 			hasSM2 = false;
 		}
+		pidConstants = RobotContainer.constants.getShooterConstants().getPIDConstants();
 
 		int SM3ID = RobotContainer.constants.getShooterConstants().getSM3ID();
 		GearRatio SM3GearRatio = RobotContainer.constants.getShooterConstants().getSM3GearRatio();

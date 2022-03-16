@@ -50,7 +50,7 @@ public class ShooterCommand extends CommandBase {
 	public void execute() {
 		SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
 		SM2Speed = SmartDashboard.getNumber("SM2 Speed", 0);
-		
+
 		// If not in target range, reset and then start the timer. This effectively
 		// checks for if SM1 is running at the right RPM.
 		if (!shooterSubsystem.SM1AtTarget(1500)) {

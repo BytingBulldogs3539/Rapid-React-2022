@@ -47,7 +47,7 @@ public class LightsSubsystem extends SubsystemBase {
   private void updateLightTop(Color hue){
     if(top != hue && !frame){     
       top = hue;
-      SmartDashboard.putString("Top Lights", top.toString());
+      //SmartDashboard.putString("Top Lights", top.toString());
       if(hue == Color.RED){
         candle.setLEDs(255, 0, 0, w, cutoff, ledCount);
       }else if(hue == Color.BLUE){
@@ -63,7 +63,7 @@ public class LightsSubsystem extends SubsystemBase {
   private void updateLightBottom(Color huex){
     if(bottom != huex && frame){
       bottom = huex;
-      SmartDashboard.putString("Bottom Lights", bottom.toString());
+      //SmartDashboard.putString("Bottom Lights", bottom.toString());
       if(huex == Color.RED){
         candle.setLEDs(255, 0, 0, w, 8, cutoff-8);
       }else if(huex == Color.BLUE){

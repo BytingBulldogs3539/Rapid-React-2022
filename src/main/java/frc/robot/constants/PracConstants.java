@@ -303,7 +303,11 @@ public class PracConstants extends Constants {
 
 		@Override
 		public PIDConstants getPIDConstants() {
-			// TODO Auto-generated method stub
+			return new PIDConstants(0.1, 0, 5, 0.045);
+		}
+
+		@Override
+		public PIDConstants getTopPIDConstants() {
 			return new PIDConstants(0.1, 0, 5, 0.045);
 		}
 

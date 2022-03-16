@@ -299,13 +299,17 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getSM2ID() {
-			return -1;
+			return 5;
 		}
 
 		@Override
 		public PIDConstants getPIDConstants() {
-			// TODO Auto-generated method stub
 			return new PIDConstants(0.1, 0, 5, 0.045);
+		}
+
+		@Override
+		public PIDConstants getTopPIDConstants() {
+			return new PIDConstants(0.005, 0, 0, 0.045);
 		}
 
 		@Override

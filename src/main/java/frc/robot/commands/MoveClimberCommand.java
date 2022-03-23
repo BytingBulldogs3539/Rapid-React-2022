@@ -26,63 +26,9 @@ public class MoveClimberCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		double motorSpeed = 0.0;
-		double motorDirection = -1.0;
-
-		if (RobotContainer.operatorController.buttonB.get()) {
-			motorDirection = 1.0;
-		}
-
-		// Allows for robot to climb up by pressing the right trigger (moves both arms).
-		if (RobotContainer.operatorController.getRightTrigger() > 0.1) {
-			motorSpeed = motorDirection * RobotContainer.operatorController.getRightTrigger();
-		}
-
-		climberSubsystem.setMotorSpeed(motorSpeed, RobotContainer.operatorController.buttonPadUp.get()); // Sets the motor speeds
-
-		// If X is pressed, grab the bar.
-		if (RobotContainer.operatorController.buttonX.get()) {
-			RobotContainer.pneumaticsSubsystem.grabClimbBar();
-		}
-		boolean shouldRelease = false;
-		// The first if above all of this checks if the manual climb button (d-pad up)
-		// is not pressed. If so, the code inside of it runs.
-		if (!RobotContainer.operatorController.buttonPadUp.get()) {
-			// Happens only when right trigger and B are both pressed.
-			// If grabber is closed and motor speed is positive, move arms out. Otherwise,
-			// if the motor speed is negative, bring the arms back in.
-			if (motorSpeed > 0 && RobotContainer.pneumaticsSubsystem.grabberStatus) {
-				RobotContainer.pneumaticsSubsystem.setIntakeOut();
-				RobotContainer.pneumaticsSubsystem.moveClimberOut();
-			} else if (motorSpeed < 0) {
-				RobotContainer.pneumaticsSubsystem.moveClimberIn();
-			}
-
-			// Automatically released the climb bar if not overriden when the robot is ready
-			// to do so.
-			if (climberSubsystem.getClimberPosition() < RobotContainer.constants.getClimberConstants()
-					.getLMaxExtensionHeight() * 0.70 && climberSubsystem.getClimberPosition() > RobotContainer.constants.getClimberConstants()
-					.getLMaxExtensionHeight() * 0.60 && motorSpeed < 0 && RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
-				shouldRelease = true;
-			}
-		}
-
-		// If Y is pressed, release the bar.
-		if (RobotContainer.operatorController.buttonY.get()) {
-			RobotContainer.pneumaticsSubsystem.releaseClimbBar();
-			// When Y is not pressed, use the limit switches to determine if grabbers need
-			// to be closed.
-		} else {
-			if (!shouldRelease) {
-				// If both switches are pressed, close the all grabbers.
-				if (RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
-					RobotContainer.pneumaticsSubsystem.grabClimbBar();
-				}
-			} else {
-				RobotContainer.pneumaticsSubsystem.releaseClimbBar();
-			}
-		}
-
+		double lSpeed = RobotContainer.operatorController.getLeftStickY();
+		double rSpeed = RobotContainer.operatorController.getRightStickY();
+		climberSubsystem.setMotorSpeed(lSpeed, rSpeed);
 	}
 
 	// Called once the command ends or is interrupted.

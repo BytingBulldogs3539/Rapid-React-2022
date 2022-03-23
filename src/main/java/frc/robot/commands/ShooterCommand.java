@@ -78,9 +78,9 @@ public class ShooterCommand extends CommandBase {
 
 		if (this.useVision) {
 			if (RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
-				double pitch = RobotContainer.driveSubsystem.getShooterVisionPitch();
-				shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(pitch));
-				shooterSubsystem.setSM2Speed(RobotContainer.constants.getShooterConstants().getTopShooterSpeed(pitch));
+				double distance = RobotContainer.constants.getShooterConstants().getDistance(RobotContainer.driveSubsystem.getShooterVisionPitch());
+				shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(distance));
+				shooterSubsystem.setSM2Speed(RobotContainer.constants.getShooterConstants().getTopShooterSpeed(distance));
 			} else {
 				shooterSubsystem.stop();
 			}

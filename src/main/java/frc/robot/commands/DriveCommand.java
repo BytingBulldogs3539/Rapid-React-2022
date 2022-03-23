@@ -81,6 +81,7 @@ public class DriveCommand extends CommandBase {
 		}
 		if(RobotContainer.driverController.getLeftTrigger()>.1)
 		{
+			drivetrain.setDriverMode(false);
 			if (!frontPIDController.atSetpoint()) {
 					translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
 			}

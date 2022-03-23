@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.commands.DriveCommand;
+import frc.robot.subsystems.ShooterSubsystem.Color;
 
 public class DriveSubsystem extends SubsystemBase {
 	public static final double MAX_VOLTAGE = 12.0;
@@ -164,6 +165,20 @@ public class DriveSubsystem extends SubsystemBase {
 		setDefaultCommand(new DriveCommand(this));
 	}
 
+	/*** Sets the state of the driver mode (on or off) */
+	public void setDriverMode(boolean shouldUse) {
+		frontCamera.setDriverMode(shouldUse);
+	}
+
+	/*** Sets the pipeline index (color of balls to look for) using the alliance color */
+	public void setPipeline() {
+		if(RobotContainer.shooterSubsystem.getAllianceColor() == Color.RED) {
+			frontCamera.setPipelineIndex(0);
+		} else if(RobotContainer.shooterSubsystem.getAllianceColor() == Color.BLUE) {
+			frontCamera.setPipelineIndex(1);
+		}
+	}
+
 	/**
 	 * Used to zero the pigeon / gyroscope.
 	 */
@@ -281,17 +296,6 @@ public class DriveSubsystem extends SubsystemBase {
 		return 0.0;
 	}
 
-	public double getShooterTargetDistance() {
-		if (getShooterVisionSeeing()) {
-			return PhotonUtils.calculateDistanceToTargetMeters(
-					RobotContainer.constants.getDriveConstants().getShooterCameraHeightMeters(),
-					getShooterTargetHeight(),
-					RobotContainer.constants.getDriveConstants().getShooterCameraPitchRadians(),
-					Units.degreesToRadians(getFrontVisionPitch()));
-		}
-		return 0; // This is the return value
-	}
-
 	public ChassisSpeeds getChassisSpeeds() {
 		return m_kinematics.toChassisSpeeds(getState(m_frontLeftModule),
 				getState(m_frontRightModule),
@@ -332,5 +336,6 @@ public class DriveSubsystem extends SubsystemBase {
 		SmartDashboard.putNumber("X Pose", m_pose.getX());
 		SmartDashboard.putNumber("Y Pose", m_pose.getY());
 		SmartDashboard.putNumber("Theta Pose", m_pose.getRotation().getDegrees());
+		SmartDashboard.putNumber("Target Distance", RobotContainer.constants.getShooterConstants().getDistance(getShooterVisionPitch()));
 	}
 }

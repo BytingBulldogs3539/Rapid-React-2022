@@ -5,7 +5,10 @@ import com.swervedrivespecialties.swervelib.control.MaxAccelerationConstraint;
 import com.swervedrivespecialties.swervelib.control.MaxVelocityConstraint;
 import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
+import org.photonvision.PhotonUtils;
+
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
@@ -212,19 +215,16 @@ public class CompConstants extends Constants {
 
 		@Override
 		public double getShooterCameraHeightMeters() {
-			// TODO Auto-generated method stub
-			return 0;
+			return Units.inchesToMeters(29);
 		}
 
 		@Override
 		public double getShooterCameraPitchRadians() {
-			// TODO Auto-generated method stub
-			return 0;
+			return Units.degreesToRadians(45);
 		}
 
 		@Override
 		public PIDConstants getFrontCameraPIDConstants() {
-			// TODO Auto-generated method stub
 			return new PIDConstants(0.01, 0, 0);
 		}
 
@@ -385,20 +385,29 @@ public class CompConstants extends Constants {
 		}
 		
 		@Override
-		public double getShooterSpeed(double pitch) {
-			return(-49.81 * pitch + 2775);
+		public double getShooterSpeed(double distance) {
+			return(-49.81 * distance + 2775);
 		}
 
 		@Override
-		public double getTopShooterSpeed(double pitch) {
-			return(-49.81 * pitch + 2775);
+		public double getTopShooterSpeed(double distance) {
+			return(-49.81 * distance + 2775);
 		}
 
 		@Override
 		public double getDistance(double pitch) {
-			double m = 0.0;
-			double b = 0.0;
-			return (m*pitch) + b;
+			// Constants such as camera and target height are stored.
+			final double TARGET_HEIGHT_METERS = Units.feetToMeters(104); // 105 total distance. 1 is subtracted from it to go for the center.
+
+			// Calculates the range
+			double range =
+			PhotonUtils.calculateDistanceToTargetMeters(
+					getDriveConstants().getShooterCameraHeightMeters(),
+					TARGET_HEIGHT_METERS,
+					getDriveConstants().getShooterCameraPitchRadians(),
+					Units.degreesToRadians(pitch));
+				
+			return range; // Returns the range
 		}
 
 		@Override
@@ -407,11 +416,12 @@ public class CompConstants extends Constants {
 			double b = 0.0;
 			return (distance - b)/m;
 		}
-
+		
 		@Override
 		public double getShotTime(double pitch) {
-
-			return 0;
+			double m = -0.0419;
+			double b = 0.6703;
+			return m * pitch + b; // Returns the time that it takes for the ball to leave the shooter and enter the target.
 		}
 
 		@Override
@@ -423,9 +433,9 @@ public class CompConstants extends Constants {
 			double xVel = chassisSpeeds.vxMetersPerSecond;
 
 
-			double yDistance = -yVel*time; // Distance the shot will be off left to right. (positive to the right)
+			double yDistance = -yVel * time; // Distance the shot will be off left to right. (positive to the right)
 
-			double xDistance = xVel*time; // Distance the shot will be off forward to backward. (positive to the front)
+			double xDistance = xVel * time; // Distance the shot will be off forward to backward. (positive to the front)
 
 
 			double distance = getDistance(pitch); //Distance the robot is away from the target in meters.
@@ -433,7 +443,7 @@ public class CompConstants extends Constants {
 			double yawOffset = Math.toDegrees(Math.atan(yDistance/distance));
 
 			double shooterSpeed = getShooterSpeed(getPitch(distance - xDistance));
-
+			
 			double[] info = {shooterSpeed, yawOffset};
 
 			return info;

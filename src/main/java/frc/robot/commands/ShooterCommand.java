@@ -48,27 +48,27 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
-		SM2Speed = SmartDashboard.getNumber("SM2 Speed", 0);
+		//SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
+		//SM2Speed = SmartDashboard.getNumber("SM2 Speed", 0);
 
 		// If not in target range, reset and then start the timer. This effectively
 		// checks for if SM1 is running at the right RPM.
-		if (!shooterSubsystem.SM1AtTarget(1500)) {
-			if (SM1Speed > 3000) {
+		if (!shooterSubsystem.SM1AtTarget(1400)) {
+			if (SM1Speed > 1800) {
 				timer.stop();
 				timer.reset();
 			}
 			timer.start();
 		}
-		if (SM1Speed < 3000) {
-			if (timer.hasElapsed(.25)) {
+		if (SM1Speed < 1800) {
+			if (timer.hasElapsed(.5)) {
 				shooterSubsystem.setKMSpeed(KMSpeed);
 				intakeSubsystem.setIntakeSpeed(0.2);
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);
 			}
 		} else {
-			if (timer.hasElapsed(1)) {
+			if (timer.hasElapsed(.35)) {
 				shooterSubsystem.setKMSpeed(KMSpeed);
 				intakeSubsystem.setIntakeSpeed(0.2);
 			} else {
@@ -79,18 +79,12 @@ public class ShooterCommand extends CommandBase {
 		if (this.useVision) {
 			if (RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
 				double pitch = RobotContainer.driveSubsystem.getShooterVisionPitch();
-				if (RobotContainer.constants.getShooterConstants().getUseHood(pitch)) {
-					RobotContainer.pneumaticsSubsystem.setShooterForward();
-				} else {
-					RobotContainer.pneumaticsSubsystem.setShooterReverse();
-				}
 				shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(pitch));
 				shooterSubsystem.setSM2Speed(RobotContainer.constants.getShooterConstants().getTopShooterSpeed(pitch));
 			} else {
 				shooterSubsystem.stop();
 			}
 		} else {
-			RobotContainer.pneumaticsSubsystem.setShooterReverse();
 			shooterSubsystem.setSM1Speed(SM1Speed);
 			shooterSubsystem.setSM2Speed(SM2Speed);
 		}

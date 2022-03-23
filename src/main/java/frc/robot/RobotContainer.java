@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.DistanceTest;
 import frc.robot.auton.OneBallAuton;
 import frc.robot.auton.TwoBallAuton;
+import frc.robot.auton.TwoBallAutonLeft;
 import frc.robot.auton.ThreeBallAuton;
 import frc.robot.commands.ClimberOutCommand;
 import frc.robot.commands.ClimberInCommand;
@@ -99,13 +100,14 @@ public class RobotContainer {
 	 * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
 	 */
 	private void configureButtonBindings() {
-		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  1000, 1000, 3000));
+
+		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  1200, 1200, 3000));
 		operatorController.buttonBL.whenHeld(new ShootReverse(shooterSubsystem));
 		operatorController.buttonPadDown
-				.whenHeld(new IntakeCommand(0.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2800, 2800, 3000));
+				.whenHeld(new IntakeCommand(1, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2900, 3200, 2000));
 		operatorController.buttonPadRight
-				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 2800, 2800, 3000));
+				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 2800, 2800, 2000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
@@ -115,7 +117,8 @@ public class RobotContainer {
 
 	public void putAuton() {
 		chooser = new SendableChooser<Command>();
-
+		chooser.addOption("TwoBallAutonLEFT",
+		new TwoBallAutonLeft(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("TwoBallAuton",
 				new TwoBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("ThreeBallAuton",

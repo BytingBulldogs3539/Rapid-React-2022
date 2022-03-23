@@ -20,8 +20,8 @@ public class DriveCommand extends CommandBase {
 
 		addRequirements(drivetrain);
 
-		SmartDashboard.putNumber("Steer Ratio", 0.3);
-		SmartDashboard.putNumber("Drive Ratio", 0.4);
+		SmartDashboard.putNumber("Steer Ratio", 0.4);
+		SmartDashboard.putNumber("Drive Ratio", 0.5);
 
 		// Declares and initializes variables holding the values of the PID constants
 		// for both cameras. This helps to make the code easier to read.
@@ -41,8 +41,8 @@ public class DriveCommand extends CommandBase {
 		frontPIDController.setSetpoint(0);
 
 		shooterPIDController.setIntegratorRange(0.0, 1.0);
-		shooterPIDController.setTolerance(4.0);
-		shooterPIDController.setSetpoint(2.5);
+		shooterPIDController.setTolerance(.25);
+		shooterPIDController.setSetpoint(0);
 	}
 
 	private static double deadband(double value, double deadband) {
@@ -73,18 +73,21 @@ public class DriveCommand extends CommandBase {
 		double translationXPercent = modifyAxis(RobotContainer.driverController.getLeftStickY());
 		double translationYPercent = -modifyAxis(RobotContainer.driverController.getLeftStickX());
 		double rotationPercent = -modifyAxis(RobotContainer.driverController.getRightStickX());
-		double driveRatio = SmartDashboard.getNumber("Drive Ratio", 0.3);
+		double driveRatio = SmartDashboard.getNumber("Drive Ratio", 0.5);
 
 		if(RobotContainer.driverController.getRightTrigger()>.1)
 		{
-			driveRatio = .7;
+			driveRatio = 1.0;
+		}
+		if(RobotContainer.driverController.getLeftTrigger()>.1)
+		{
+			if (!frontPIDController.atSetpoint()) {
+					translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+			}
 		}
 
 		if (RobotContainer.driverController.buttonBR.get()) {
-			
-		//	if (!frontPIDController.atSetpoint()) {
-		//		translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
-		//	}
+				
 			gyroAngle = Rotation2d.fromDegrees(0);
 		}
 
@@ -103,7 +106,7 @@ public class DriveCommand extends CommandBase {
 				ChassisSpeeds.fromFieldRelativeSpeeds(
 						driveRatio * translationXPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
 						driveRatio * translationYPercent * DriveSubsystem.MAX_VELOCITY_METERS_PER_SECOND,
-						SmartDashboard.getNumber("Steer Ratio", 0.3) * rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
+						SmartDashboard.getNumber("Steer Ratio", 0.4) * rotationPercent * DriveSubsystem.MAX_ANGULAR_VELOCITY_RADIANS_PER_SECOND,
 						gyroAngle));
 	}
 

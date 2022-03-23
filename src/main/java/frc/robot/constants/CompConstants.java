@@ -189,7 +189,7 @@ public class CompConstants extends Constants {
 		@Override
 		public String getFrontCameraName() {
 			// TODO Auto-generated method stub
-			return "Microsoft_LifeCam_HD-3000";
+			return "HD_USB_Camera";
 		}
 
 		@Override
@@ -231,7 +231,7 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getShooterCameraPIDConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(0.07, 0, 0);
+			return new PIDConstants(0.03, 0.001, 0.0);
 		}
 
 		@Override
@@ -249,7 +249,7 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getRotationConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(1, 0, .05, 0);
+			return new PIDConstants(1, 0, 0, 0);
 		}
 
 		@Override
@@ -386,12 +386,12 @@ public class CompConstants extends Constants {
 		
 		@Override
 		public double getShooterSpeed(double pitch) {
-			return(-87.7414 * pitch + 4791.31);
+			return(-49.81 * pitch + 2775);
 		}
 
 		@Override
 		public double getTopShooterSpeed(double pitch) {
-			return(-87.7414 * pitch + 4791.31);
+			return(-49.81 * pitch + 2775);
 		}
 
 		@Override

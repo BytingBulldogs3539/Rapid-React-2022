@@ -61,7 +61,8 @@ public class MoveClimberCommand extends CommandBase {
 			// Automatically released the climb bar if not overriden when the robot is ready
 			// to do so.
 			if (climberSubsystem.getClimberPosition() < RobotContainer.constants.getClimberConstants()
-					.getLMaxExtensionHeight() * 0.70 && motorSpeed < 0 && RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
+					.getLMaxExtensionHeight() * 0.70 && climberSubsystem.getClimberPosition() > RobotContainer.constants.getClimberConstants()
+					.getLMaxExtensionHeight() * 0.60 && motorSpeed < 0 && RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
 				shouldRelease = true;
 			}
 		}

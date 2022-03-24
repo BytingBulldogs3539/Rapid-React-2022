@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,8 +18,8 @@ import frc.robot.commands.MoveClimberCommand;
 import frc.robot.utilities.GearRatio;
 
 public class ClimberSubsystem extends SubsystemBase {
-	private TalonSRX lClimber;
-	private TalonSRX rClimber;
+	private TalonFX lClimber;
+	private TalonFX rClimber;
 
 	private DigitalInput leftLimit;
 	private DigitalInput rightLimit;
@@ -75,8 +76,8 @@ public class ClimberSubsystem extends SubsystemBase {
 		this.setDefaultCommand(new MoveClimberCommand(this));
 	}
 
-	public TalonSRX configMotor(int id, GearRatio gearRatio) {
-		TalonSRX motor = new TalonSRX(id);
+	public TalonFX configMotor(int id, GearRatio gearRatio) {
+		TalonFX motor = new TalonFX(id);
 		motor.setInverted(gearRatio.getInverted());
 		motor.setNeutralMode(NeutralMode.Brake);
 		motor.setSelectedSensorPosition(0);
@@ -89,6 +90,14 @@ public class ClimberSubsystem extends SubsystemBase {
 
 	public double getClimberPosition() {
 		return (lClimber.getSelectedSensorPosition() + rClimber.getSelectedSensorPosition()) / 2.0;
+	}
+	
+	public double getLClimberPosition() {
+		return lClimber.getSelectedSensorPosition();
+	}
+
+	public double getRClimberPosition() {
+		return rClimber.getSelectedSensorPosition();
 	}
 
 	/*** Sets the speed of both the left and right climbers. */
@@ -207,6 +216,12 @@ public class ClimberSubsystem extends SubsystemBase {
 			return rightLimit.get(); // Not inverted
 		}
 		return false; // No right limit switch present
+	}
+
+	// Citrus climber methods
+	public void zeroClimber() {
+		lClimber.setSelectedSensorPosition(0);
+		rClimber.setSelectedSensorPosition(0);
 	}
 
 	@Override

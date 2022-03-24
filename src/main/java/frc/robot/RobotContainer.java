@@ -21,6 +21,7 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.MoveShooterHood;
 import frc.robot.commands.ShootReverse;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.ZeroClimber;
 import frc.robot.commands.ZeroGyroCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
@@ -108,8 +109,8 @@ public class RobotContainer {
 		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2900, 3200, 2000));
 		operatorController.buttonPadRight
 				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 2800, 2800, 2000));
-		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
-		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
+		// operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
+		operatorController.buttonSTART.whenPressed(new ZeroClimber(climberSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
 
 		driverController.buttonSTART.whenPressed(new ZeroGyroCommand());

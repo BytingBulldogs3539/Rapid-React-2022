@@ -444,12 +444,12 @@ public class PracConstants extends Constants {
 
 		@Override
 		public int getLClimberMotorID() {
-			return 15;
+			return 16;
 		}
 
 		@Override
 		public int getRClimberMotorID() {
-			return 16;
+			return 15;
 		}
 
 		@Override
@@ -459,7 +459,7 @@ public class PracConstants extends Constants {
 
 		@Override
 		public GearRatio getRClimberGearRatio() {
-			return new GearRatio(1, true, 40); // Gear ratio does not matter but inversion does
+			return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
 		}
 
 		@Override
@@ -516,20 +516,17 @@ public class PracConstants extends Constants {
 
 		@Override
 		public int getLMaxExtensionHeight() {
-			// TODO Auto-generated method stub
-			return 18000;
+			return 212000;
 		}
 
 		@Override
 		public int getRFrameHeight() {
-			// TODO Auto-generated method stub
 			return 9000;
 		}
 
 		@Override
 		public int getRMaxExtensionHeight() {
-			// TODO Auto-generated method stub
-			return 18000;
+			return 212000;
 		}
 	}
 

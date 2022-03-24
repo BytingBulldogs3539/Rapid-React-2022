@@ -28,6 +28,27 @@ public class MoveClimberCommand extends CommandBase {
 	public void execute() {
 		double lSpeed = RobotContainer.operatorController.getLeftStickY();
 		double rSpeed = RobotContainer.operatorController.getRightStickY();
+		
+		// If up on d-pad is pressed, ignore all of the limits.
+		if(!RobotContainer.operatorController.buttonPadUp.get()) {
+			// If the left climber position is greater than the max extension height and the climber arm is moving, then set left speed to 0.
+			if(climberSubsystem.getLClimberPosition() > RobotContainer.constants.getClimberConstants().getLMaxExtensionHeight() && lSpeed > 0) {
+				lSpeed = 0;
+			}
+			// Same as above except for the right climber motor.
+			if(climberSubsystem.getRClimberPosition() > RobotContainer.constants.getClimberConstants().getRMaxExtensionHeight() && rSpeed > 0) {
+				rSpeed = 0;
+			}
+
+			if(climberSubsystem.getLClimberPosition() < RobotContainer.constants.getClimberConstants().getLClimberSoftBottom() && lSpeed < 0) {
+				lSpeed = 0;
+			}
+
+			if(climberSubsystem.getRClimberPosition() < RobotContainer.constants.getClimberConstants().getRClimberSoftBottom() && rSpeed < 0) {
+				rSpeed = 0;
+			}
+		}
+
 		climberSubsystem.setMotorSpeed(lSpeed, rSpeed);
 	}
 

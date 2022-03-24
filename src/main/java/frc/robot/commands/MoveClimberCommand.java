@@ -31,6 +31,7 @@ public class MoveClimberCommand extends CommandBase {
 		
 		// If up on d-pad is pressed, ignore all of the limits.
 		if(!RobotContainer.operatorController.buttonPadUp.get()) {
+			rSpeed = -lSpeed;
 			// If the left climber position is greater than the max extension height and the climber arm is moving, then set left speed to 0.
 			if(climberSubsystem.getLClimberPosition() > RobotContainer.constants.getClimberConstants().getLMaxExtensionHeight() && lSpeed > 0) {
 				lSpeed = 0;

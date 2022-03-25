@@ -301,6 +301,18 @@ public class DriveSubsystem extends SubsystemBase {
 				getState(m_frontRightModule),
 				getState(m_backLeftModule), getState(m_backRightModule));
 	}
+	
+	public double getMovingShooterTargetYaw() {
+		return RobotContainer.constants.getShooterConstants().getMovingShotInfo(getShooterVisionPitch(), getChassisSpeeds())[2];
+	}
+
+	public double getMovingShooterTargetSpeed() {
+		return RobotContainer.constants.getShooterConstants().getMovingShotInfo(getShooterVisionPitch(), getChassisSpeeds())[0];
+	}
+
+	public double getMovingTopShooterTargetSpeed() {
+		return RobotContainer.constants.getShooterConstants().getMovingShotInfo(getShooterVisionPitch(), getChassisSpeeds())[1];
+	}
 
 	@Override
 	public void periodic() {

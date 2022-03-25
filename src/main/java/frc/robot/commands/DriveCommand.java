@@ -6,6 +6,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.utilities.PIDConstants;
@@ -95,12 +96,14 @@ public class DriveCommand extends CommandBase {
 		if (RobotContainer.driverController.buttonBL.get()) {
 			if(drivetrain.getShooterVisionSeeing()) {
 				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
-				RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 0);
-			} else {
-				RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 1);
 			}
-		} else {
-			RobotContainer.driverController.setRumble(RumbleType.kLeftRumble, 0);
+		}
+
+		if (RobotContainer.driverController.buttonA.get()) {
+			if(drivetrain.getShooterVisionSeeing()) {
+				shooterPIDController.setSetpoint(drivetrain.getMovingShooterTargetYaw());
+				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+			}
 		}
 
 		drivetrain.drive(

@@ -102,14 +102,14 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 
-		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  1200, 1200, 3000));
+		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 1200, 1200, 3000));
 		operatorController.buttonBL.whenHeld(new ShootReverse(shooterSubsystem));
-		operatorController.buttonBR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  3400, 4600, 3000));
+		operatorController.buttonBR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3400, 4600, 3000));
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(1, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2900, 3200, 2000));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2900, 3200, 2000));
 		operatorController.buttonPadRight
-				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, 2800, 2800, 2000));
+				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, true, 2800, 2800, 2000));
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));

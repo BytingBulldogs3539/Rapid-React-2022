@@ -18,7 +18,7 @@ import com.swervedrivespecialties.swervelib.math.Vector2;
 /*** Auton command where the robot starts with one ball that it shoots. It then picks up two balls from two different locations and then shoots them from a different position than where it started. */
 public class OneBallAuton extends SequentialCommandGroup {
     public OneBallAuton(DriveSubsystem driveSub, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumaticsSubsystem, ShooterSubsystem shooterSubsystem) {
-        super(new Command[] {new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2800,2800, 3000).withTimeout(2), //Shoots for 4 seconds
+        super(new Command[] {new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2800,2800, 3000).withTimeout(2), //Shoots for 4 seconds
             new ParallelRaceGroup( TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
                         .lineTo(new Vector2(-2, 0), Rotation2.fromDegrees(0))

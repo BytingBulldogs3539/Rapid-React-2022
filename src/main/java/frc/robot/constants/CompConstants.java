@@ -220,7 +220,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public double getShooterCameraPitchRadians() {
-			return Units.degreesToRadians(45);
+			return Units.degreesToRadians(42);
 		}
 
 		@Override
@@ -384,20 +384,22 @@ public class CompConstants extends Constants {
 			return pitch<=-3.3;
 		}
 		
+		// For SM1 motor speeds given target distance (located in constants)
 		@Override
 		public double getShooterSpeed(double distance) {
-			return(-49.81 * distance + 2775);
+			return(275.889 * distance + 2206.11);
 		}
 
+		// For SM2 motor speeds given target distance (located in constants)
 		@Override
 		public double getTopShooterSpeed(double distance) {
-			return(-49.81 * distance + 2775);
+			return(703.94 * distance + 1539.06);
 		}
 
 		@Override
 		public double getDistance(double pitch) {
 			// Constants such as camera and target height are stored.
-			final double TARGET_HEIGHT_METERS = Units.feetToMeters(104); // 105 total distance. 1 is subtracted from it to go for the center.
+			final double TARGET_HEIGHT_METERS = Units.inchesToMeters(104); // 105 total distance (inches). 1 is subtracted from it to go for the center.
 
 			// Calculates the range
 			double range =
@@ -442,9 +444,11 @@ public class CompConstants extends Constants {
 
 			double yawOffset = Math.toDegrees(Math.atan(yDistance/distance));
 
-			double shooterSpeed = getShooterSpeed(getPitch(distance - xDistance));
+			double shooterSpeed = getShooterSpeed(distance - xDistance);
+
+			double topShooterSpeed = getTopShooterSpeed(distance - xDistance);
 			
-			double[] info = {shooterSpeed, yawOffset};
+			double[] info = {shooterSpeed, topShooterSpeed, yawOffset};
 
 			return info;
 		}

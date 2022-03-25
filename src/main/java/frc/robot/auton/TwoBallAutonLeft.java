@@ -24,7 +24,7 @@ public class TwoBallAutonLeft extends SequentialCommandGroup {
 
     public TwoBallAutonLeft(DriveSubsystem driveSub, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumaticsSubsystem, ShooterSubsystem shooterSubsystem) {
         super(new Command[] {
-            new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2800,2800, 3000).withTimeout(2), //Shoots for 4 seconds
+            new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2800,2800, 3000).withTimeout(2), //Shoots for 4 seconds
             new ParallelRaceGroup( TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
                 .lineTo(new Vector2(-0.38, 0.0), Rotation2.fromDegrees(-179))
@@ -32,6 +32,6 @@ public class TwoBallAutonLeft extends SequentialCommandGroup {
                 .lineTo(new Vector2(-1.3, 0.0), Rotation2.ZERO)
                 .build(),constraints, false, driveSub),
                 new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)), // Runs intake while driving
-                new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 3100,3150, 3000).withTimeout(4)}); // Shoots after it has finished driving
+                new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3100,3150, 3000).withTimeout(4)}); // Shoots after it has finished driving
     }
 }

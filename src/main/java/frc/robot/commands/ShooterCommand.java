@@ -24,7 +24,7 @@ public class ShooterCommand extends CommandBase {
 	double KMSpeed;
 	boolean useVision = false;
 
-	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean useVision,
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean isMovingShot, boolean useVision,
 			int SM1Speed, int SM2Speed, int KMSpeed) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.intakeSubsystem = intakeSubsystem;
@@ -48,8 +48,13 @@ public class ShooterCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		//SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
-		//SM2Speed = SmartDashboard.getNumber("SM2 Speed", 0);
+		if(RobotContainer.driverController.buttonA.get()) {
+			SM1Speed = RobotContainer.driveSubsystem.getMovingShooterTargetSpeed();
+			SM2Speed = RobotContainer.driveSubsystem.getMovingTopShooterTargetSpeed();
+		}
+
+		/* SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
+		SM2Speed = SmartDashboard.getNumber("SM2 Speed", 0); */
 
 		// If not in target range, reset and then start the timer. This effectively
 		// checks for if SM1 is running at the right RPM.

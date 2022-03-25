@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.DistanceTest;
+import frc.robot.auton.FourBallAuton;
 import frc.robot.auton.OneBallAuton;
 import frc.robot.auton.TwoBallAuton;
 import frc.robot.auton.TwoBallAutonLeft;
@@ -103,6 +104,7 @@ public class RobotContainer {
 
 		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  1200, 1200, 3000));
 		operatorController.buttonBL.whenHeld(new ShootReverse(shooterSubsystem));
+		operatorController.buttonBR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false,  3400, 4600, 3000));
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(1, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 2900, 3200, 2000));
@@ -123,8 +125,10 @@ public class RobotContainer {
 				new TwoBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("ThreeBallAuton",
 				new ThreeBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-				chooser.addOption("OneBallAuton",
-						new OneBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		chooser.addOption("OneBallAuton",
+				new OneBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));		
+		chooser.addOption("FourBallAuton",
+				new FourBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		SmartDashboard.putData("Auto Chooser", chooser);
 	}
 

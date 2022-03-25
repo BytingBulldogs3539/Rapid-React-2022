@@ -249,7 +249,7 @@ public class CompConstants extends Constants {
 		@Override
 		public PIDConstants getRotationConstants() {
 			// TODO Auto-generated method stub
-			return new PIDConstants(1, 0, 0, 0);
+			return new PIDConstants(1, 0, .07, 0);
 		}
 
 		@Override

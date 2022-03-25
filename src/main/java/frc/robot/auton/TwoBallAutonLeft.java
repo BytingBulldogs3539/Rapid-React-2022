@@ -31,7 +31,7 @@ public class TwoBallAutonLeft extends SequentialCommandGroup {
                 .lineTo(new Vector2(-1.52, 0.0), Rotation2.fromDegrees(-179))
                 .lineTo(new Vector2(-1.3, 0.0), Rotation2.ZERO)
                 .build(),constraints, false, driveSub),
-                new IntakeCommand(.5, 1.0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)), // Runs intake while driving
+                new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)), // Runs intake while driving
                 new ShooterCommand(shooterSubsystem, intakeSubsystem, false, 3100,3150, 3000).withTimeout(4)}); // Shoots after it has finished driving
     }
 }

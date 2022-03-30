@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,8 +18,8 @@ import frc.robot.commands.MoveClimberCommand;
 import frc.robot.utilities.GearRatio;
 
 public class ClimberSubsystem extends SubsystemBase {
-	private TalonSRX lClimber;
-	private TalonSRX rClimber;
+	private TalonFX lClimber;
+	private TalonFX rClimber;
 
 	private DigitalInput leftLimit;
 	private DigitalInput rightLimit;
@@ -75,8 +76,8 @@ public class ClimberSubsystem extends SubsystemBase {
 		this.setDefaultCommand(new MoveClimberCommand(this));
 	}
 
-	public TalonSRX configMotor(int id, GearRatio gearRatio) {
-		TalonSRX motor = new TalonSRX(id);
+	public TalonFX configMotor(int id, GearRatio gearRatio) {
+		TalonFX motor = new TalonFX(id);
 		motor.setInverted(gearRatio.getInverted());
 		motor.setNeutralMode(NeutralMode.Brake);
 		motor.setSelectedSensorPosition(0);
@@ -163,17 +164,17 @@ public class ClimberSubsystem extends SubsystemBase {
 			// by 500 or more and then adjust it.
 			if (climberSpeed > 0) {
 				if (lClimber.getSelectedSensorPosition() - 500 > rClimber.getSelectedSensorPosition()) {
-					lMotorSpeed = 0.0;
+					lMotorSpeed *= 0.75;
 				} else if (rClimber.getSelectedSensorPosition() - 500 > lClimber.getSelectedSensorPosition()) {
-					rMotorSpeed = 0.0;
+					rMotorSpeed *= 0.75;
 				}
 				// Otherwise, check to see if climber speed is negative. If so, check to see if
 				// one arm is higher than the other by 500 or more and then adjust it.
 			} else if (climberSpeed < 0) {
 				if (lClimber.getSelectedSensorPosition() + 500 < rClimber.getSelectedSensorPosition()) {
-					lMotorSpeed = 0.0;
+					lMotorSpeed *= 0.75;
 				} else if (rClimber.getSelectedSensorPosition() + 500 < lClimber.getSelectedSensorPosition()) {
-					rMotorSpeed = 0.0;
+					rMotorSpeed *= 0.75;
 				}
 			}
 		}

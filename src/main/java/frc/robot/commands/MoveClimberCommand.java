@@ -4,12 +4,16 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class MoveClimberCommand extends CommandBase {
 	ClimberSubsystem climberSubsystem;
+	Timer timer = new Timer();
+
+	
 
 	/** Creates a new GrabBarCommand. */
 	public MoveClimberCommand(ClimberSubsystem climberSubsystem) {
@@ -20,7 +24,8 @@ public class MoveClimberCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-
+		timer.reset();
+		timer.start();
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -61,9 +66,11 @@ public class MoveClimberCommand extends CommandBase {
 			// Automatically released the climb bar if not overriden when the robot is ready
 			// to do so.
 			if (climberSubsystem.getClimberPosition() < RobotContainer.constants.getClimberConstants()
-					.getLMaxExtensionHeight() * 0.70 && climberSubsystem.getClimberPosition() > RobotContainer.constants.getClimberConstants()
-					.getLMaxExtensionHeight() * 0.60 && motorSpeed < 0 && RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
+					.getLMaxExtensionHeight() * 0.70&& climberSubsystem.getClimberPosition() > RobotContainer.constants.getClimberConstants()
+					.getLMaxExtensionHeight() * 0.50 && motorSpeed < 0 && RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
 				shouldRelease = true;
+				timer.reset();
+				timer.start();
 			}
 		}
 
@@ -75,7 +82,7 @@ public class MoveClimberCommand extends CommandBase {
 		} else {
 			if (!shouldRelease) {
 				// If both switches are pressed, close the all grabbers.
-				if (RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
+				if (RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()&&timer.hasElapsed(1)) {
 					RobotContainer.pneumaticsSubsystem.grabClimbBar();
 				}
 			} else {

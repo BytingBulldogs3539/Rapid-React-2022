@@ -496,56 +496,53 @@ public class CompConstants extends Constants {
 
 		@Override
 		public boolean invertRightLimitSensor() {
-			// TODO Auto-generated method stub
 			return true;
 		}
 
 		@Override
 		public boolean getLClimberMotorInversion() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public boolean getRClimberMotorInversion() {
-			// TODO Auto-generated method stub
-			return true;
+			return false;
 		}
 
 		@Override
 		public int getLClimberSoftBottom() {
 			// TODO Auto-generated method stub
-			return -1000;
+			return -8000;
 		}
 
 		@Override
 		public int getRClimberSoftBottom() {
 			// TODO Auto-generated method stub
-			return -1000;
+			return -8000;
 		}
 
 		@Override
 		public int getLFrameHeight() {
 			// TODO Auto-generated method stub
-			return 18177;
+			return 132000;
 		}
 
 		@Override
 		public int getLMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 28000;
+			return 180000;
 		}
 
 		@Override
 		public int getRFrameHeight() {
 			// TODO Auto-generated method stub
-			return 18177;
+			return 132000;
 		}
 
 		@Override
 		public int getRMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 28000;
+			return 180000;
 		}
 	}
 

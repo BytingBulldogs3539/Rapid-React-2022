@@ -96,12 +96,12 @@ public class CompConstants extends Constants {
 
 		@Override
 		public int getBRDriveID() {
-			return 14;
+			return 42; // Was 14
 		}
 
 		@Override
 		public int getBRSteeringID() {
-			return 13;
+			return 41; // Was 13
 		}
 
 		@Override
@@ -144,14 +144,12 @@ public class CompConstants extends Constants {
 
 		@Override
 		public double getBLSteerOffset() {
-			// TODO Auto-generated method stub
 			return -3.9284;
 		}
 
 		@Override
 		public double getBRSteerOffset() {
-			// TODO Auto-generated method stub
-			return -.2883;
+			return -2.932851;
 		}
 
 		@Override

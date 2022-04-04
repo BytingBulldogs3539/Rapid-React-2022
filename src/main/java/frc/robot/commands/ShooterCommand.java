@@ -23,19 +23,28 @@ public class ShooterCommand extends CommandBase {
 	double SM2Speed;
 	double KMSpeed;
 	boolean useVision = false;
+	boolean revUp = false;
+	boolean shootNow = false;
 
-	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean isMovingShot, boolean useVision,
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean revUp, boolean useVision,
 			int SM1Speed, int SM2Speed, int KMSpeed) {
 		this.shooterSubsystem = shooterSubsystem;
 		this.intakeSubsystem = intakeSubsystem;
 		this.SM1Speed = SM1Speed;
 		this.SM2Speed = SM2Speed;
 		this.KMSpeed = KMSpeed;
+		this.revUp = revUp;
+		this.useVision = useVision;
+
+		if(revUp == true && useVision == true)
+		{
+			shootNow = true;
+			useVision = false;
+		}
 
 		SmartDashboard.putNumber("KM Speed", 3000);
 		SmartDashboard.putNumber("SM1 Speed", 4000);
 		SmartDashboard.putNumber("SM2 Speed", 4000);
-		this.useVision = useVision;
 	}
 
 	// Called when the command is initially scheduled.
@@ -67,15 +76,22 @@ public class ShooterCommand extends CommandBase {
 		}
 		if (SM1Speed < 1800) {
 			if (timer.hasElapsed(.5)) {
-				shooterSubsystem.setKMSpeed(KMSpeed);
-				intakeSubsystem.setIntakeSpeed(0.2);
+				if(!this.revUp)
+				{
+					shooterSubsystem.setKMSpeed(KMSpeed);
+					intakeSubsystem.setIntakeSpeed(0.2);
+				}
+					
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);
 			}
 		} else {
 			if (timer.hasElapsed(.35)) {
-				shooterSubsystem.setKMSpeed(KMSpeed);
-				intakeSubsystem.setIntakeSpeed(0.2);
+				if(!this.revUp)
+				{
+					shooterSubsystem.setKMSpeed(KMSpeed);
+					intakeSubsystem.setIntakeSpeed(0.2);
+				}
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);
 			}
@@ -93,13 +109,17 @@ public class ShooterCommand extends CommandBase {
 			shooterSubsystem.setSM1Speed(SM1Speed);
 			shooterSubsystem.setSM2Speed(SM2Speed);
 		}
+		//if(this.shootNow)
+		//	shooterSubsystem.setKMSpeed(KMSpeed);
+		//	intakeSubsystem.setIntakeSpeed(0.2);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
 		shooterSubsystem.stop();
-		intakeSubsystem.setIntakeSpeed(0);
+		if(!this.revUp)
+			intakeSubsystem.setIntakeSpeed(0);
 	}
 
 	// Returns true when the command should end.

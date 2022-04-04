@@ -179,6 +179,15 @@ public class ClimberSubsystem extends SubsystemBase {
 			}
 		}
 
+		if(lMotorSpeed<0 && getLeftLimit() && lClimber.getSelectedSensorPosition()<RobotContainer.constants.getClimberConstants().getLMaxExtensionHeight()*.15)
+		{
+			rMotorSpeed = 0;//Inverted on purpose
+		}
+		if(rMotorSpeed<0 && getRightLimit() && rClimber.getSelectedSensorPosition()<RobotContainer.constants.getClimberConstants().getRMaxExtensionHeight()*.15)
+		{
+			lMotorSpeed = 0;// inverted on purpose
+		}
+
 		setMotorSpeed(lMotorSpeed, rMotorSpeed);
 	}
 

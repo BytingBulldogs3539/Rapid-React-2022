@@ -444,17 +444,17 @@ public class PracConstants extends Constants {
 
 		@Override
 		public int getLClimberMotorID() {
-			return 16;
-		}
-
-		@Override
-		public int getRClimberMotorID() {
 			return 15;
 		}
 
 		@Override
+		public int getRClimberMotorID() {
+			return 16;
+		}
+
+		@Override
 		public GearRatio getLClimberGearRatio() {
-			return new GearRatio(1, true, 40); // Gear ratio does not matter but inversion does
+			return new GearRatio(1, false, 40); // Gear ratio does not matter but inversion does
 		}
 
 		@Override

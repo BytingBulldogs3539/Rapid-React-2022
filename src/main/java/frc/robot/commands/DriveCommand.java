@@ -38,7 +38,7 @@ public class DriveCommand extends CommandBase {
 
 		// Sets several values of the front PID Controller
 		frontPIDController.setIntegratorRange(0.0, 1.0);
-		frontPIDController.setTolerance(4.0);
+		frontPIDController.setTolerance(0.0);
 		frontPIDController.setSetpoint(0);
 
 		shooterPIDController.setIntegratorRange(0.0, 1.0);
@@ -86,6 +86,10 @@ public class DriveCommand extends CommandBase {
 			if (!frontPIDController.atSetpoint()) {
 					translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
 			}
+		}
+		else
+		{
+			drivetrain.setDriverMode(true);
 		}
 
 		if (RobotContainer.driverController.buttonBR.get()) {

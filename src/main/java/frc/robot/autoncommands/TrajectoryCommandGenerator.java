@@ -13,7 +13,7 @@ import com.swervedrivespecialties.swervelib.control.Trajectory;
 import com.swervedrivespecialties.swervelib.control.TrajectoryConstraint;
 
 public class TrajectoryCommandGenerator {
-	public static Command getMotionCommand(Path path, TrajectoryConstraint[] constraints,boolean reverse, DriveSubsystem driveSub) {
+	public static Command getMotionCommand(Path path, TrajectoryConstraint[] constraints,boolean reverse, DriveSubsystem driveSub, Boolean useVision, Boolean useShooterCam) {
 		Trajectory trajectory = new Trajectory(path, constraints, 0.2);
 		SwerveController swerveControllerCommand = new SwerveController(trajectory, driveSub::getPose,
 				new PidController(new PidConstants(
@@ -37,7 +37,14 @@ public class TrajectoryCommandGenerator {
 								.getI(),
 						RobotContainer.constants.getDriveConstants().getRotationConstants()
 								.getD())),
-				driveSub::getShooterVisionSeeing, driveSub::getShooterVisionYaw, false, driveSub,
+				new PidController(new PidConstants(
+						RobotContainer.constants.getDriveConstants().getShooterCameraPIDConstants()
+								.getP(),
+						RobotContainer.constants.getDriveConstants().getShooterCameraPIDConstants()
+								.getI(),
+						RobotContainer.constants.getDriveConstants().getShooterCameraPIDConstants()
+								.getD())),
+				driveSub::getShooterVisionSeeing, driveSub::getShooterVisionYaw, useVision ,driveSub::getFrontVisionYaw, driveSub::getFrontVisionSeeing, useShooterCam, driveSub,
 				new Subsystem[] { (Subsystem) driveSub });
 
 		return (Command) swerveControllerCommand.andThen(() -> driveSub.drive(new ChassisSpeeds(0, 0, 0)),

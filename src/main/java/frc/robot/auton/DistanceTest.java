@@ -20,6 +20,6 @@ public class DistanceTest extends SequentialCommandGroup {
                         /* .lineTo(new Vector2(2, -2), Rotation2.fromDegrees(180))
                         .lineTo(new Vector2(1, -2), Rotation2.ZERO)
                         .lineTo(new Vector2(1, -3), Rotation2.ZERO) */
-                        .build(),RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub) });
+                        .build(),RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub,false,false) });
     }
 }

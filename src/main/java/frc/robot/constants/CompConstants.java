@@ -223,7 +223,7 @@ public class CompConstants extends Constants {
 
 		@Override
 		public PIDConstants getFrontCameraPIDConstants() {
-			return new PIDConstants(0.1, 0, 0);
+			return new PIDConstants(0.03, .001, 0);
 		}
 
 		@Override

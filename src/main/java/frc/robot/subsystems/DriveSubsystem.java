@@ -214,7 +214,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	// Getter methods for front camera
-	public boolean getFrontVisionSeeing() {
+	public Boolean getFrontVisionSeeing() {
 		if (!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals("")) {
 			return frontCamera.getLatestResult().hasTargets();
 		}
@@ -241,13 +241,12 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	// Getter methods for the shooter camera
-	public boolean getShooterVisionSeeing() {
+	public Boolean getShooterVisionSeeing() {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
 			return shooterCamera.getLatestResult().hasTargets();
 		}
 		return false;
 	}
-
 	public double getShooterVisionYaw() {
 		if (!RobotContainer.constants.getDriveConstants().getShooterCameraName().equals("")) {
 			if (getShooterVisionSeeing()) {

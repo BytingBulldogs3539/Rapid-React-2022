@@ -25,6 +25,7 @@ public class ShooterCommand extends CommandBase {
 	boolean useVision = false;
 	boolean revUp = false;
 	boolean shootNow = false;
+	double intakeSpeed = 0.2;
 
 	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean revUp, boolean useVision,
 			int SM1Speed, int SM2Speed, int KMSpeed) {
@@ -35,6 +36,29 @@ public class ShooterCommand extends CommandBase {
 		this.KMSpeed = KMSpeed;
 		this.revUp = revUp;
 		this.useVision = useVision;
+
+		if(revUp == true && useVision == true)
+		{
+			shootNow = true;
+			useVision = false;
+		}
+
+		SmartDashboard.putNumber("KM Speed", 3000);
+		SmartDashboard.putNumber("SM1 Speed", 4000);
+		SmartDashboard.putNumber("SM2 Speed", 4000);
+	}
+
+	/*** Version of the ShooterCommand constructor that manually sets the intake speed. */
+	public ShooterCommand(ShooterSubsystem shooterSubsystem, IntakeSubsystem intakeSubsystem, boolean revUp, boolean useVision,
+			int SM1Speed, int SM2Speed, int KMSpeed, double intakeSpeed) {
+		this.shooterSubsystem = shooterSubsystem;
+		this.intakeSubsystem = intakeSubsystem;
+		this.SM1Speed = SM1Speed;
+		this.SM2Speed = SM2Speed;
+		this.KMSpeed = KMSpeed;
+		this.revUp = revUp;
+		this.useVision = useVision;
+		this.intakeSpeed = intakeSpeed;
 
 		if(revUp == true && useVision == true)
 		{
@@ -79,7 +103,7 @@ public class ShooterCommand extends CommandBase {
 				if(!this.revUp)
 				{
 					shooterSubsystem.setKMSpeed(KMSpeed);
-					intakeSubsystem.setIntakeSpeed(0.2);
+					intakeSubsystem.setIntakeSpeed(intakeSpeed);
 				}
 					
 			} else {
@@ -90,7 +114,7 @@ public class ShooterCommand extends CommandBase {
 				if(!this.revUp)
 				{
 					shooterSubsystem.setKMSpeed(KMSpeed);
-					intakeSubsystem.setIntakeSpeed(0.2);
+					intakeSubsystem.setIntakeSpeed(intakeSpeed);
 				}
 			} else {
 				shooterSubsystem.setKMPercentOutput(0);

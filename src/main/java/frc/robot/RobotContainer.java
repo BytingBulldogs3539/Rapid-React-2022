@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.DistanceTest;
 import frc.robot.auton.FourBallAuton;
 import frc.robot.auton.OneBallAuton;
+import frc.robot.auton.QuickerFourBallAuton;
 import frc.robot.auton.TwoBallAuton;
 import frc.robot.auton.TwoBallAutonLeft;
 import frc.robot.auton.ThreeBallAuton;
@@ -129,6 +130,8 @@ public class RobotContainer {
 				new OneBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));		
 		chooser.addOption("FourBallAuton",
 				new FourBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
+		chooser.addOption("QuickerFourBallAuton",
+				new QuickerFourBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		SmartDashboard.putData("Auto Chooser", chooser);
 	}
 

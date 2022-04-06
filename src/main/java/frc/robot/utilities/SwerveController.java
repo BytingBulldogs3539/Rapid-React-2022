@@ -22,15 +22,20 @@ public class SwerveController extends CommandBase {
 	private final PidController m_xController;
 	private final PidController m_yController;
 	private final PidController m_thetaController;
+	private final PidController m_targetController;
 	private final Supplier<Double> m_targetSupplier;
 	private final boolean m_shouldVisionTrack;
 	private final Supplier<Boolean> m_targetIsAvail;
+	private final Supplier<Double> m_target2Supplier;
+	private final boolean isTargetOne;
+	private final Supplier<Boolean> m_target2IsAvail;
 	private final DriveSubsystem m_driveSub;
 	private double lastTime = 0.0D;
 
 	public SwerveController(Trajectory trajectory, Supplier<Pose2d> pose, PidController xController,
-			PidController yController, PidController thetaController, Supplier<Boolean> targetIsAvail,
-			Supplier<Double> targetSupplier, Boolean shouldVisionTrack, DriveSubsystem driveSub,
+			PidController yController, PidController thetaController,PidController targetController, Supplier<Boolean> targetIsAvail,
+			Supplier<Double> targetSupplier, Boolean shouldVisionTrack, Supplier<Double> target2Supplier,
+			Supplier<Boolean> target2IsAvail, Boolean isTargetOne, DriveSubsystem driveSub,
 			Subsystem... requirements) {
 		this.m_trajectory = (Trajectory) ErrorMessages.requireNonNullParam(trajectory, "trajectory",
 				"SwerveControllerCommand");
@@ -44,6 +49,9 @@ public class SwerveController extends CommandBase {
 		this.m_thetaController = (PidController) ErrorMessages.requireNonNullParam(thetaController,
 				"thetaController",
 				"SwerveControllerCommand");
+		this.m_targetController = (PidController) ErrorMessages.requireNonNullParam(targetController,
+				"targetController",
+				"SwerveControllerCommand");
 
 		this.m_targetIsAvail = (Supplier<Boolean>) ErrorMessages.requireNonNullParam(targetIsAvail,
 				"targetIsAvail",
@@ -56,6 +64,9 @@ public class SwerveController extends CommandBase {
 				"SwerveControllerCommand")).booleanValue();
 		this.m_driveSub = (DriveSubsystem) ErrorMessages.requireNonNullParam(driveSub, "driveSub",
 				"SwerveControllerCommand");
+		this.m_target2Supplier = target2Supplier;
+		this.m_target2IsAvail = target2IsAvail;
+		this.isTargetOne = isTargetOne;
 		addRequirements(requirements);
 	}
 
@@ -65,6 +76,8 @@ public class SwerveController extends CommandBase {
 	}
 
 	public void execute() {
+		this.m_driveSub.setPipeline();
+		this.m_driveSub.setDriverMode(false);
 		double curTime = this.m_timer.get();
 
 		double dt = curTime - this.lastTime;
@@ -121,16 +134,32 @@ public class SwerveController extends CommandBase {
 		double targetAngularVel = 0.0D;
 
 		if (this.m_shouldVisionTrack) {
-			if (((Boolean) this.m_targetIsAvail.get()).booleanValue()) {
-				this.m_thetaController.setSetpoint(0.0D);
-				targetAngularVel = this.m_thetaController
-						.calculate(((Double) this.m_targetSupplier.get()).doubleValue(), dt);
-			} else {
+			if (this.isTargetOne) {
+				if (((Boolean) this.m_targetIsAvail.get()).booleanValue()) {
+					this.m_targetController.setSetpoint(0.0D);
+					targetAngularVel = this.m_targetController
+							.calculate(((Double) this.m_targetSupplier.get()).doubleValue(), dt);
+				} else {
 
-				this.m_thetaController.setSetpoint(desiredPose.getRotation().inverse().toRadians());
-				targetAngularVel = this.m_thetaController
-						.calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
+					this.m_thetaController.setSetpoint(desiredPose.getRotation().inverse().toRadians());
+					targetAngularVel = this.m_thetaController
+							.calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
+				}
 			}
+			else
+			{
+				if (((Boolean) this.m_target2IsAvail.get()).booleanValue()) {
+					this.m_targetController.setSetpoint(0.0D);
+					targetAngularVel = this.m_targetController
+							.calculate(((Double) this.m_target2Supplier.get()).doubleValue(), dt);
+				} else {
+
+					this.m_thetaController.setSetpoint(desiredPose.getRotation().inverse().toRadians());
+					targetAngularVel = this.m_thetaController
+							.calculate(((Pose2d) this.m_pose.get()).getRotation().getRadians(), dt);
+				}
+			}
+
 		} else {
 			this.m_thetaController.setSetpoint(desiredPose.getRotation().inverse().toRadians());
 

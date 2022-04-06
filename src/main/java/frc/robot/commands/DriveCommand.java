@@ -82,9 +82,11 @@ public class DriveCommand extends CommandBase {
 		}
 		if(RobotContainer.driverController.getLeftTrigger()>.1)
 		{
+			drivetrain.setPipeline();
 			drivetrain.setDriverMode(false);
 			if (!frontPIDController.atSetpoint()) {
-					translationYPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+				if(RobotContainer.driveSubsystem.getFrontVisionSeeing())
+					rotationPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
 			}
 		}
 		else

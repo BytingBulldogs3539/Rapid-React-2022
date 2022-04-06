@@ -22,6 +22,6 @@ public class OneBallAuton extends SequentialCommandGroup {
             new ParallelRaceGroup( TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
                         .lineTo(new Vector2(-2, 0), Rotation2.fromDegrees(0))
-                        .build(),RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub))}); // Shoots after it has finished driving
+                        .build(),RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub,false,false))}); // Shoots after it has finished driving
     }
 }

@@ -27,7 +27,7 @@ public class ThreeBallAuton extends SequentialCommandGroup {
                         .lineTo(new Vector2(-1.2, -0.75), Rotation2.fromDegrees(-270))
                         .lineTo(new Vector2(-0.75, -2.15), Rotation2.fromDegrees(-270))
                         .lineTo(new Vector2(-0.1, -0.8), Rotation2.fromDegrees(-378))
-                        .build(),RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub),
+                        .build(), RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub, false, false),
                         new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)), // Runs intake while driving
                         new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2800,2800, 3000).withTimeout(2.5)}); // Shoots after it has finished driving
     }

@@ -32,7 +32,7 @@ public class QuickerFourBallAuton extends SequentialCommandGroup {
                         .lineTo(new Vector2(-1.2192, 0 + 0.42), Rotation2.fromDegrees(180))
                         .lineTo(new Vector2(-0.9, 1.5 + 0.50), Rotation2.fromDegrees(310))
                         .lineTo(new Vector2(0.60, 2.70), Rotation2.fromDegrees(310))
-                        .lineTo(new Vector2(1.0, 2.30 + 0.50), Rotation2.fromDegrees(414))
+                        .lineTo(new Vector2(1.0, 2.30 + 0.50), Rotation2.fromDegrees(417))
                         .build(), RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub, false, false),
                         new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10),
                         new ShooterCommand(shooterSubsystem, intakeSubsystem, true, false, 3400, 3400, 2000).withTimeout(10)), // Runs intake while driving
@@ -40,11 +40,20 @@ public class QuickerFourBallAuton extends SequentialCommandGroup {
                         new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3400, 3400, 2000).withTimeout(1.5),
 
                         new ParallelRaceGroup( TrajectoryCommandGenerator
-                        .getMotionCommand((new SimplePathBuilder(new Vector2(1.0, 2.80), Rotation2.fromDegrees(414)))
-                                .lineTo(new Vector2(-1.0, 6.4), Rotation2.fromDegrees(275))
+                        .getMotionCommand((new SimplePathBuilder(new Vector2(1.0, 2.80), Rotation2.fromDegrees(415.5)))
+                                .lineTo(new Vector2(-0.25, 5.80), Rotation2.fromDegrees(230))
                                 // .lineTo(new Vector2(-4.25, 2.5), Rotation2.fromDegrees(-180))
                                 .build(), LongConstraints, false, driveSub, false, false),
                                 new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)),
+
+                        new ParallelRaceGroup( TrajectoryCommandGenerator
+                        .getMotionCommand((new SimplePathBuilder(new Vector2(-0.25, 5.80), Rotation2.fromDegrees(230)))
+                                .lineTo(new Vector2(-0.1, 6.55), Rotation2.fromDegrees(245))
+                                .lineTo(new Vector2(0.0, 2.10), Rotation2.fromDegrees(410))
+                                .build(), LongConstraints, false, driveSub, false, false),
+                                new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)),
+                        new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3400, 3400, 2000).withTimeout(1.5)
+                        
                         /*
                         // Drives into the fourth ball while using vision tracking.
                         new ParallelRaceGroup( TrajectoryCommandGenerator

@@ -222,9 +222,15 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	public double getFrontVisionYaw() {
-		if (!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals("")) {
-			if (getFrontVisionSeeing()) {
-				return frontCamera.getLatestResult().getBestTarget().getYaw();
+		if (!RobotContainer.constants.getDriveConstants().getFrontCameraName().equals("")) 
+		{
+			if (getFrontVisionSeeing()) 
+			{
+				PhotonTrackedTarget target = frontCamera.getLatestResult().getBestTarget();
+				if (target != null)
+					return target.getYaw();
+				else
+					return 0;
 			}
 		}
 		return 0;

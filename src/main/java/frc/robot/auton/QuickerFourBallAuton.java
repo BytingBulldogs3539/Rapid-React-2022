@@ -1,7 +1,6 @@
 package frc.robot.auton;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
@@ -24,7 +23,7 @@ public class QuickerFourBallAuton extends SequentialCommandGroup {
 
     public QuickerFourBallAuton(DriveSubsystem driveSub, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumaticsSubsystem, ShooterSubsystem shooterSubsystem) {
         super(new Command[] {
-            new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2900, 2900, 2000).withTimeout(1.5),
+            new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2825, 2825, 2000).withTimeout(1.5),
 
             new ParallelRaceGroup( TrajectoryCommandGenerator
                 .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
@@ -52,7 +51,7 @@ public class QuickerFourBallAuton extends SequentialCommandGroup {
                                 .lineTo(new Vector2(0.0, 2.10), Rotation2.fromDegrees(410))
                                 .build(), LongConstraints, false, driveSub, false, false),
                                 new IntakeCommand(1.0, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem).withTimeout(10)),
-                        new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3400, 3400, 2000).withTimeout(1.5)
+                        new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3300, 3300, 2000).withTimeout(1.5)
                         
                         /*
                         // Drives into the fourth ball while using vision tracking.

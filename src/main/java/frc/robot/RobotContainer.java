@@ -108,12 +108,13 @@ public class RobotContainer {
 		operatorController.buttonBR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3400, 4600, 3000));
 		operatorController.buttonPadDown
 				.whenHeld(new IntakeCommand(1, 0, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2900, 3200, 2000));
+		operatorController.buttonA.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2900, 3200, 2000)); // Static shot
 		operatorController.buttonPadRight
-				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, true, 2800, 2800, 2000));
+				.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, true, 2800, 2800, 2000)); // Vision shot
 		operatorController.buttonSELECT.whenPressed(new ClimberOutCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
+				operatorController.buttonPadLeft.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, true, 2800, 2800, 2000)); // Revs to setpoint using vision.
 
 		driverController.buttonSTART.whenPressed(new ZeroGyroCommand());
 	}

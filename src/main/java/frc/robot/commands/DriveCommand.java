@@ -42,7 +42,7 @@ public class DriveCommand extends CommandBase {
 		frontPIDController.setSetpoint(0);
 
 		shooterPIDController.setIntegratorRange(0.0, 1.0);
-		shooterPIDController.setTolerance(.25);
+		shooterPIDController.setTolerance(2.5); // Tolerance for being lined up for shooting.
 		shooterPIDController.setSetpoint(0);
 	}
 
@@ -104,6 +104,10 @@ public class DriveCommand extends CommandBase {
 				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
 			}
 		}
+		
+		// If within tolerance (1 degree), set lights to purple.
+		shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+		RobotContainer.lightsSubsystem.setGoodTarget(shooterPIDController.atSetpoint() && drivetrain.getShooterVisionSeeing()); // Passes in if it is in the tolerance as a parameter and if there is a target. Is only true if both are true (sets to purple only in that case).
 
 		if (RobotContainer.driverController.buttonA.get()) {
 			if(drivetrain.getShooterVisionSeeing()) {

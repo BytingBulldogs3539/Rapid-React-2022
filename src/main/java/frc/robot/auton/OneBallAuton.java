@@ -20,8 +20,9 @@ public class OneBallAuton extends SequentialCommandGroup {
     public OneBallAuton(DriveSubsystem driveSub, IntakeSubsystem intakeSubsystem, PneumaticsSubsystem pneumaticsSubsystem, ShooterSubsystem shooterSubsystem) {
         super(new Command[] {new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 2800,2800, 3000).withTimeout(2), //Shoots for 4 seconds
             new ParallelRaceGroup( TrajectoryCommandGenerator
-                .getMotionCommand((new SimplePathBuilder(new Vector2(0.0, 0.0), Rotation2.ZERO))
-                        .lineTo(new Vector2(-2, 0), Rotation2.fromDegrees(0))
+                .getMotionCommand((new SimplePathBuilder
+                (new Vector2(0.0, 0.0), Rotation2.ZERO))
+                        .lineTo(new Vector2(-3, 0), Rotation2.fromDegrees(0))
                         .build(),RobotContainer.constants.getDriveConstants().getConstraints(), false, driveSub,false,false))}); // Shoots after it has finished driving
     }
 }

@@ -9,6 +9,7 @@ import org.photonvision.PhotonUtils;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.utilities.GearRatio;
 import frc.robot.utilities.PIDConstants;
@@ -381,13 +382,15 @@ public class CompConstants extends Constants {
 		// For SM1 motor speeds given target distance (located in constants)
 		@Override
 		public double getShooterSpeed(double distance) {
-			return(275.889 * distance + 2206.11);
+			// return(275.889 * distance + 2206.11 + 85);
+			return(180.21 * distance + 2447); // 3317.42 at 3.72 meters
+			// 2930.49 at 2.68 meters
 		}
 
 		// For SM2 motor speeds given target distance (located in constants)
 		@Override
 		public double getTopShooterSpeed(double distance) {
-			return(703.94 * distance + 1539.06);
+			return(703.94 * distance + 1539.06+100);
 		}
 
 		@Override
@@ -518,25 +521,25 @@ public class CompConstants extends Constants {
 		@Override
 		public int getLFrameHeight() {
 			// TODO Auto-generated method stub
-			return 132000;
+			return 132000- (2700*6);
 		}
 
 		@Override
 		public int getLMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 180000;
+			return 180000+ (2700*5) - (2700*7);
 		}
 
 		@Override
 		public int getRFrameHeight() {
 			// TODO Auto-generated method stub
-			return 132000;
+			return 132000- (2700*10);
 		}
 
 		@Override
 		public int getRMaxExtensionHeight() {
 			// TODO Auto-generated method stub
-			return 180000;
+			return 180000 - (2700*7);
 		}
 	}
 

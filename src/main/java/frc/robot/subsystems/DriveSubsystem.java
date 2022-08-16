@@ -78,6 +78,9 @@ public class DriveSubsystem extends SubsystemBase {
 	PowerDistribution PDH;
 
 	final boolean hasPDH;
+	//final double sensorPositionCoefficient;
+	//private static final double TICKS_PER_ROTATION = 2048.0;
+
 
 	public DriveSubsystem() {
 		int PDHID = RobotContainer.constants.getDriveConstants().getPDHID();
@@ -161,7 +164,10 @@ public class DriveSubsystem extends SubsystemBase {
 					RobotContainer.constants.getDriveConstants().getShooterCameraName());
 
 		}
+		//sensorPositionCoefficient = 2.0 * Math.PI / TICKS_PER_ROTATION * RobotContainer.constants.getDriveConstants().getBLModuleGearRatio().getSteerReduction();
+		
 
+		
 		setDefaultCommand(new DriveCommand(this));
 	}
 
@@ -202,8 +208,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public SwerveModuleState getState(SwerveModule swerveModule) {
 		return new SwerveModuleState(swerveModule.getDriveVelocity(),
-				Rotation2d.fromDegrees(Math.toDegrees(swerveModule.getSteerAngle())));
-	}
+				Rotation2d.fromDegrees(Math.toDegrees(swerveModule.getSteerAngle())));			}
 
 	public Pose2d getPose() {
 		return m_pose;
@@ -324,7 +329,7 @@ public class DriveSubsystem extends SubsystemBase {
 		SwerveModuleState[] states = m_kinematics.toSwerveModuleStates(m_chassisSpeeds);
 		SwerveDriveKinematics.desaturateWheelSpeeds(states, MAX_VELOCITY_METERS_PER_SECOND);
 		
-		short[] ba_xyz = new short[3];
+		/*short[] ba_xyz = new short[3];
 		m_pigeon.getBiasedAccelerometer(ba_xyz);
 		SmartDashboard.putNumber("Accel X", ba_xyz[0]);
 		SmartDashboard.putNumber("Accel Y", ba_xyz[1]);
@@ -334,7 +339,7 @@ public class DriveSubsystem extends SubsystemBase {
 		m_pigeon.getYawPitchRoll(ypr);
 		SmartDashboard.putNumber("Rotation Y", ypr[0]);
 		SmartDashboard.putNumber("Rotation P", ypr[1]);
-		SmartDashboard.putNumber("Rotation R", ypr[2]);
+		SmartDashboard.putNumber("Rotation R", ypr[2]);*/
 
 
 		m_frontLeftModule.set(states[0].speedMetersPerSecond / MAX_VELOCITY_METERS_PER_SECOND * MAX_VOLTAGE,

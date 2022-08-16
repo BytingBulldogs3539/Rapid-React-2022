@@ -30,6 +30,8 @@ public class LightsSubsystem extends SubsystemBase {
 
   private Boolean frame = false;
   private int frameCounter = 0;
+  
+  private boolean isGoodTarget = false;
 
   /** Creates a new LightsSubsystem. */
   public LightsSubsystem() {
@@ -76,11 +78,26 @@ public class LightsSubsystem extends SubsystemBase {
     }
   }
 
+    // Sets LEDs to green
+    private void setGreen(){
+      candle.setLEDs(110, 255, 20, w, 8, ledCount); 
+    }
+
+    // Sets LEDs to red
+    private void setRed() {
+      candle.setLEDs(255, 0, 0, w, 8, ledCount);
+    }
+
+    // Sets LEDs to purple
+    private void setPurple() {
+      candle.setLEDs(255, 0, 255, w, 8, ledCount);
+    }
+
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    /*// This method will be called once per scheduler run
 
-    //Turns the shooter's boolean returns into a system that will keep track of the balls
+    // Turns the shooter's boolean returns into a system that will keep track of the balls
     intakeColor = RobotContainer.shooterSubsystem.getColorSensorColor();
     lightBeam = RobotContainer.shooterSubsystem.getSensor(); //True if blocked or not found
     if (intakeColor != Color.NONE && canPush) {
@@ -111,10 +128,27 @@ public class LightsSubsystem extends SubsystemBase {
     }
     if (frameCounter >= 100) {
       ball1 = Color.NONE;
-    }
+    }*/
     
-    frame = !frame;
-    updateLightTop(ball2);
-    updateLightBottom(ball1);
+    //frame = !frame;
+    //updateLightTop(Color.NONE);
+    //updateLightBottom(Color.NONE);
+
+    // Code that will have the lights keep track of the status of the climber hooks. They will be green if open and red if closed.
+    // If within tolerance, sets to purple and does nothing else. This is useful when going to shoot and making sure it is lined up. If lined up, this executes.
+    if(isGoodTarget) {
+      setPurple();
+    } else {
+    if(RobotContainer.pneumaticsSubsystem.grabberStatus) {
+      setRed(); // Closed
+    } else {
+      setGreen(); // Open
+    }
+  }
+}
+
+  /*** Sets if there is a good target or not (true or false) to change the lights accordingly. */
+  public void setGoodTarget(boolean isGoodTarget) {
+    this.isGoodTarget = isGoodTarget;
   }
 }

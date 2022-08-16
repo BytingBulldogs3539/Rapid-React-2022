@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import com.fasterxml.jackson.databind.type.ResolvedRecursiveType;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -60,11 +62,11 @@ public class ShooterCommand extends CommandBase {
 		this.useVision = useVision;
 		this.intakeSpeed = intakeSpeed;
 
-		if(revUp == true && useVision == true)
+		/* if(revUp == true && useVision == true)
 		{
 			shootNow = true;
 			useVision = false;
-		}
+		} */
 
 		SmartDashboard.putNumber("KM Speed", 3000);
 		SmartDashboard.putNumber("SM1 Speed", 4000);
@@ -126,6 +128,10 @@ public class ShooterCommand extends CommandBase {
 				double distance = RobotContainer.constants.getShooterConstants().getDistance(RobotContainer.driveSubsystem.getShooterVisionPitch());
 				shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(distance));
 				shooterSubsystem.setSM2Speed(RobotContainer.constants.getShooterConstants().getTopShooterSpeed(distance));
+			}
+			else if(this.revUp){
+				shooterSubsystem.setSM1Speed(SM1Speed);
+				shooterSubsystem.setSM2Speed(SM2Speed); 
 			} else {
 				shooterSubsystem.stop();
 			}

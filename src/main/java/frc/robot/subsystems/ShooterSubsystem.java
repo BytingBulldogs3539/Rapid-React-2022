@@ -8,9 +8,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.revrobotics.ColorMatch;
-import com.revrobotics.ColorMatchResult;
-import com.revrobotics.ColorSensorV3;
+// import com.revrobotics.ColorMatch;
+// import com.revrobotics.ColorMatchResult;
+// import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -48,8 +48,8 @@ public class ShooterSubsystem extends SubsystemBase {
 	final boolean hasSensor;
 
 	// Create color sensor and corosponding color matcher.
-	ColorSensorV3 colorSensor;
-	private final ColorMatch colorMatcher = new ColorMatch();
+	//ColorSensorV3 colorSensor;
+	//private final ColorMatch colorMatcher = new ColorMatch();
 
 	public ShooterSubsystem() {
 		PIDConstants pidConstants = RobotContainer.constants.getShooterConstants().getPIDConstants();
@@ -104,7 +104,7 @@ public class ShooterSubsystem extends SubsystemBase {
 		}
 
 		if (RobotContainer.constants.getShooterConstants().getColorSensor()) {
-			colorSensor = new ColorSensorV3(Port.kOnboard);
+			//colorSensor = new ColorSensorV3(Port.kOnboard);
 		}
 	}
 
@@ -310,14 +310,14 @@ public class ShooterSubsystem extends SubsystemBase {
 	public Color getColorSensorColor()
 	{
 		
-		if(colorSensor.getRed()>colorSensor.getBlue() && colorSensor.getRed()>300)
+		/*if(colorSensor.getRed()>colorSensor.getBlue() && colorSensor.getRed()>300)
 		{
 			return Color.RED;
 		}
 		if(colorSensor.getBlue()>colorSensor.getRed() && colorSensor.getBlue()>300)
 		{
 			return Color.BLUE;
-		}
+		}*/
 		return Color.NONE;
 	}
 
@@ -326,11 +326,11 @@ public class ShooterSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run.
 
 		// If there is a color sensor, display its RGB values to the SmartDashboard.
-		if (colorSensor != null) {
+		/*if (colorSensor != null) {
 			SmartDashboard.putNumber("Get Red", colorSensor.getRed());
 			SmartDashboard.putNumber("Get Green", colorSensor.getGreen());
 			SmartDashboard.putNumber("Get Blue", colorSensor.getBlue());
-		}
+		}*/
 	}
 
 	public void stop() {

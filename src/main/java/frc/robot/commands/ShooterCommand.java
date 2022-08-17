@@ -84,8 +84,8 @@ public class ShooterCommand extends CommandBase {
 	@Override
 	public void execute() {
 		if(RobotContainer.driverController.buttonA.get()) {
-			SM1Speed = RobotContainer.driveSubsystem.getMovingShooterTargetSpeed();
-			SM2Speed = RobotContainer.driveSubsystem.getMovingTopShooterTargetSpeed();
+			/* SM1Speed = RobotContainer.driveSubsystem.getMovingShooterTargetSpeed();
+			SM2Speed = RobotContainer.driveSubsystem.getMovingTopShooterTargetSpeed(); */
 		}
 
 		/* SM1Speed = SmartDashboard.getNumber("SM1 Speed", 0);
@@ -123,7 +123,7 @@ public class ShooterCommand extends CommandBase {
 			}
 		}
 
-		if (this.useVision) {
+		/* if (this.useVision) {
 			if (RobotContainer.driveSubsystem.getShooterVisionSeeing()) {
 				double distance = RobotContainer.constants.getShooterConstants().getDistance(RobotContainer.driveSubsystem.getShooterVisionPitch());
 				shooterSubsystem.setSM1Speed(RobotContainer.constants.getShooterConstants().getShooterSpeed(distance));
@@ -138,7 +138,7 @@ public class ShooterCommand extends CommandBase {
 		} else {
 			shooterSubsystem.setSM1Speed(SM1Speed);
 			shooterSubsystem.setSM2Speed(SM2Speed);
-		}
+		} */
 		//if(this.shootNow)
 		//	shooterSubsystem.setKMSpeed(KMSpeed);
 		//	intakeSubsystem.setIntakeSpeed(0.2);

@@ -178,11 +178,11 @@ public class DriveSubsystem extends SubsystemBase {
 
 	/*** Sets the pipeline index (color of balls to look for) using the alliance color */
 	public void setPipeline() {
-		if(RobotContainer.shooterSubsystem.getAllianceColor() == Color.RED) {
+		/* if(RobotContainer.shooterSubsystem.getAllianceColor() == Color.RED) {
 			frontCamera.setPipelineIndex(0);
 		} else if(RobotContainer.shooterSubsystem.getAllianceColor() == Color.BLUE) {
 			frontCamera.setPipelineIndex(1);
-		}
+		} */
 	}
 
 	/**

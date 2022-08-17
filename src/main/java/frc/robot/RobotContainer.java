@@ -23,6 +23,7 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.MoveShooterHood;
 import frc.robot.commands.ShootReverse;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.commands.TurretCommand;
 import frc.robot.commands.ZeroGyroCommand;
 import frc.robot.constants.CompConstants;
 import frc.robot.constants.Constants;
@@ -33,6 +34,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LightsSubsystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.utilities.LogitechF310;
 import frc.robot.utilities.MacAddress;
 
@@ -48,17 +50,14 @@ public class RobotContainer {
 	public static LogitechF310 driverController = new LogitechF310(1);
 	public static LogitechF310 operatorController = new LogitechF310(0);
 
-	public static IntakeSubsystem intakeSubsystem;
-
+	/* public static IntakeSubsystem intakeSubsystem;
 	public static ShooterSubsystem shooterSubsystem;
-
 	public static DriveSubsystem driveSubsystem;
-
 	public static ClimberSubsystem climberSubsystem;
+	public static LightsSubsystem lightsSubsystem; */
 
 	public static PneumaticsSubsystem pneumaticsSubsystem;
-
-	public static LightsSubsystem lightsSubsystem;
+	public static TurretSubsystem turretSubsystem;
 
 	public SendableChooser<Command> chooser;
 
@@ -81,12 +80,14 @@ public class RobotContainer {
 			constants = new CompConstants();
 		}
 
-		intakeSubsystem = new IntakeSubsystem();
+		/* intakeSubsystem = new IntakeSubsystem();
 		shooterSubsystem = new ShooterSubsystem();
 		driveSubsystem = new DriveSubsystem();
-		pneumaticsSubsystem = new PneumaticsSubsystem();
 		climberSubsystem = new ClimberSubsystem();
-		lightsSubsystem = new LightsSubsystem();
+		lightsSubsystem = new LightsSubsystem(); */
+
+		pneumaticsSubsystem = new PneumaticsSubsystem(); // Creates pneumaticsSystem object *declared earlier
+		turretSubsystem = new TurretSubsystem(); // Creates turretSubsystem object (declared earlier)
 
 		configureButtonBindings();
 		putAuton();
@@ -103,7 +104,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 
-		operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 1200, 1200, 3000));
+		/* operatorController.buttonTL.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 1200, 1200, 3000));
 		operatorController.buttonBL.whenHeld(new ShootReverse(shooterSubsystem));
 		operatorController.buttonBR.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, false, false, 3400, 4600, 3000));
 		operatorController.buttonPadDown
@@ -115,12 +116,18 @@ public class RobotContainer {
 		operatorController.buttonSTART.whenPressed(new ClimberInCommand(climberSubsystem, pneumaticsSubsystem));
 		operatorController.buttonB.whenHeld(new MoveShooterHood(pneumaticsSubsystem));
 				operatorController.buttonPadLeft.whenHeld(new ShooterCommand(shooterSubsystem, intakeSubsystem, true, true, 2800, 2800, 2000)); // Revs to setpoint using vision.
+		
+		*/
+
+		operatorController.buttonBR.whenHeld(new TurretCommand(1.0, turretSubsystem)); // Move the turret right (bottom right bumper)
+		operatorController.buttonBL.whenHeld(new TurretCommand(-1.0, turretSubsystem)); // Move the turret left (bottom left bumper)
 
 		driverController.buttonSTART.whenPressed(new ZeroGyroCommand());
 	}
 
+	/*** Autons not used at the moment, so none are put into the Smart Dashboard. */
 	public void putAuton() {
-		chooser = new SendableChooser<Command>();
+		/* chooser = new SendableChooser<Command>();
 		chooser.addOption("TwoBallAutonLEFT",
 		new TwoBallAutonLeft(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("TwoBallAuton",
@@ -133,7 +140,7 @@ public class RobotContainer {
 				new FourBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
 		chooser.addOption("QuickerFourBallAuton",
 				new QuickerFourBallAuton(driveSubsystem, intakeSubsystem, pneumaticsSubsystem, shooterSubsystem));
-		SmartDashboard.putData("Auto Chooser", chooser);
+		SmartDashboard.putData("Auto Chooser", chooser); */
 	}
 
 	/**

@@ -16,7 +16,7 @@ public class ZeroGyroCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.driveSubsystem.zeroGyroscope(); // Resets the gyroscope.
+    /* RobotContainer.driveSubsystem.zeroGyroscope(); // Resets the gyroscope. */
   }
 
   // Called every time the scheduler runs while the command is scheduled.

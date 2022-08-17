@@ -65,13 +65,13 @@ public class MoveClimberCommand extends CommandBase {
 
 			// Automatically released the climb bar if not overriden when the robot is ready
 			// to do so.
-			if (climberSubsystem.getClimberPosition() < RobotContainer.constants.getClimberConstants()
+			/* if (climberSubsystem.getClimberPosition() < RobotContainer.constants.getClimberConstants()
 					.getLMaxExtensionHeight() * 0.70&& climberSubsystem.getClimberPosition() > RobotContainer.constants.getClimberConstants()
 					.getLMaxExtensionHeight() * 0.50 && motorSpeed < 0 && RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()) {
 				shouldRelease = true;
 				timer.reset();
 				timer.start();
-			}
+			} */
 		}
 
 		// If Y is pressed, release the bar.
@@ -82,9 +82,9 @@ public class MoveClimberCommand extends CommandBase {
 		} else {
 			if (!shouldRelease) {
 				// If both switches are pressed, close the all grabbers.
-				if (RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()&&timer.hasElapsed(1)) {
+				/* if (RobotContainer.climberSubsystem.getLeftLimit() && RobotContainer.climberSubsystem.getRightLimit()&&timer.hasElapsed(1)) {
 					RobotContainer.pneumaticsSubsystem.grabClimbBar();
-				}
+				} */
 			} else {
 				RobotContainer.pneumaticsSubsystem.releaseClimbBar();
 			}

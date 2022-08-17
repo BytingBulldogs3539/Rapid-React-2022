@@ -85,8 +85,9 @@ public class DriveCommand extends CommandBase {
 			drivetrain.setPipeline();
 			drivetrain.setDriverMode(false);
 			if (!frontPIDController.atSetpoint()) {
-				if(RobotContainer.driveSubsystem.getFrontVisionSeeing())
+				/* if(RobotContainer.driveSubsystem.getFrontVisionSeeing())
 					rotationPercent = frontPIDController.calculate(RobotContainer.driveSubsystem.getFrontVisionYaw());
+				*/
 			}
 		}
 		else
@@ -101,18 +102,18 @@ public class DriveCommand extends CommandBase {
 
 		if (RobotContainer.driverController.buttonBL.get()) {
 			if(drivetrain.getShooterVisionSeeing()) {
-				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+				/* rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw()); */
 			}
 		}
 		
 		// If within tolerance (1 degree), set lights to purple.
-		shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
-		RobotContainer.lightsSubsystem.setGoodTarget(shooterPIDController.atSetpoint() && drivetrain.getShooterVisionSeeing()); // Passes in if it is in the tolerance as a parameter and if there is a target. Is only true if both are true (sets to purple only in that case).
+		/* shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+		RobotContainer.lightsSubsystem.setGoodTarget(shooterPIDController.atSetpoint() && drivetrain.getShooterVisionSeeing()); */ // Passes in if it is in the tolerance as a parameter and if there is a target. Is only true if both are true (sets to purple only in that case).
 
 		if (RobotContainer.driverController.buttonA.get()) {
 			if(drivetrain.getShooterVisionSeeing()) {
 				shooterPIDController.setSetpoint(drivetrain.getMovingShooterTargetYaw());
-				rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw());
+				/* rotationPercent = shooterPIDController.calculate(RobotContainer.driveSubsystem.getShooterVisionYaw()); */
 			}
 		}
 
